@@ -2,20 +2,13 @@ import React, { useEffect, useState } from 'react'; // Import useState here
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
+import { useNavigation } from '@react-navigation/native';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
-const handleLoginPress = () => {
-  // Code to navigate to the login page
-};
 
-const handleRegisterPress = () => {
-  // Code to navigate to the register page
-};
-
-
-  export default function App() {
+  export default function WelcomePage() {
     // ... your existing code ...
     const [fontLoaded, setFontLoaded] = useState(false);
 
@@ -33,16 +26,26 @@ const handleRegisterPress = () => {
       // Wait for the font to load
       return null;
     }
+    const navigation = useNavigation();
+
+    const handleLoginPress = () => {
+      // Code to navigate to the login page
+      navigation.navigate('Login');
+    };
   
+    const handleRegisterPress = () => {
+      // Code to navigate to the register page
+      navigation.navigate('Register');
+    };  
   
     return (
       <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
         <View style={styles.container}>
           <View style={styles.upperHalf}>
             <Icon name="camera" size={36} color="black" style={styles.cameraIcon} />
-            <Text style={styles.title}>Snapster</Text>
+            <Text style={styles.title}>It's Snapster, bitch!!!!!!</Text>
           </View>
-          <Text style={styles.middle}>you better know it!</Text>
+          <Text style={styles.middle}>you better know it</Text>
           <View style={styles.lowerHalf}>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
@@ -95,7 +98,7 @@ const handleRegisterPress = () => {
   },
   cameraIcon: {
     marginBottom: 5,
-    color: 'red',
+    color: 'white',
   },
   buttonContainer: {
     flexDirection: 'row',
