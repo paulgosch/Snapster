@@ -40,7 +40,7 @@ const handleRegisterPress = () => {
         <View style={styles.container}>
           <View style={styles.upperHalf}>
             <Icon name="camera" size={36} color="black" style={styles.cameraIcon} />
-            <Text style={styles.title}>It's Snapster, bitch</Text>
+            <Text style={styles.title}>It's Snapster, bitch!!!!!!</Text>
           </View>
           <Text style={styles.middle}>you better know it</Text>
           <View style={styles.lowerHalf}>
