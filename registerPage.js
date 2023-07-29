@@ -4,6 +4,7 @@ import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import AppPresentationScreen from './AppPresentationScreen'; // Import the new screen component
+import TermsAndConditions from './TermsAndConditions';
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -14,6 +15,9 @@ export default function RegisterScreen() {
   const [agreeChecked, setAgreeChecked] = useState(false);
 
   const navigation = useNavigation();
+  const handleTermsAndConditions = () => {
+    navigation.navigate('TermsAndConditions'); // Navigate to the 'TermsAndConditions' screen
+  };
 
   useEffect(() => {
     async function loadFont() {
@@ -84,12 +88,18 @@ export default function RegisterScreen() {
               style={styles.checkbox}
             />
           </TouchableOpacity>
+          </View>
+
           <Text style={styles.agreeText}>Agree with </Text>
-          <Text style={styles.termsText}>Terms and Conditions</Text>
-        </View>
+
+          <TouchableOpacity onPress={handleTermsAndConditions}>
+            <Text style={styles.termsText}>Terms and Conditions</Text>
+          </TouchableOpacity>
+
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
+        
         </KeyboardAvoidingView>
     </ImageBackground>
   );
