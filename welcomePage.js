@@ -45,7 +45,8 @@ const customFont = require('./assets/Neucha-Regular.otf');
             <Icon name="camera" size={36} color="black" style={styles.cameraIcon} />
             <Text style={styles.title}>Snapster</Text>
           </View>
-          <Text style={styles.middle}>you better know it</Text>
+          <Text style={styles.middle}>Ready to bring your digital photos</Text>
+          <Text style={styles.middle}>to life?</Text>
           <View style={styles.lowerHalf}>
             <View style={styles.buttonContainer}>
               <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
@@ -67,7 +68,7 @@ const customFont = require('./assets/Neucha-Regular.otf');
 
   const styles = StyleSheet.create({
     middle:{   fontFamily: 'neucha-regular', // this is ust for fun
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     color: 'white',
     },
