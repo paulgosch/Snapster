@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import AppPresentationScreen from './AppPresentationScreen'; // Import the new screen component
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -10,6 +12,8 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [agreeChecked, setAgreeChecked] = useState(false);
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function loadFont() {
@@ -22,7 +26,14 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = () => {
-    Alert.alert('Congratulations! You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉');
+    Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉', [
+      {
+        text: 'OK',
+        onPress: () => {
+          navigation.navigate('AppPresentation'); // Navigate to the new screen after clicking OK on the alert
+        },
+      },
+    ]);
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');

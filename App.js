@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, ImageBackground, Text } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
@@ -8,6 +8,9 @@ import WelcomePage from './WelcomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 import FirstScreen from './FirstScreen';
+import AppPresentationScreen from './AppPresentationScreen';
+import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new screen components
+import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -80,6 +83,27 @@ function App() {
             headerTransparent: true, // Make the header background transparent
             headerLeft: () => <BackIcon />, // Show the back icon
             headerTitleStyle: styles.headerTitle,
+          }}
+        />
+        <Stack.Screen
+          name="AppPresentation"
+          component={AppPresentationScreen}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name="AppPresentationScreen2"
+          component={AppPresentationScreen2}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name="AppPresentationScreen3"
+          component={AppPresentationScreen3}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
           }}
         />
       </Stack.Navigator>
