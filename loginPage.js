@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native';
 
 export default function LoginScreen() {
   const [username, setUsername] = useState('');
@@ -13,8 +13,8 @@ export default function LoginScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
-      <View style={styles.container}>
-      <Text style={styles.title}>Snapster</Text>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <Text style={styles.title}>Snapster</Text>
         <TextInput
           style={styles.input}
           placeholder="Username or Email"
@@ -33,7 +33,7 @@ export default function LoginScreen() {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }

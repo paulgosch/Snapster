@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native';
 import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -22,7 +22,7 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = () => {
-    Alert.alert('"Congratulations! You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉"');
+    Alert.alert('Congratulations! You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉');
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
@@ -33,7 +33,7 @@ export default function RegisterScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Snapster</Text>
         <TextInput
           style={styles.input}
@@ -79,7 +79,7 @@ export default function RegisterScreen() {
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
-      </View>
+        </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
