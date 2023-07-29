@@ -22,7 +22,7 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = () => {
-    Alert.alert('Register', `Register with username: ${username} and password: ${password}`);
+    Alert.alert('"Congratulations! You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉"');
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     paddingBottom: 15,
-    paddingTop: 5,
   },
   termsText: {
     fontSize: 14,
@@ -144,7 +143,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     textDecorationLine: 'underline',
     paddingBottom: 15,
-    paddingTop: 5,
   },
   checkbox: {
     marginRight: 5,

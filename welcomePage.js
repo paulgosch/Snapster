@@ -56,9 +56,6 @@ const customFont = require('./assets/Neucha-Regular.otf');
                 <Text style={styles.buttonText}>Register</Text>
               </TouchableOpacity>
             </View>
-            <View style={styles.termsContainer}>
-              <Text style={styles.termsText}>Terms and Conditions</Text>
-            </View>
           </View>
         </View>
       </ImageBackground>
@@ -119,15 +116,5 @@ const customFont = require('./assets/Neucha-Regular.otf');
     fontWeight: 'bold',
     fontFamily: 'neucha-regular',
     textAlign: 'center',
-  },
-  termsContainer: {
-    position: 'absolute',
-    bottom: 40,
-  },
-  termsText: {
-    fontSize: 18,
-    fontFamily: 'neucha-regular',
-    color: 'white',
-    textDecorationLine: 'underline',
   },
 });
