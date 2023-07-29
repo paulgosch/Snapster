@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
-export default function AppPresentationScreen() {
+export default function AppPresentationScreen2() {
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const navigation = useNavigation(); // Use the useNavigation hook here
 
@@ -28,10 +28,17 @@ export default function AppPresentationScreen() {
     navigation.navigate('AppPresentationScreen3');
   };
 
+  const handleSkip = () => {
+    navigation.navigate('Home'); // Direct to HomePage when "Skip" is pressed
+  };
+
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={handleNextScreen}>
       <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
         <View style={styles.container}>
+          <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
           <Text style={styles.title}>Step 2: Transform Digital to Tangible </Text>
           <Text style={styles.text}>Say goodbye to digital albums as we transform your photo into a stunning hardcopy print.</Text>
         </View>
@@ -62,5 +69,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'neucha-regular',
     color: 'white', // You can adjust the text color as needed
+  },
+  skipButton: {
+    position: 'absolute',
+    fontFamily: 'neucha-regular',
+    top: 40,
+    right: 20,
+  },
+  skipText: {
+    fontSize: 18,
+    fontFamily: 'neucha-regular',
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginRight: 15,
   },
 });

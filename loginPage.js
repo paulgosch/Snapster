@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 
-export default function LoginScreen() {
+export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation(); // Use the useNavigation hook here
 
   const handleLogin = () => {
-    Alert.alert('Login', `Logging in with username: ${username} and password: ${password}`);
+    // Here, you can implement your login logic if needed
+
+    // Assuming the 'HomeScreen' is a valid route in your navigation stack, navigate to it
+    navigation.navigate('HomeScreen');
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');

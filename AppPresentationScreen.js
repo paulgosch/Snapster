@@ -28,10 +28,17 @@ export default function AppPresentationScreen() {
     navigation.navigate('AppPresentationScreen2');
   };
 
+  const handleSkip = () => {
+    navigation.navigate('Home'); // Direct to HomePage when "Skip" is pressed
+  };
+
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={handleNextScreen}>
       <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
         <View style={styles.container}>
+          <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
           <Text style={styles.title}>Step 1: Capture the Moment</Text>
           <Text style={styles.text}>Sign up, choose a bundle, snap a picture, and preserve precious moments with a simple click.</Text>
         </View>
@@ -62,5 +69,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: 'neucha-regular',
     color: 'white', // You can adjust the text color as needed
+  },
+  skipButton: {
+    position: 'absolute',
+    fontFamily: 'neucha-regular',
+    top: 40,
+    right: 20,
+  },
+  skipText: {
+    fontSize: 18,
+    fontFamily: 'neucha-regular',
+    color: 'white',
+    fontWeight: 'bold',
+    marginTop: 15,
+    marginRight: 15
   },
 });

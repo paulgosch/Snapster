@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
-export default function AppPresentationScreen() {
+export default function AppPresentationScreen3() {
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const navigation = useNavigation(); // Use the useNavigation hook here
 
@@ -25,15 +25,15 @@ export default function AppPresentationScreen() {
   }
 
   const handleNextScreen = () => {
-    navigation.navigate('AppPresentationScreen2');
+    navigation.navigate('Home');
   };
 
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={handleNextScreen}>
       <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
         <View style={styles.container}>
-          <Text style={styles.title}>Step 3: Delivery to Your Doorstep </Text>
-          <Text style={styles.text}>Sit back and relax once you've taken all your pictures, as we take care of delivering your personalized prints right to your doorstep. </Text>
+          <Text style={styles.title}>Step 3: Delivery to Your Doorstep</Text>
+          <Text style={styles.text}>Sit back and relax once you've taken all your pictures, as we take care of delivering your personalized prints right to your doorstep.</Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
