@@ -4,12 +4,9 @@ import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import AppPresentationScreen from './AppPresentationScreen'; // Import the new screen component
-<<<<<<< HEAD
 import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './FirebaseConfig';
-=======
->>>>>>> parent of 7b808c5 (failed to connect a terms and conditions page)
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -22,6 +19,9 @@ export default function RegisterScreen() {
   
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
+  const handleTermsAndConditions = () => {
+    navigation.navigate('TermsAndConditions'); // Navigate to the 'TermsAndConditions' screen
+  };
 
   useEffect(() => {
     async function loadFont() {
@@ -103,8 +103,9 @@ export default function RegisterScreen() {
               style={styles.checkbox}
             />
           </TouchableOpacity>
+          </View>
+
           <Text style={styles.agreeText}>Agree with </Text>
-<<<<<<< HEAD
 
           <TouchableOpacity onPress={handleTermsAndConditions}>
             <Text style={styles.termsText}>Terms and Conditions</Text>
@@ -114,13 +115,6 @@ export default function RegisterScreen() {
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
         }
-=======
-          <Text style={styles.termsText}>Terms and Conditions</Text>
-        </View>
-        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-          <Text style={styles.buttonText}>Sign up</Text>
-        </TouchableOpacity>
->>>>>>> parent of 7b808c5 (failed to connect a terms and conditions page)
         </KeyboardAvoidingView>
     </ImageBackground>
   );
