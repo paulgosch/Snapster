@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import { Pages } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -25,11 +26,11 @@ export default function AppPresentationScreen() {
   }
 
   const handleNextScreen = () => {
-    navigation.navigate('AppPresentationScreen2');
+    navigation.navigate('AppPresentation2');
   };
 
   const handleSkip = () => {
-    navigation.navigate('Home'); // Direct to HomePage when "Skip" is pressed
+    navigation.navigate('HomeScreen'); // Direct to HomePage when "Skip" is pressed
   };
 
   return (

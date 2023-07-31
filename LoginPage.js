@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { FIREBASE_AUTH } from './FirebaseConfig';
+import { FIREBASE_AUTH } from './firebaseConfig';
+import { Pages } from './constants';
 
 
 export default function LoginPage() {
@@ -17,7 +18,7 @@ export default function LoginPage() {
     try {
       const response = await signInWithEmailAndPassword(auth, username, password);      
       console.log(response);
-      navigation.navigate('Home');
+      navigation.navigate('HomeScreen');
 
     } catch(error){
       console.log(error)

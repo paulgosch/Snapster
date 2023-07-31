@@ -30,12 +30,12 @@ const customFont = require('./assets/Neucha-Regular.otf');
 
     const handleLoginPress = () => {
       // Code to navigate to the login page
-      navigation.navigate('Login');
+      navigation.navigate('LoginPage');
     };
   
     const handleRegisterPress = () => {
       // Code to navigate to the register page
-      navigation.navigate('Register');
+      navigation.navigate('RegisterPage');
     };  
   
     return (

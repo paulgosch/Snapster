@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import { Pages } from './constants';
 
 const customFont = require('./assets/Neucha-Regular.otf');
 
@@ -26,7 +27,7 @@ export default function HomeScreen() {
   const handleLogout = () => {
     // Implement any necessary logout logic here
     // For now, let's just navigate to the WelcomePage
-    navigation.navigate('Welcome');
+    navigation.navigate('WelcomePage');
   };
 
   return (

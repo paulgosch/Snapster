@@ -13,6 +13,7 @@ import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new
 import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 import HomeScreen from './HomeScreen'; // Import the new screen component
 
+import Pages from './constants';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
@@ -22,8 +23,8 @@ function BackIcon() {
   const navigation = useNavigation();
   const route = useRoute();
 
-  // Show the back icon only if the current route is not FirstScreen or Welcome
-  if (route.name === 'FirstScreen' || route.name === 'Welcome') {
+  // Show the back icon only if the current route is not FirstScreen or WelcomePage
+  if (route.name === 'FirstScreen' || route.name === 'WelcomePage') {
     return null;
   }
 
@@ -52,24 +53,25 @@ function App() {
   }
 
   return (
+    
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="FirstScreen" headerMode="screen">
+      <Stack.Navigator initialRouteName={'FirstScreen'} headerMode="screen">
         <Stack.Screen
-          name="FirstScreen"
+          name={'FirstScreen'}
           component={FirstScreen}
           options={{
             headerShown: false, // Hide the header for FirstScreen
           }}
         />
         <Stack.Screen
-          name="Welcome"
+          name={'WelcomePage'}
           component={WelcomePage}
           options={{
             headerShown: false, // Hide the header for Welcome
           }}
         />
         <Stack.Screen
-          name="Login"
+          name={'LoginPage'}
           component={LoginPage}
           options={{
             headerTransparent: true, // Make the header background transparent
@@ -78,7 +80,7 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="Register"
+          name={'RegisterPage'}
           component={RegisterPage}
           options={{
             headerTransparent: true, // Make the header background transparent
@@ -87,28 +89,28 @@ function App() {
           }}
         />
         <Stack.Screen
-          name="AppPresentation"
+          name={'AppPresentation'}
           component={AppPresentationScreen}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
         <Stack.Screen
-          name="AppPresentationScreen2"
+          name={'AppPresentation2'}
           component={AppPresentationScreen2}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
         <Stack.Screen
-          name="AppPresentationScreen3"
+          name={'AppPresentation3'}
           component={AppPresentationScreen3}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
         <Stack.Screen
-          name="Home"
+          name={'HomeScreen'}
           component={HomeScreen}
           options={{
             headerShown: false, // Hide the header for the new screen if needed

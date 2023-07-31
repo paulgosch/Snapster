@@ -1,4 +1,5 @@
 export const Pages = {
+    FirstScreen: 'FirstScreen',
     HomeScreen:'HomeScreen', 
     WelcomePage:'WelcomePage', 
     LoginPage: 'LoginPage', 

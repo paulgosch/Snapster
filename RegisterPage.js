@@ -6,7 +6,8 @@ import { useNavigation } from '@react-navigation/native'; // Import the useNavig
 import AppPresentationScreen from './AppPresentationScreen'; // Import the new screen component
 import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { FIREBASE_AUTH } from './FirebaseConfig';
+import { FIREBASE_AUTH } from './firebaseConfig';
+import { Pages } from './constants';
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -40,7 +41,7 @@ export default function RegisterScreen() {
       const response = await createUserWithEmailAndPassword(auth, email, password);      
       console.log(response);
       Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
-      navigation.navigate('Home');
+      navigation.navigate(Pages.HomeScreen);
 
     } catch(error){
       console.log(error)
