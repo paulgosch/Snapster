@@ -14,6 +14,7 @@ import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new
 import HomeScreen from './HomeScreen'; // Import the new screen component
 
 import Pages from './constants';
+import TermsAndConditionsScreen from './TermsAndConditions';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
@@ -112,6 +113,13 @@ function App() {
         <Stack.Screen
           name={'HomeScreen'}
           component={HomeScreen}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={'TermsAndConditions'}
+          component={TermsAndConditionsScreen}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
