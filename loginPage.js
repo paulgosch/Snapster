@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH } from './FirebaseConfig';
+
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigation = useNavigation(); // Use the useNavigation hook here
+  const auth = FIREBASE_AUTH;
 
-  const handleLogin = () => {
-    // Here, you can implement your login logic if needed
+  const handleLogin = async () => {
+    setLoading(true);
+    try {
+      const response = await signInWithEmailAndPassword(auth, username, password);      
+      console.log(response);
+      navigation.navigate('Home');
 
-    // Assuming the 'HomeScreen' is a valid route in your navigation stack, navigate to it
-    navigation.navigate('HomeScreen');
+    } catch(error){
+      console.log(error)
+      alert("Sign in failed: " + error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
+
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
@@ -35,9 +49,10 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
         />
+        {loading ? <Text>LOADING</Text> : 
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </KeyboardAvoidingView>
     </ImageBackground>
   );
