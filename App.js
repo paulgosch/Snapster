@@ -9,10 +9,9 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 import FirstScreen from './FirstScreen';
 import AppPresentationScreen from './AppPresentationScreen';
-import AppPresentationScreen2 from './AppPresentationScreen2'; 
-import AppPresentationScreen3 from './AppPresentationScreen3'; 
-import HomeScreen from './HomeScreen'; 
-import TermsAndConditions from './TermsAndConditions'; 
+import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new screen components
+import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
+import HomeScreen from './HomeScreen'; // Import the new screen component
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -115,13 +114,6 @@ function App() {
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
-        <Stack.Screen 
-        name="TermsAndConditions" 
-        component={TermsAndConditions} 
-        options={{
-          headerShown: false, // Hide the header for the new screen if needed
-        }}
-        /> 
       </Stack.Navigator>
     </NavigationContainer>
   );
