@@ -18,7 +18,7 @@ export default function LoginPage() {
     try {
       const response = await signInWithEmailAndPassword(auth, username, password);      
       console.log(response);
-      navigation.navigate('HomeScreen');
+      navigation.navigate(Pages.HomeScreen);
 
     } catch(error){
       console.log(error)

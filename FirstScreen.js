@@ -9,7 +9,7 @@ const customFont = require('./assets/Neucha-Regular.otf');
 
 export default function FirstScreen({ navigation }) {
   const handleScreenPress = () => {
-    navigation.navigate('WelcomePage');
+    navigation.navigate(Pages.WelcomePage);
   };
 
   return (

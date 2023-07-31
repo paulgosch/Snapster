@@ -21,7 +21,7 @@ export default function RegisterScreen() {
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
   const handleTermsAndConditions = () => {
-    navigation.navigate('TermsAndConditions'); // Navigate to the 'TermsAndConditions' screen
+    navigation.navigate(Pages.TermsAndConditions); // Navigate to the 'TermsAndConditions' screen
   };
 
   useEffect(() => {

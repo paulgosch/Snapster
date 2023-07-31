@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
+import { Pages } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -30,12 +31,12 @@ const customFont = require('./assets/Neucha-Regular.otf');
 
     const handleLoginPress = () => {
       // Code to navigate to the login page
-      navigation.navigate('LoginPage');
+      navigation.navigate(Pages.LoginPage);
     };
   
     const handleRegisterPress = () => {
       // Code to navigate to the register page
-      navigation.navigate('RegisterPage');
+      navigation.navigate(Pages.RegisterPage);
     };  
   
     return (

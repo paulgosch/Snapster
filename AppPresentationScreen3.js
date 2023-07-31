@@ -26,7 +26,7 @@ export default function AppPresentationScreen3() {
   }
 
   const handleNextScreen = () => {
-    navigation.navigate('HomeScreen');
+    navigation.navigate(Pages.HomeScreen);
   };
 
   return (

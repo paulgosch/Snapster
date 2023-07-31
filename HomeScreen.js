@@ -27,7 +27,7 @@ export default function HomeScreen() {
   const handleLogout = () => {
     // Implement any necessary logout logic here
     // For now, let's just navigate to the WelcomePage
-    navigation.navigate('WelcomePage');
+    navigation.navigate(Pages.WelcomePage);
   };
 
   return (

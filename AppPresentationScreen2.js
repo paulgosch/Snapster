@@ -26,11 +26,11 @@ export default function AppPresentationScreen2() {
   }
 
   const handleNextScreen = () => {
-    navigation.navigate('AppPresentation3');
+    navigation.navigate(Pages.AppPresentation3);
   };
 
   const handleSkip = () => {
-    navigation.navigate('HomeScreen'); // Direct to HomePage when "Skip" is pressed
+    navigation.navigate(Pages.HomeScreen); // Direct to HomePage when "Skip" is pressed
   };
 
   return (
