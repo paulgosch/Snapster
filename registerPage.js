@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
 import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import AppPresentationScreen from './AppPresentationScreen'; // Import the new screen component
 import TermsAndConditions from './TermsAndConditions';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { FIREBASE_AUTH } from './FirebaseConfig';
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
@@ -12,8 +14,10 @@ export default function RegisterScreen() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const [agreeChecked, setAgreeChecked] = useState(false);
-
+  
+  const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
   const handleTermsAndConditions = () => {
     navigation.navigate('TermsAndConditions'); // Navigate to the 'TermsAndConditions' screen
@@ -29,15 +33,25 @@ export default function RegisterScreen() {
     loadFont();
   }, []);
 
-  const handleRegister = () => {
-    Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉', [
-      {
-        text: 'OK',
-        onPress: () => {
-          navigation.navigate('AppPresentation'); // Navigate to the new screen after clicking OK on the alert
-        },
-      },
-    ]);
+  const handleRegister = async () => {
+    if(agreeChecked){
+    setLoading(true);
+    try {
+      const response = await createUserWithEmailAndPassword(auth, email, password);      
+      console.log(response);
+      Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
+      navigation.navigate('Home');
+
+    } catch(error){
+      console.log(error)
+      alert("Sign in failed: " + error);
+    } finally {
+      setLoading(false);
+    }
+  }
+  else{
+    Alert("You must agree to the T&C to continue")
+  }
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
@@ -48,6 +62,7 @@ export default function RegisterScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+      
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Snapster</Text>
         <TextInput
@@ -95,11 +110,11 @@ export default function RegisterScreen() {
           <TouchableOpacity onPress={handleTermsAndConditions}>
             <Text style={styles.termsText}>Terms and Conditions</Text>
           </TouchableOpacity>
-
+        {loading ? <Text>LOADING</Text> : 
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
-        
+        }
         </KeyboardAvoidingView>
     </ImageBackground>
   );
