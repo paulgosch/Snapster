@@ -13,7 +13,7 @@ import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new
 import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 import HomeScreen from './HomeScreen'; // Import the new screen component
 
-import Pages from './constants';
+import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
