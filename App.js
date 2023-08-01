@@ -12,13 +12,8 @@ import AppPresentationScreen from './AppPresentationScreen';
 import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new screen components
 import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 import HomeScreen from './HomeScreen'; // Import the new screen component
-<<<<<<< HEAD
-import { Pages } from './constants';
-import './constants';
-=======
 
 import Pages from './constants';
->>>>>>> 40dc630cb64e0789933d80fbb22c3c4927552bba
 import TermsAndConditionsScreen from './TermsAndConditions';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
