@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 
-export default function TermsAndConditionsScreen() {
+export default function PrivacyPolicyPage() {
   const pdfUrl = "https://drive.google.com/uc?export=download&id=1vlelO-YcMg4zPprmgOszatYTVTQOpiOa";
   const navigation = useNavigation(); // Use the useNavigation hook here
 
@@ -21,7 +21,7 @@ export default function TermsAndConditionsScreen() {
         <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
           <Text style={styles.backButtonText}>{'<'}</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>Terms and Conditions</Text>
+        <Text style={styles.title}>Privacy Policy</Text>
         <View style={styles.webViewContainer}>
           <WebView
             source={{ uri: pdfUrl }}
