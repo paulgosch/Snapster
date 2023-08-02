@@ -35,24 +35,22 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = async () => {
-    if(agreeChecked){
-    setLoading(true);
-    try {
-      const response = await createUserWithEmailAndPassword(auth, email, password);      
-      console.log(response);
-      Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
-      navigation.navigate(Pages.HomeScreen);
-
-    } catch(error){
-      console.log(error)
-      alert("Sign in failed: " + error);
-    } finally {
-      setLoading(false);
+    if (agreeChecked) {
+      setLoading(true);
+      try {
+        const response = await createUserWithEmailAndPassword(auth, email, password);      
+        console.log(response);
+        Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
+        navigation.navigate(Pages.AppPresentationScreen); // Update the navigation to 'AppPresentationScreen'
+      } catch(error){
+        console.log(error)
+        alert("Sign in failed: " + error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      Alert.alert("You must agree to the T&C to continue");
     }
-  }
-  else{
-    Alert("You must agree to the T&C to continue")
-  }
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
@@ -111,15 +109,20 @@ export default function RegisterScreen() {
           </TouchableOpacity>
         </View>
 
-        {loading ? <Text>LOADING</Text> : 
-        <TouchableOpacity style={styles.button} onPress={handleRegister}>
-          <Text style={styles.buttonText}>Sign up</Text>
-        </TouchableOpacity>
-        }
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="white" />
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={handleRegister}>
+            <Text style={styles.buttonText}>Sign up</Text>
+          </TouchableOpacity>
+        )}
       </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -184,5 +187,21 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     marginRight: 5, // Add some space between "Terms and Conditions" and the checkbox
+  },
+  loadingContainer: {
+    height: 40, // Fixed height to keep the container from expanding
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingContent: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent background for the text container
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  loadingText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });

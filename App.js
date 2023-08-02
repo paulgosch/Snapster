@@ -91,21 +91,21 @@ function App() {
           }}
         />
         <Stack.Screen
-          name={Pages.AppPresentation}
+          name={Pages.AppPresentationScreen}
           component={AppPresentationScreen}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
         <Stack.Screen
-          name={Pages.AppPresentation2}
+          name={Pages.AppPresentationScreen2}
           component={AppPresentationScreen2}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
         />
         <Stack.Screen
-          name={Pages.AppPresentation3}
+          name={Pages.AppPresentationScreen3}
           component={AppPresentationScreen3}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
