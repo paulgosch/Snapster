@@ -1,16 +1,17 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import {WebView} from 'react-native-webview';
 
 export default function TermsAndConditionsScreen() {
-  const imageUrl = require('./assets/TermsAndConditions.jpg'); // Relative path to the image
+
+  const pdfUrl = "https://drive.google.com/uc?export=download&id=1vlelO-YcMg4zPprmgOszatYTVTQOpiOa";
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Terms and Conditions</Text>
-      <View style={styles.imageContainer}>
-        <Image source={imageUrl} style={styles.image} resizeMode="contain" />
-      </View>
-    </View>
+      <WebView
+      source={{ uri: pdfUrl }}
+      style={styles.webView}
+      onError={(error) => console.log(error)}
+ />
   );
 }
 
@@ -36,5 +37,8 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+  },
+  webView: {
+    flex: 1
   },
 });
