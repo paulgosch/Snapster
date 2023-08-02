@@ -8,5 +8,6 @@ export const Pages = {
     AppPresentation2: 'AppPresentation2',
     AppPresentation3: 'AppPresentation3',
     TermsAndConditions: 'TermsAndConditionsPage',
+    SettingsPage: 'SettingsPage',
   };
   

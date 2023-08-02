@@ -63,7 +63,6 @@ export default function RegisterScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
-      
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Snapster</Text>
         <TextInput
@@ -95,6 +94,8 @@ export default function RegisterScreen() {
           value={password}
           onChangeText={setPassword}
         />
+
+        {/* Wrap the checkbox, "Agree with", and "Terms and Conditions" in a view container */}
         <View style={styles.termsContainer}>
           <TouchableOpacity onPress={() => setAgreeChecked(!agreeChecked)}>
             <Icon
@@ -104,22 +105,22 @@ export default function RegisterScreen() {
               style={styles.checkbox}
             />
           </TouchableOpacity>
-          </View>
-
-          <Text style={styles.agreeText}>Agree with </Text>
-
+          <Text style={styles.agreeText}>Agree with</Text>
           <TouchableOpacity onPress={handleTermsAndConditions}>
             <Text style={styles.termsText}>Terms and Conditions</Text>
           </TouchableOpacity>
+        </View>
+
         {loading ? <Text>LOADING</Text> : 
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Sign up</Text>
         </TouchableOpacity>
         }
-        </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
+
 
 const styles = StyleSheet.create({
   backgroundImage: {
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'neucha-regular', // Apply the custom font
-    fontSize: 50,
+    fontSize: 40,
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center', // Center the title horizontally
@@ -166,22 +167,22 @@ const styles = StyleSheet.create({
   termsContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginTop: 10, // Adjust the marginTop value as needed
+    alignItems: 'center', // Align items vertically
+    marginTop: 10,
+    paddingBottom: 15,
   },
   agreeText: {
     fontSize: 14,
     color: 'white',
-    textAlign: 'center',
-    paddingBottom: 15,
+    marginLeft: 5, // Add some space between the checkbox and "Agree with"
   },
   termsText: {
     fontSize: 14,
     color: 'white',
-    textAlign: 'center',
     textDecorationLine: 'underline',
-    paddingBottom: 15,
+    marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
   },
   checkbox: {
-    marginRight: 5,
+    marginRight: 5, // Add some space between "Terms and Conditions" and the checkbox
   },
 });

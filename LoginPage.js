@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
@@ -50,10 +50,17 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
         />
-        {loading ? <Text>LOADING</Text> : 
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>}
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <View style={styles.loadingContent}>
+              <Text style={styles.loadingText}>Loading...</Text>
+            </View>
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+        )}
       </KeyboardAvoidingView>
     </ImageBackground>
   );
@@ -100,5 +107,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  loadingContainer: {
+    height: 40, // Fixed height to keep the container from expanding
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingContent: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent background for the text container
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+  },
+  loadingText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
