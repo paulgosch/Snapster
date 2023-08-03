@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground,} from 'react-native';
+import { useNavigation, useRoute} from '@react-navigation/native';
 import { Pages } from './constants';
 
 
@@ -8,8 +8,7 @@ const backgroundImageSource = require('./assets/Background.jpg');
 
 
 export default function SettingsPage() {
-  const navigation = useNavigation(); // Use the useNavigation hook here
-
+  const navigation = useNavigation();
   const handleBack = () => {
     // Navigate back to the HomeScreen
     navigation.goBack();
@@ -79,7 +78,11 @@ export default function SettingsPage() {
             />
           </View>
         </View>
-        <TouchableOpacity style={[styles.logoutButton]} onPress={handleLogout}>
+        <Text style={styles.backButtonText}> My Account: </Text>
+        <Text style={styles.backButtonText}> Name:  </Text>
+        <Text style={styles.backButtonText}> Username:  </Text>
+        <Text style={styles.backButtonText}> Email:  </Text>
+        <TouchableOpacity onPress={handleLogout}>
         <Text style={[styles.buttonText, styles.buttonTextWhite]}>Log out</Text>
         </TouchableOpacity>
         </View>
@@ -130,9 +133,9 @@ const styles = StyleSheet.create({
   },
   settingContainer: {
     width: '80%',
-    marginVertical: 10,
+    marginVertical: 7.5,
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 7.5,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 4,
@@ -147,15 +150,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'white',
   },
-  logoutButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
-    borderWidth: 1,
-    borderColor: 'white', // Change the button border color to white
-    borderRadius: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-  },
   buttonText: {
+    paddingVertical: 40,
     fontSize: 18,
   },
   buttonTextWhite: {

@@ -11,7 +11,7 @@ import { Pages } from './constants';
 
 export default function RegisterScreen() {
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [fullname, setFullName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('')
@@ -43,7 +43,7 @@ export default function RegisterScreen() {
   
       if (password !== confirmPassword) {
         // Show an alert if the password and confirm password fields don't match
-        Alert.alert('Error', 'Password and Confirm Password fields must match');
+        Alert.alert('Password and Confirm Password fields must match');
         setLoading(false);
         return;
       }
@@ -51,16 +51,21 @@ export default function RegisterScreen() {
       try {
         const response = await createUserWithEmailAndPassword(auth, email, password);
         console.log(response);
-        Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
-        navigation.navigate(Pages.AppPresentationScreen); // Update the navigation to 'AppPresentationScreen'
-      } catch(error) {
-        console.log(error)
-        alert("Sign in failed: " + error);
+  
+        // Pass the user data as parameters to the SettingsPage
+        navigation.navigate(Pages.SettingsPage, {
+          fullName: fullName,
+          username: username,
+          email: email,
+        });
+      } catch (error) {
+        console.log(error);
+        alert('Sign in failed: ' + error);
       } finally {
         setLoading(false);
       }
     } else {
-      Alert.alert("You must agree to the T&C to continue");
+      Alert.alert('You must agree to the T&C to continue');
     }
   };
 
@@ -78,7 +83,7 @@ export default function RegisterScreen() {
           style={styles.input}
           placeholder="Full Name"
           placeholderTextColor="white"
-          value={fullname}
+          value={fullName}
           onChangeText={setFullName}
         />
         <TextInput
@@ -218,6 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'white',
     textDecorationLine: 'underline',
+    textDecorationStyle: 'dotted',
     marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
   },
   checkbox: {
