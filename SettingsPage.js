@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground,} from 'react-native';
-import { useNavigation, useRoute} from '@react-navigation/native';
+import { useNavigation} from '@react-navigation/native';
 import { Pages } from './constants';
 
 
@@ -9,8 +9,7 @@ const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function SettingsPage() {
   const navigation = useNavigation();
-  const route = useRoute();
-  const { fullName, username, email } = route.params;
+
   const handleBack = () => {
     // Navigate back to the HomeScreen
     navigation.goBack();
@@ -82,9 +81,9 @@ export default function SettingsPage() {
           </View>
         </View>
         <Text style={styles.backButtonText}> My Account: </Text>
-        <Text style={styles.backButtonText}> Name:  {fullName}</Text>
-        <Text style={styles.backButtonText}> Username: {username} </Text>
-        <Text style={styles.backButtonText}> Email:  {email}</Text>
+        <Text style={styles.backButtonText}> Name:  </Text>
+        <Text style={styles.backButtonText}> Username:  </Text>
+        <Text style={styles.backButtonText}> Email: </Text>
         <TouchableOpacity onPress={handleLogout}>
         <Text style={[styles.buttonText, styles.buttonTextWhite]}>Log out</Text>
         </TouchableOpacity>
