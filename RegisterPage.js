@@ -14,9 +14,12 @@ export default function RegisterScreen() {
   const [fullname, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setconfirmPassword] = useState('')
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreeChecked, setAgreeChecked] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
   
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
@@ -37,12 +40,20 @@ export default function RegisterScreen() {
   const handleRegister = async () => {
     if (agreeChecked) {
       setLoading(true);
+  
+      if (password !== confirmPassword) {
+        // Show an alert if the password and confirm password fields don't match
+        Alert.alert('Error', 'Password and Confirm Password fields must match');
+        setLoading(false);
+        return;
+      }
+  
       try {
-        const response = await createUserWithEmailAndPassword(auth, email, password);      
+        const response = await createUserWithEmailAndPassword(auth, email, password);
         console.log(response);
         Alert.alert('Congratulations!', 'You have successfully registered with Snapster. Welcome to our community of photo enthusiasts! 🎉')
         navigation.navigate(Pages.AppPresentationScreen); // Update the navigation to 'AppPresentationScreen'
-      } catch(error){
+      } catch(error) {
         console.log(error)
         alert("Sign in failed: " + error);
       } finally {
@@ -84,14 +95,38 @@ export default function RegisterScreen() {
           value={email}
           onChangeText={setEmail}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="white"
-          secureTextEntry
-          value={password}
-          onChangeText={setPassword}
-        />
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Password"
+            placeholderTextColor="white"
+            secureTextEntry={!passwordVisible}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <TouchableOpacity
+            onPress={() => setPasswordVisible(!passwordVisible)}
+            style={styles.eyeIconContainer}
+          >
+            <Icon name={passwordVisible ? 'eye' : 'eye-slash'} size={18} color="white" />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Confirm Password"
+            placeholderTextColor="white"
+            secureTextEntry={!confirmPasswordVisible}
+            value={confirmPassword}
+            onChangeText={setconfirmPassword}
+          />
+          <TouchableOpacity
+            onPress={() => setConfirmPasswordVisible(!confirmPasswordVisible)}
+            style={styles.eyeIconContainer}
+          >
+            <Icon name={confirmPasswordVisible ? 'eye' : 'eye-slash'} size={18} color="white" />
+          </TouchableOpacity>
+        </View>
 
         {/* Wrap the checkbox, "Agree with", and "Terms and Conditions" in a view container */}
         <View style={styles.termsContainer}>
@@ -203,5 +238,21 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: 'white',
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingLeft: 10,
+  },
+  passwordInput: {
+    flex: 1,
+    height: 40,
+    color: 'white',
+  },
+  eyeIconContainer: {
+    padding: 10,
   },
 });

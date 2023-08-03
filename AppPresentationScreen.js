@@ -26,7 +26,7 @@ export default function AppPresentationScreen() {
   }
 
   const handleNextScreen = () => {
-    navigation.navigate(Pages.AppPresentation2);
+    navigation.navigate(Pages.AppPresentationScreen2);
   };
 
   const handleSkip = () => {
