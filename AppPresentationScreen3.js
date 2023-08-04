@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+    marginTop: 15,
     marginBottom: 20,
     top: 70,
   },
@@ -146,8 +147,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   deliveryImage: {
-    width: width * 1.5, // Adjust the size as needed
-    height: width * 1.5, // Maintain aspect ratio
+    width: width * 1.4, // Adjust the size as needed
+    height: width * 1.4, // Maintain aspect ratio
    bottom: 30,
   }
 });

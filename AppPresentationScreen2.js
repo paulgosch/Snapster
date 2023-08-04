@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
+    marginTop: 15,
     top: 70,
   },
   text: {
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
   },
   houseImage: {
     width: width * 0.6, // Adjust the size as needed
-    height: width * 0.6, // Maintain aspect ratio
+    height: width * 1.2, // Maintain aspect ratio
     marginBottom: 20,
   }
 });
