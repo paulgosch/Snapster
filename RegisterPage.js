@@ -53,7 +53,7 @@ export default function RegisterScreen() {
         console.log(response);
   
         // Pass the user data as parameters to the SettingsPage
-        navigation.navigate(Pages.SettingsPage, {
+        navigation.navigate(Pages.AppPresentationScreen, {
           fullName: fullName,
           username: username,
           email: email,
@@ -78,7 +78,9 @@ export default function RegisterScreen() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <Text style={styles.title}>Snapster</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>Snapster</Text>
+        </View>
         <TextInput
           style={styles.input}
           placeholder="Full Name"
@@ -171,9 +173,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   container: {
-    flex: 1,
+    marginTop: 20,
     justifyContent: 'center',
     padding: 20,
+    marginTop: 100,
   },
   title: {
     fontFamily: 'neucha-regular', // Apply the custom font
@@ -181,7 +184,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     textAlign: 'center', // Center the title horizontally
-    marginTop: 40, // Adjust the marginTop value as needed
+    marginTop: 60, // Adjust the marginTop value as needed
+  },
+  titleContainer: {
+    alignItems: 'center', // Center the title horizontally within the container
+    marginTop: 40, // Adjust the marginTop value to move only the title "Snapster"
   },
   input: {
     height: 40,

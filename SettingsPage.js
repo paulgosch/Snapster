@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground,} from 'react-native';
 import { useNavigation} from '@react-navigation/native';
 import { Pages } from './constants';
+import Icon from 'react-native-vector-icons/Feather';
 
 
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -40,8 +41,8 @@ export default function SettingsPage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-        <Text style={styles.backButtonText}>{'<'}</Text>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Icon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
         <View style={styles.settingContainer}>
