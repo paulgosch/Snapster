@@ -14,6 +14,8 @@ import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new
 import HomeScreen from './HomeScreen'; // Import the new screen component
 import SettingsPage from './SettingsPage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
+import StorePage from './StorePage';
+
 
 import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
@@ -138,6 +140,13 @@ function App() {
         <Stack.Screen
           name={Pages.SettingsPage}
           component={SettingsPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.StorePage}
+          component={StorePage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

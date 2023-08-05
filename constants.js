@@ -9,6 +9,7 @@ export const Pages = {
     AppPresentationScreen3: 'AppPresentationScreen3',
     TermsAndConditions: 'TermsAndConditionsPage',
     SettingsPage: 'SettingsPage',
-    PrivacyPolicyPage: 'PrivacyPolicyPage'
+    PrivacyPolicyPage: 'PrivacyPolicyPage',
+    StorePage: 'StorePage',
   };
   

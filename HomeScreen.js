@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Pages } from './constants';
+import { Feather } from '@expo/vector-icons'; // Import the Feather component
 import { Camera } from 'expo-camera';
-import SettingsPage from './SettingsPage'; // Import the SettingsScreen component
+import { Pages } from './constants';
+
 
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -40,9 +41,10 @@ export default function HomeScreen() {
   }
 
   const handleSettings = () => {
-    // Implement any necessary logout logic here
-    // For now, let's just navigate to the WelcomePage
     navigation.navigate(Pages.SettingsPage);
+  };
+  const handleStore = () => {
+    navigation.navigate(Pages.StorePage);
   };
 
   const takePicture = async () => {
@@ -53,16 +55,22 @@ export default function HomeScreen() {
     }
   };
 
-  return (
+
+   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.titleContainer}>
             <Text style={styles.title}> Snapster </Text>
           </TouchableOpacity>
-          <Text style={styles.progressText}>3/27</Text>
+          <Text style={styles.progressText}>3/27</Text> 
+
           <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
-            <Text style={styles.settingsButtonText}>Settings</Text>
+            <Feather name="settings" size={24} color="white" />
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.storeButton} onPress={handleStore}>
+            <Feather name="shopping-cart" size={24} color="white" />
           </TouchableOpacity>
         </View>
         <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
@@ -156,7 +164,6 @@ const styles = StyleSheet.create({
   },
   settingsButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
-    borderWidth: 1,
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,

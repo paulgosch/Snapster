@@ -1,12 +1,10 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground,} from 'react-native';
-import { useNavigation} from '@react-navigation/native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Icon } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Pages } from './constants';
-import Icon from 'react-native-vector-icons/Feather';
-
+import FeatherIcon from 'react-native-vector-icons/Feather';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-
 
 export default function SettingsPage() {
   const navigation = useNavigation();
@@ -16,9 +14,8 @@ export default function SettingsPage() {
     navigation.goBack();
   };
 
-
   const handlePrivacyPolicyPage = () => {
-    navigation.navigate(Pages.PrivacyPolicyPage); // Navigate to the 'TermsAndConditions' screen
+    navigation.navigate(Pages.PrivacyPolicyPage); // Navigate to the 'PrivacyPolicyPage'
   };
 
   const handleTermsAndConditions = () => {
@@ -41,10 +38,11 @@ export default function SettingsPage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="white" />
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <FeatherIcon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
+
         <View style={styles.settingContainer}>
           <View style={styles.settingRow}>
             <Text style={styles.settingText}>Enable Notifications</Text>
@@ -54,58 +52,45 @@ export default function SettingsPage() {
             />
           </View>
         </View>
+
         <View style={styles.settingContainer}>
           <View style={styles.settingRow}>
             <Text style={styles.settingText}>Sound Effects</Text>
             <Switch
-              value={false} 
+              value={false}
               onValueChange={handleSoundsChange}
             />
           </View>
         </View>
-        <View style={styles.settingContainer}>
-          <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Example 3</Text>
-            <Switch
-              value={false} 
-              onValueChange={handleSoundsChange}
-            />
-          </View>
+
+
+        <View style={styles.accountContainer}>
+          <Text style={styles.accountHeaderText}> My Account: </Text>
+          <Text style={styles.accountText}> Name: John Doe </Text>
+          <Text style={styles.accountText}> Username: johndoe123 </Text>
+          <Text style={styles.accountText}> Email: john@example.com </Text>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text style={[styles.buttonText, styles.buttonTextWhite]}>Log out</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.settingContainer}>
-          <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Example 4</Text>
-            <Switch
-              value={false} 
-              onValueChange={handleSoundsChange}
-            />
-          </View>
-        </View>
-        <Text style={styles.backButtonText}> My Account: </Text>
-        <Text style={styles.backButtonText}> Name:  </Text>
-        <Text style={styles.backButtonText}> Username:  </Text>
-        <Text style={styles.backButtonText}> Email: </Text>
-        <TouchableOpacity onPress={handleLogout}>
-        <Text style={[styles.buttonText, styles.buttonTextWhite]}>Log out</Text>
-        </TouchableOpacity>
-        </View>
-        <View>
+
         <View style={styles.bottomContainer}>
-        <TouchableOpacity onPress={handlePrivacyPolicyPage}>
-            <Text style={[styles.bottomText]}>PrivacyPolicy</Text>
+          <TouchableOpacity onPress={handleTermsAndConditions}>
+            <Text style={[styles.bottomText]}>Terms & Conditions</Text>
           </TouchableOpacity>
 
+          <TouchableOpacity onPress={handlePrivacyPolicyPage}>
+            <Text style={[styles.bottomText]}>Privacy Policy</Text>
+          </TouchableOpacity>
+        
           <TouchableOpacity onPress={handlePrivacyPolicyPage}>
             <Text style={[styles.bottomText]}>Support</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={handleTermsAndConditions}>
-            <Text style={[styles.bottomText]}>Terms & Conditions</Text>
-          </TouchableOpacity>
-        {/* Add more settings options as needed */}
+          
+          {/* Add more settings options as needed */}
+        </View>
       </View>
-      </View>
-    
     </ImageBackground>
   );
 }
@@ -118,31 +103,31 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   backButton: {
     position: 'absolute',
-    top: 30,
+    top: 40,
     left: 20,
-    padding: 10, 
+    padding: 10,
     color: 'white', // Set the icon color to white
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: 'white'
+    color: 'white',
   },
   settingContainer: {
-    width: '80%',
-    marginVertical: 7.5,
+    width: '90%',
+    marginVertical: 10,
     paddingHorizontal: 20,
-    paddingVertical: 7.5,
+    paddingVertical: 15,
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   settingRow: {
     flexDirection: 'row', // Align items horizontally
@@ -150,11 +135,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Center items vertically in the row
   },
   settingText: {
-    fontSize: 16,
+    fontSize: 18,
     color: 'white',
   },
   buttonText: {
-    paddingVertical: 40,
     fontSize: 18,
   },
   buttonTextWhite: {
@@ -162,17 +146,26 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 10,
   },
-  backButton: {
-    position: 'absolute',
-    top: 40,
-    left: 20,
-    paddingTop: 30
+  accountContainer: {
+    width: '90%',
+    marginVertical: 20,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    alignItems: 'center',
   },
-  backButtonText: {
-    fontFamily: 'neucha-regular',
-    fontSize: 18,
+  accountHeaderText: {
+    fontSize: 22,
     fontWeight: 'bold',
     color: 'white',
+    marginBottom: 10,
+  },
+  accountText: {
+    fontSize: 16,
+    color: 'white',
+    marginBottom: 5,
   },
   bottomContainer: {
     position: 'absolute',
@@ -181,14 +174,14 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20
+    paddingBottom: 20,
   },
   bottomText: {
     fontFamily: 'neucha-regular',
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginVertical: 2,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
   },
