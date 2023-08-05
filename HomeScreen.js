@@ -63,7 +63,7 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.titleContainer}>
-            <Text style={styles.title}> Snapster {userName} </Text>
+            <Text style={styles.title}> Snapster </Text>
           </TouchableOpacity>
           <Text style={styles.progressText}>3/27</Text> 
 
