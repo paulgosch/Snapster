@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Icon } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -62,31 +62,28 @@ export default function SettingsPage() {
             />
           </View>
         </View>
-
-
+        <Text style={styles.accountHeaderText}>My Account</Text>
         <View style={styles.accountContainer}>
-          <Text style={styles.accountHeaderText}> My Account: </Text>
-          <Text style={styles.accountText}> Name: John Doe </Text>
-          <Text style={styles.accountText}> Username: johndoe123 </Text>
-          <Text style={styles.accountText}> Email: john@example.com </Text>
-          <TouchableOpacity onPress={handleLogout}>
-            <Text style={[styles.buttonText, styles.buttonTextWhite]}>Log out</Text>
-          </TouchableOpacity>
+          <Text style={styles.accountText}>Name: John Doe</Text>
+          <Text style={styles.accountText}>Username: johndoe123</Text>
+          <Text style={styles.accountText}>Email: john@example.com</Text>
+          <Text style={styles.accountText}>Adress: Johns Street, 24784 Westerrönfeld, Germany</Text>
         </View>
-
+        <TouchableOpacity onPress={handleLogout}>
+            <Text style={[styles.buttonTextWhite]}>Log out</Text>
+          </TouchableOpacity>
         <View style={styles.bottomContainer}>
           <TouchableOpacity onPress={handleTermsAndConditions}>
-            <Text style={[styles.bottomText]}>Terms & Conditions</Text>
+            <Text style={styles.bottomText}>Terms & Conditions</Text>
           </TouchableOpacity>
 
           <TouchableOpacity onPress={handlePrivacyPolicyPage}>
-            <Text style={[styles.bottomText]}>Privacy Policy</Text>
+            <Text style={styles.bottomText}>Privacy Policy</Text>
           </TouchableOpacity>
         
           <TouchableOpacity onPress={handlePrivacyPolicyPage}>
-            <Text style={[styles.bottomText]}>Support</Text>
+            <Text style={styles.bottomText}>Support</Text>
           </TouchableOpacity>
-
           
           {/* Add more settings options as needed */}
         </View>
@@ -116,7 +113,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 10,
     color: 'white',
   },
   settingContainer: {
@@ -127,24 +124,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  settingRow: {
-    flexDirection: 'row', // Align items horizontally
-    justifyContent: 'space-between', // Align items at both ends of the row
-    alignItems: 'center', // Center items vertically in the row
+    backgroundColor: 'white', // White background color for settings container
   },
   settingText: {
     fontSize: 18,
-    color: 'white',
-  },
-  buttonText: {
-    fontSize: 18,
-  },
-  buttonTextWhite: {
-    color: 'white', // Set the text color to white
-    fontWeight: 'bold',
-    paddingTop: 10,
+    color: 'grey', // Black text color for settings
   },
   accountContainer: {
     width: '90%',
@@ -153,19 +137,34 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    alignItems: 'center',
+    backgroundColor: 'white', // White background color for account container
   },
   accountHeaderText: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
-    marginBottom: 10,
+    color: 'white', // Black text color for account header
+    marginTop: 10,
   },
   accountText: {
     fontSize: 16,
-    color: 'white',
+    color: 'grey', // Grey text color for account details
     marginBottom: 5,
+  },
+  settingRow: {
+    flexDirection: 'row', // Align items horizontally
+    justifyContent: 'space-between', // Align items at both ends of the row
+    alignItems: 'center', // Center items vertically in the row
+  },
+  buttonTextWhite: {
+    color: 'white', // Set the text color to white
+    fontWeight: 'bold',
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
   },
   bottomContainer: {
     position: 'absolute',
