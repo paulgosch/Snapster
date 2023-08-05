@@ -3,10 +3,12 @@ import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } fro
 import { useNavigation } from '@react-navigation/native';
 import { Pages } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { useSelector, useDispatch } from 'react-redux';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function SettingsPage() {
+  const { userName, email, fullName, address } = useSelector((state) => state.user);
   const navigation = useNavigation();
 
   const handleBack = () => {
@@ -64,10 +66,10 @@ export default function SettingsPage() {
         </View>
         <Text style={styles.accountHeaderText}>My Account</Text>
         <View style={styles.accountContainer}>
-          <Text style={styles.accountText}>Name: John Doe</Text>
-          <Text style={styles.accountText}>Username: johndoe123</Text>
-          <Text style={styles.accountText}>Email: john@example.com</Text>
-          <Text style={styles.accountText}>Adress: Johns Street, 24784 Westerrönfeld, Germany</Text>
+          <Text style={styles.accountText}>Name: {fullName}</Text>
+          <Text style={styles.accountText}>Username: {userName}</Text>
+          <Text style={styles.accountText}>Email: {email}</Text>
+          <Text style={styles.accountText}>Adress: {address}</Text>
         </View>
         <TouchableOpacity onPress={handleLogout}>
             <Text style={[styles.buttonTextWhite]}>Log out</Text>

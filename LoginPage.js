@@ -4,10 +4,11 @@ import { useNavigation } from '@react-navigation/native'; // Import the useNavig
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
 import { Pages } from './constants';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function LoginPage() {
-  const [username, setUsername] = useState('');
+  const dispatch = useDispatch();
+  const { userName } = useSelector((state) => state.user);
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation(); // Use the useNavigation hook here
@@ -16,9 +17,10 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(auth, username, password);      
+      const response = await signInWithEmailAndPassword(auth, userName, password);      
       console.log(response);
       navigation.navigate(Pages.HomeScreen);
+      dispatch({ type: 'SET_USER', payload: { userName, email } });
 
     } catch(error){
       console.log(error)
@@ -39,8 +41,11 @@ export default function LoginPage() {
           style={styles.input}
           placeholder="Username or Email"
           placeholderTextColor="white"
-          value={username}
-          onChangeText={setUsername}
+          value={userName}
+          onChangeText={text => dispatch({
+            type: 'SET_USERNAME',
+            payload: text,
+          })}
         />
         <TextInput
           style={styles.input}

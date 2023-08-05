@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; // Import the Feather component
 import { Camera } from 'expo-camera';
 import { Pages } from './constants';
+import { useSelector } from 'react-redux';
 
 
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -16,6 +17,7 @@ export default function HomeScreen() {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [cameraRef, setCameraRef] = React.useState(null);
   const navigation = useNavigation(); // Use the useNavigation hook here
+  const { userName } = useSelector((state) => state.user);
 
   React.useEffect(() => {
     async function loadFont() {
@@ -61,7 +63,7 @@ export default function HomeScreen() {
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.titleContainer}>
-            <Text style={styles.title}> Snapster </Text>
+            <Text style={styles.title}> Snapster {userName} </Text>
           </TouchableOpacity>
           <Text style={styles.progressText}>3/27</Text> 
 

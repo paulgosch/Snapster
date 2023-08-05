@@ -8,14 +8,15 @@ import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
 import { Pages } from './constants';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function RegisterScreen() {
+  const dispatch = useDispatch();
+  const { userName, email, fullName, address } = useSelector((state) => state.user);
+
   const [fontLoaded, setFontLoaded] = useState(false);
-  const [fullName, setFullName] = useState('');
-  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setconfirmPassword] = useState('')
-  const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreeChecked, setAgreeChecked] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -53,11 +54,7 @@ export default function RegisterScreen() {
         console.log(response);
   
         // Pass the user data as parameters to the SettingsPage
-        navigation.navigate(Pages.AppPresentationScreen, {
-          fullName: fullName,
-          username: username,
-          email: email,
-        });
+        navigation.navigate(Pages.AppPresentationScreen);
       } catch (error) {
         console.log(error);
         alert('Sign in failed: ' + error);
@@ -86,21 +83,30 @@ export default function RegisterScreen() {
           placeholder="Full Name"
           placeholderTextColor="white"
           value={fullName}
-          onChangeText={setFullName}
+          onChangeText={text => dispatch({
+            type: 'SET_FULLNAME',
+            payload: text,
+          })}
         />
         <TextInput
           style={styles.input}
           placeholder="Username"
           placeholderTextColor="white"
-          value={username}
-          onChangeText={setUsername}
+          value={userName}
+          onChangeText={text => dispatch({
+            type: 'SET_USERNAME',
+            payload: text,
+          })}
         />
         <TextInput
           style={styles.input}
           placeholder="Email"
           placeholderTextColor="white"
           value={email}
-          onChangeText={setEmail}
+          onChangeText={text => dispatch({
+            type: 'SET_EMAIL',
+            payload: text,
+          })}
         />
         <View style={styles.passwordContainer}>
           <TextInput

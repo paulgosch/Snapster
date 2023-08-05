@@ -15,7 +15,8 @@ import HomeScreen from './HomeScreen'; // Import the new screen component
 import SettingsPage from './SettingsPage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
-
+import { Provider } from 'react-redux';
+import { store } from './reduxStore'; 
 
 import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
@@ -58,7 +59,7 @@ function App() {
   }
 
   return (
-    
+    <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName={Pages.FirstScreen} headerMode="screen">
         <Stack.Screen
@@ -153,6 +154,7 @@ function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
 
