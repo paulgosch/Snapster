@@ -11,5 +11,6 @@ export const Pages = {
     SettingsPage: 'SettingsPage',
     PrivacyPolicyPage: 'PrivacyPolicyPage',
     StorePage: 'StorePage',
+    SupportPage: 'SupportPage',
   };
   

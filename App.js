@@ -13,10 +13,12 @@ import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new
 import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 import HomeScreen from './HomeScreen'; // Import the new screen component
 import SettingsPage from './SettingsPage';
+import SupportPage from './Supportpage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
+
 
 import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
@@ -128,11 +130,17 @@ function App() {
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
-          
         />
          <Stack.Screen
           name={Pages.PrivacyPolicyPage}
           component={PrivacyPolicyPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.SupportPage}
+          component={SupportPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

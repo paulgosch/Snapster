@@ -16,6 +16,11 @@ export default function SettingsPage() {
     navigation.goBack();
   };
 
+  const handleSupportPage = () => {
+    navigation.navigate(Pages.SupportPage); // Navigate to the 'PrivacyPolicyPage'
+  };
+
+
   const handlePrivacyPolicyPage = () => {
     navigation.navigate(Pages.PrivacyPolicyPage); // Navigate to the 'PrivacyPolicyPage'
   };
@@ -83,8 +88,8 @@ export default function SettingsPage() {
             <Text style={styles.bottomText}>Privacy Policy</Text>
           </TouchableOpacity>
         
-          <TouchableOpacity onPress={handlePrivacyPolicyPage}>
-            <Text style={styles.bottomText}>Support</Text>
+          <TouchableOpacity onPress={handleSupportPage}>
+            <Text style={styles.bottomText}>Q&A + Support</Text>
           </TouchableOpacity>
           
           {/* Add more settings options as needed */}
