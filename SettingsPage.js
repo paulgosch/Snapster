@@ -42,6 +42,17 @@ export default function SettingsPage() {
   const handleSoundsChange = (value) => {
   };
 
+  const handleChangeFullName = () => {
+    // Implement logic to navigate to the screen where the user can change their full name
+  };
+
+    const handleChangePassword = () => {
+    // Implement logic to change the password
+    // For example, you can dispatch an action to update the password in the Redux store
+    // Here, we'll just set a simple example where we update the password in the state
+  
+  };
+
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
@@ -69,12 +80,32 @@ export default function SettingsPage() {
             />
           </View>
         </View>
-        <Text style={styles.accountHeaderText}>My Account</Text>
+        
         <View style={styles.accountContainer}>
-          <Text style={styles.accountText}>Name: {fullName}</Text>
-          <Text style={styles.accountText}>Username: {userName}</Text>
-          <Text style={styles.accountText}>Email: {email}</Text>
-          <Text style={styles.accountText}>Adress: {address}</Text>
+          <Text style={styles.accountHeaderText}>My Account</Text>
+          <View style={styles.accountDetails}>
+            <View style={styles.accountRow}>
+              <Text style={styles.accountText}>Name: {fullName}</Text>
+              <TouchableOpacity onPress={handleChangeFullName}>
+                <Text style={styles.changeText}>Change</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.accountRow}>
+              <Text style={styles.accountText}>Password: ********</Text>
+              <TouchableOpacity onPress={handleChangePassword}>
+                <Text style={styles.changeText}>Change</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text style={styles.accountText}>Username: {userName}</Text>
+            <Text style={styles.accountText}>Email: {email}</Text>
+            <Text style={styles.accountText}>Adress: {address}</Text>
+          </View>
+
+          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
+            <Text style={styles.buttonTextWhite}>Log out</Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity onPress={handleLogout}>
             <Text style={[styles.buttonTextWhite]}>Log out</Text>
@@ -145,12 +176,13 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 8,
     backgroundColor: 'white', // White background color for account container
+    alignItems: 'center',
   },
   accountHeaderText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white', // Black text color for account header
-    marginTop: 10,
+    color: 'grey', // Black text color for account header
+    marginBottom: 10,
   },
   accountText: {
     fontSize: 16,
@@ -190,5 +222,21 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
+  },
+  changeText: {
+    color: 'grey',
+    textDecorationLine: 'underline',
+  },
+  accountDetails: {
+    marginBottom: 10,
+  },
+  accountRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 5,
+  },
+  logoutButton: {
+    alignSelf: 'flex-end',
   },
 });
