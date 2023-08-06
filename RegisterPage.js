@@ -10,6 +10,13 @@ import { FIREBASE_AUTH } from './firebaseConfig';
 import { Pages } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
+
+const isPasswordStrongEnough = (password) => {
+  // Password must have at least 6 characters, one number, and one uppercase letter
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/;
+  return passwordRegex.test(password);
+};
+
 export default function RegisterScreen() {
   const dispatch = useDispatch();
   const { userName, email, fullName, address } = useSelector((state) => state.user);
@@ -39,12 +46,27 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = async () => {
+    if (!fullName || !userName) {
+      // Show an alert if the name or username is missing
+      Alert.alert('Name and Username are required fields');
+      return;
+    }
+    
     if (agreeChecked) {
       setLoading(true);
   
       if (password !== confirmPassword) {
         // Show an alert if the password and confirm password fields don't match
         Alert.alert('Password and Confirm Password fields must match');
+        setLoading(false);
+        return;
+      }
+      if (!isPasswordStrongEnough(password)) {
+        // Show an alert if the password is not strong enough
+        Alert.alert(
+          'Password Requirements',
+          'Password must have at least 6 characters, one number, and one uppercase letter'
+        );
         setLoading(false);
         return;
       }
