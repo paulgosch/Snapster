@@ -63,7 +63,7 @@ function App() {
   return (
     <Provider store={store}>
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={Pages.FirstScreen} headerMode="screen">
+      <Stack.Navigator initialRouteName={Pages.HomeScreen} headerMode="screen">
         <Stack.Screen
           name={Pages.FirstScreen}
           component={FirstScreen}

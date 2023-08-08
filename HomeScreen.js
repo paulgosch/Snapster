@@ -6,7 +6,9 @@ import { Feather } from '@expo/vector-icons'; // Import the Feather component
 import { Camera } from 'expo-camera';
 import { Pages } from './constants';
 import { useSelector } from 'react-redux';
-
+import { ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
+import { FIREBASE_STORAGE_IMAGES, storage } from './firebaseConfig';
+import * as FileSystem from 'expo-file-system';
 
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -72,7 +74,16 @@ export default function HomeScreen() {
       console.log('Taking picture...');
       try {
       let photo = await cameraRef.takePictureAsync();
+      const fetchRep = await fetch(photo.uri)
+      const theBlob = await fetchRep.blob();
+
       console.log('photo', photo);
+      console.log('photo uri: ', photo.uri);
+      uploadBytesResumable(ref(storage, 'images/'+ photo.uri.substring(photo.uri.lastIndexOf('/') + 1)), theBlob).then((snapshot) => {
+        console.log("Success!");
+        console.log(snapshot.metadata);
+      })
+     
     } catch (error) {
       console.error('Error taking picture:', error); // Log error if something goes wrong
     }
