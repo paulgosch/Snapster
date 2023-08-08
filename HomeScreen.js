@@ -69,11 +69,17 @@ export default function HomeScreen() {
 
   const takePicture = async () => {
     if (cameraRef) {
+      console.log('Taking picture...');
+      try {
       let photo = await cameraRef.takePictureAsync();
       console.log('photo', photo);
-      Alert.alert('Photo taken', 'Check your console logs');
+    } catch (error) {
+      console.error('Error taking picture:', error); // Log error if something goes wrong
     }
-  };
+  } else {
+    console.log('Camera reference is not set'); // Log if cameraRef is not set
+  }
+};
 
 
  return (
@@ -101,7 +107,7 @@ export default function HomeScreen() {
 
         {/* Move the camera container slightly up */}
         <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
-          <Camera
+          <Camera flashMode={flashMode}
             style={styles.camera}
             type={type}
             ref={(ref) => setCameraRef(ref)}
