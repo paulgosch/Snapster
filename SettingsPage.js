@@ -1,15 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
 const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function SettingsPage() {
+  const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(false);
   const { userName, email, fullName, address } = useSelector((state) => state.user);
   const navigation = useNavigation();
+  useEffect(() => {
+    loadSoundEffectsSetting();
+  }, []);
+
+  const loadSoundEffectsSetting = async () => {
+    try {
+      const value = await AsyncStorage.getItem('soundEffectsEnabled');
+      if (value !== null) {
+        setSoundEffectsEnabled(value === 'true');
+      }
+    } catch (error) {
+      console.error('Error loading sound effects setting:', error);
+    }
+  };
+
+  const saveSoundEffectsSetting = async (value) => {
+    try {
+      await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
+    } catch (error) {
+      console.error('Error saving sound effects setting:', error);
+    }
+  };
+
+  const handleSoundsChange = async (value) => {
+    // Save the sound effects setting to AsyncStorage
+    try {
+      await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
+    } catch (error) {
+      console.error('Error saving sound effects setting:', error);
+    }
+  
+    setSoundEffectsEnabled(value); // Update the local state
+  };
 
   const handleBack = () => {
     // Navigate back to the HomeScreen
@@ -39,9 +74,6 @@ export default function SettingsPage() {
     // Implement logic to toggle notification settings
   };
 
-  const handleSoundsChange = (value) => {
-  };
-
   const handleChangeFullName = () => {
     // Implement logic to navigate to the screen where the user can change their full name
   };
@@ -50,7 +82,11 @@ export default function SettingsPage() {
     // Implement logic to change the password
     // For example, you can dispatch an action to update the password in the Redux store
     // Here, we'll just set a simple example where we update the password in the state
-  
+  };
+
+  const handleSettings = () => {
+    // Pass the soundEffectsEnabled state as a param to HomeScreen
+    navigation.navigate(Pages.HomeScreen, { soundEffectsEnabled });
   };
 
   return (
@@ -72,13 +108,13 @@ export default function SettingsPage() {
         </View>
 
         <View style={styles.settingContainer}>
-          <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Sound Effects</Text>
-            <Switch
-              value={false}
-              onValueChange={handleSoundsChange}
-            />
-          </View>
+        <View style={styles.settingRow}>
+          <Text style={styles.settingText}>Mute Sounds</Text>
+          <Switch
+            value={soundEffectsEnabled} // Use the state variable
+            onValueChange={handleSoundsChange}
+          />
+        </View>
         </View>
         
         <View style={styles.accountContainer}>

@@ -6,14 +6,14 @@ import { Feather } from '@expo/vector-icons'; // Import the Feather component
 import { Camera } from 'expo-camera';
 import { Pages } from './constants';
 import { useSelector } from 'react-redux';
-import { ref, uploadBytes, uploadBytesResumable } from 'firebase/storage';
-import { FIREBASE_STORAGE_IMAGES, storage } from './firebaseConfig';
-import * as FileSystem from 'expo-file-system';
+import { ref, uploadBytesResumable } from 'firebase/storage';
+import { storage } from './firebaseConfig';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
 
-export default function HomeScreen() {
+export default function HomeScreen({ route }) {
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = React.useState(null);
@@ -38,11 +38,31 @@ export default function HomeScreen() {
         : Camera.Constants.FlashMode.off
     );
   };
+  
   const [timer, setTimer] = useState(10); // Initial timer value is 10 seconds
   const [isTimerActive, setIsTimerActive] = useState(false);
 
   // New state variable for countdown text
   const [countdownText, setCountdownText] = useState('');
+
+  // Updated sound effects logic
+  const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(true); // Initialize as true or as needed
+
+  useEffect(() => {
+    // Retrieve the sound effects setting from AsyncStorage
+    async function loadSoundEffectsSetting() {
+      try {
+        const value = await AsyncStorage.getItem('soundEffectsEnabled');
+        if (value !== null) {
+          setSoundEffectsEnabled(value === 'true');
+        }
+      } catch (error) {
+        console.error('Error loading sound effects setting:', error);
+      }
+    }
+  
+    loadSoundEffectsSetting();
+  }, []);
 
   useEffect(() => {
     // Start the countdown when the timer is active
@@ -102,6 +122,13 @@ export default function HomeScreen() {
     navigation.navigate(Pages.StorePage);
   };
 
+  // Updated sound effects logic
+  const playSoundEffect = () => {
+    if (soundEffectsEnabled) {
+      // Implement the logic to play the sound effect here
+    }
+  };
+
   const takePicture = async () => {
     if (cameraRef) {
       console.log('Taking picture...');
@@ -118,6 +145,9 @@ export default function HomeScreen() {
         ).then((snapshot) => {
           console.log('Success!');
           console.log(snapshot.metadata);
+
+          // Play the sound effect when the picture is taken
+          playSoundEffect();
         });
       } catch (error) {
         console.error('Error taking picture:', error); // Log error if something goes wrong
@@ -184,8 +214,6 @@ export default function HomeScreen() {
 
         {isTimerActive && <Text style={styles.timerText}>{timer}</Text>}
       </View>
-
-   
     </ImageBackground>
   );
 }
@@ -228,7 +256,7 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     top: '10%', // Adjust the top position
-    left: '50%', // Adjust the left position
+    left: '47.5%', // Adjust the left position
   },
   button: {
     position: 'absolute',
