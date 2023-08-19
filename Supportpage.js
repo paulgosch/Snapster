@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Linking } from 'react-native';
 
@@ -74,6 +74,7 @@ export default function SupportScreen() {
       style={styles.backgroundImage}
       resizeMode="cover"
     >
+       <ScrollView style={styles.scrollContainer}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Icon name="arrow-left" size={24} color="white" />
@@ -98,6 +99,7 @@ export default function SupportScreen() {
           ))}
   
           {/* Additional text and contact buttons in the same row */}
+          <View style={styles.additionalContainer}>
           <View style={styles.rowContainer}>
             <Text style={styles.moreQuestionsText}>More Questions?</Text>
             <TouchableOpacity onPress={handleMoreQuestions}>
@@ -115,9 +117,10 @@ export default function SupportScreen() {
               </View>
             </TouchableOpacity>
           </View>
-  
+         </View>
         </View>
       </View>
+      </ScrollView>
     </ImageBackground>
   );
 }
@@ -145,6 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
+    top: 30,
     marginBottom: 20,
   },
   question: {
@@ -165,6 +169,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     marginBottom: 10,
+    top: 50,
     padding: 10,
   },
   questionHeader: {
@@ -184,6 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: 'white',
+    top: 50,
   },
   rowContainer: {
     flexDirection: 'row', // Display items in the same row
@@ -199,5 +205,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
+    top: 50,
   },
+  scrollContainer: {
+    flex: 1, // Ensure ScrollView takes the full height of the container
+    marginBottom: 20, // Add margin to the bottom to prevent content from being covered by the navigation bar
+  },
+  additionalContainer: {
+    marginBottom: 50
+  }
 });
