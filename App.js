@@ -16,6 +16,7 @@ import SettingsPage from './SettingsPage';
 import SupportPage from './Supportpage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
+import CheckoutPage from './CheckoutPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 
@@ -156,6 +157,13 @@ function App() {
         <Stack.Screen
           name={Pages.StorePage}
           component={StorePage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.CheckoutPage}
+          component={CheckoutPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

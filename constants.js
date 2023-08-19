@@ -12,5 +12,6 @@ export const Pages = {
     PrivacyPolicyPage: 'PrivacyPolicyPage',
     StorePage: 'StorePage',
     SupportPage: 'SupportPage',
+    CheckoutPage: 'CheckoutPage',
   };
   

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
@@ -38,6 +38,39 @@ export default function HomeScreen() {
         : Camera.Constants.FlashMode.off
     );
   };
+  const [timer, setTimer] = useState(10); // Initial timer value is 10 seconds
+  const [isTimerActive, setIsTimerActive] = useState(false);
+
+  // New state variable for countdown text
+  const [countdownText, setCountdownText] = useState('');
+
+  useEffect(() => {
+    // Start the countdown when the timer is active
+    let interval;
+    if (isTimerActive && timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+
+    // When the timer reaches 0, take a photo and reset the timer
+    if (timer === 0) {
+      takePicture();
+      setTimer(10); // Reset the timer to 10 seconds
+      setIsTimerActive(false); // Disable the timer
+    }
+
+    // Clean up the interval when component unmounts or timer is inactive
+    return () => clearInterval(interval);
+  }, [timer, isTimerActive]);
+
+  const startTimer = () => {
+    // Start the timer when the button is pressed
+    setIsTimerActive(true);
+
+    // Set the initial countdown text
+    setCountdownText('10');
+  };
 
   React.useEffect(() => {
     async function loadFont() {
@@ -73,27 +106,28 @@ export default function HomeScreen() {
     if (cameraRef) {
       console.log('Taking picture...');
       try {
-      let photo = await cameraRef.takePictureAsync();
-      const fetchRep = await fetch(photo.uri)
-      const theBlob = await fetchRep.blob();
+        let photo = await cameraRef.takePictureAsync();
+        const fetchRep = await fetch(photo.uri);
+        const theBlob = await fetchRep.blob();
 
-      console.log('photo', photo);
-      console.log('photo uri: ', photo.uri);
-      uploadBytesResumable(ref(storage, 'images/'+ photo.uri.substring(photo.uri.lastIndexOf('/') + 1)), theBlob).then((snapshot) => {
-        console.log("Success!");
-        console.log(snapshot.metadata);
-      })
-     
-    } catch (error) {
-      console.error('Error taking picture:', error); // Log error if something goes wrong
+        console.log('photo', photo);
+        console.log('photo uri: ', photo.uri);
+        uploadBytesResumable(
+          ref(storage, 'images/' + photo.uri.substring(photo.uri.lastIndexOf('/') + 1)),
+          theBlob
+        ).then((snapshot) => {
+          console.log('Success!');
+          console.log(snapshot.metadata);
+        });
+      } catch (error) {
+        console.error('Error taking picture:', error); // Log error if something goes wrong
+      }
+    } else {
+      console.log('Camera reference is not set'); // Log if cameraRef is not set
     }
-  } else {
-    console.log('Camera reference is not set'); // Log if cameraRef is not set
-  }
-};
+  };
 
-
- return (
+  return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.headerTop}>
@@ -102,19 +136,25 @@ export default function HomeScreen() {
           <Text style={styles.progressText}>3/27</Text>
           <TouchableOpacity style={styles.flashButton} onPress={toggleFlashMode}>
             <Feather
-              name={flashMode === Camera.Constants.FlashMode.off ? "zap-off" : "zap"}
+              name={flashMode === Camera.Constants.FlashMode.off ? 'zap-off' : 'zap'}
               size={24}
               color="white"
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.cameraSwitchButton} onPress={toggleCameraType}>
-            <Feather
-              name="rotate-cw"
-              size={24}
-              color="white"
-            />
+            <Feather name="rotate-cw" size={24} color="white" />
           </TouchableOpacity>
+
+          {/* Render countdown text when timer is active */}
+          {isTimerActive ? (
+            <Text style={styles.timerText}>{countdownText}</Text>
+          ) : (
+            <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
+              <Feather name="clock" size={24} color={isTimerActive ? 'red' : 'white'} />
+            </TouchableOpacity>
+          )}
         </View>
+
 
         {/* Move the camera container slightly up */}
         <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
@@ -141,7 +181,11 @@ export default function HomeScreen() {
         <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
           <Text style={[styles.buttonText, styles.buttonTextWhite]}>Take Photo</Text>
         </TouchableOpacity>
+
+        {isTimerActive && <Text style={styles.timerText}>{timer}</Text>}
       </View>
+
+   
     </ImageBackground>
   );
 }
@@ -178,11 +222,13 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   progressText: {
-    fontFamily: 'neucha-regular', // Apply the custom font
+    fontFamily: 'neucha-regular',
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
-    left: 20,
+    position: 'absolute',
+    top: '10%', // Adjust the top position
+    left: '50%', // Adjust the left position
   },
   button: {
     position: 'absolute',
@@ -242,7 +288,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 4,
     paddingHorizontal: 10,
-    marginLeft: 10,
+    marginLeft: 32,
+    position: 'absolute', 
+    left: '60%', // Adjust the left position
   },
   flashButton: {
     left: 45, // Move the button to the top left corner
@@ -250,6 +298,30 @@ const styles = StyleSheet.create({
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,
-    paddingHorizontal: 10,
+    paddingHorizontal: 15,
+    position: 'absolute', 
+    left: '77.5%', // Adjust the left position
+  },
+  timerButton: {
+    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
+    borderColor: 'white', // Change the button border color to white
+    borderRadius: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 5,
+    position: 'absolute',
+    left: '90%', // Adjust the left position
+  },
+  timerText: {
+    fontFamily: 'neucha-regular',
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginLeft: 100, // Adjust the left margin to align with other elements
+    borderRadius: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 5,
+    position: 'absolute', 
+    top: 55,
+     right: 20 
   },
 });
