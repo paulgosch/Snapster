@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
-    top: 30,
+    top: 50,
     marginBottom: 20,
   },
   question: {
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     color: 'black',
     marginBottom: 10,
     left: '25%',
+    marginRight: 5,
   },
   answer: {
     fontFamily: 'neucha-regular',
