@@ -151,5 +151,5 @@ const styles = StyleSheet.create({
     width: width * 1, // Adjust the size as needed
     height: width * 1.2, // Maintain aspect ratio
     marginBottom: 30,
-  }
+  },
 });

@@ -19,6 +19,7 @@ import StorePage from './StorePage';
 import CheckoutPage from './CheckoutPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 import {Pages} from './constants';

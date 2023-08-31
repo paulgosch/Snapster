@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Vibration } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; // Import the Feather component
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -260,8 +261,8 @@ const styles = StyleSheet.create({
   },
   button: {
     position: 'absolute',
-    bottom: '21%', // Move the button 10% higher up from the bottom
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', // White transparent background
+    bottom: '11%', // Move the button 10% higher up from the bottom
+    backgroundColor: 'rgba(255, 255, 255, 0.1)', // White transparent background
     borderWidth: 1,
     borderColor: 'white', // Change the button border color to white
     borderRadius: 8,

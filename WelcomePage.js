@@ -105,11 +105,16 @@ const customFont = require('./assets/Neucha-Regular.otf');
   },
   button: {
     flex: 1,
-    marginLeft: 10,
-    marginRight: 10,
-    paddingVertical: 12,
+    marginLeft: 30,
+    marginRight: 30,
     paddingHorizontal: 20,
     borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.15)', // White transparent background
+    borderWidth: 1,
+    borderColor: 'white', // Change the button border color to white
+    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 20,
   },
   buttonText: {
     color: 'white', // Change text color to white
@@ -118,4 +123,5 @@ const customFont = require('./assets/Neucha-Regular.otf');
     fontFamily: 'neucha-regular',
     textAlign: 'center',
   },
+
 });

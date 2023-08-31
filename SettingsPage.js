@@ -4,13 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { Pages } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function SettingsPage() {
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(false);
-  const { userName, email, fullName, address } = useSelector((state) => state.user);
+  const { userName, email, fullName, address, userBundle } = useSelector((state) => state.user);
   const navigation = useNavigation();
   useEffect(() => {
     loadSoundEffectsSetting();
@@ -36,37 +36,32 @@ export default function SettingsPage() {
   };
 
   const handleSoundsChange = async (value) => {
-    // Save the sound effects setting to AsyncStorage
     try {
       await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
     } catch (error) {
       console.error('Error saving sound effects setting:', error);
     }
-  
-    setSoundEffectsEnabled(value); // Update the local state
+
+    setSoundEffectsEnabled(value);
   };
 
   const handleBack = () => {
-    // Navigate back to the HomeScreen
     navigation.goBack();
   };
 
   const handleSupportPage = () => {
-    navigation.navigate(Pages.SupportPage); // Navigate to the 'PrivacyPolicyPage'
+    navigation.navigate(Pages.SupportPage);
   };
 
-
   const handlePrivacyPolicyPage = () => {
-    navigation.navigate(Pages.PrivacyPolicyPage); // Navigate to the 'PrivacyPolicyPage'
+    navigation.navigate(Pages.PrivacyPolicyPage);
   };
 
   const handleTermsAndConditions = () => {
-    navigation.navigate(Pages.TermsAndConditions); // Navigate to the 'TermsAndConditions' screen
+    navigation.navigate(Pages.TermsAndConditions);
   };
 
   const handleLogout = () => {
-    // Implement any necessary logout logic here
-    // For now, let's just navigate to the WelcomePage
     navigation.navigate(Pages.WelcomePage);
   };
 
@@ -78,21 +73,18 @@ export default function SettingsPage() {
     // Implement logic to navigate to the screen where the user can change their full name
   };
 
-    const handleChangePassword = () => {
+  const handleChangePassword = () => {
     // Implement logic to change the password
-    // For example, you can dispatch an action to update the password in the Redux store
-    // Here, we'll just set a simple example where we update the password in the state
   };
 
   const handleSettings = () => {
-    // Pass the soundEffectsEnabled state as a param to HomeScreen
     navigation.navigate(Pages.HomeScreen, { soundEffectsEnabled });
   };
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <FeatherIcon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
@@ -101,51 +93,65 @@ export default function SettingsPage() {
           <View style={styles.settingRow}>
             <Text style={styles.settingText}>Enable Notifications</Text>
             <Switch
-              value={false} // Pass the actual state of notifications
+              value={false}
               onValueChange={handleNotificationChange}
             />
           </View>
         </View>
 
         <View style={styles.settingContainer}>
-        <View style={styles.settingRow}>
-          <Text style={styles.settingText}>Mute Sounds</Text>
-          <Switch
-            value={soundEffectsEnabled} // Use the state variable
-            onValueChange={handleSoundsChange}
-          />
+          <View style={styles.settingRow}>
+            <Text style={styles.settingText}>Mute Sounds</Text>
+            <Switch
+              value={soundEffectsEnabled}
+              onValueChange={handleSoundsChange}
+            />
+          </View>
         </View>
-        </View>
-        
+
         <View style={styles.accountContainer}>
           <Text style={styles.accountHeaderText}>My Account</Text>
           <View style={styles.accountDetails}>
             <View style={styles.accountRow}>
-              <Text style={styles.accountText}>Name: {fullName}</Text>
+              <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
+              <Text style={[styles.accountTextGrey, styles.accountValue]}>{fullName}</Text>
               <TouchableOpacity onPress={handleChangeFullName}>
                 <Text style={styles.changeText}>Change</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.accountRow}>
-              <Text style={styles.accountText}>Password: ********</Text>
+              <Text style={[styles.accountText, styles.accountLabel]}>Password:</Text>
+              <Text style={[styles.accountTextGrey, styles.accountValue]}>********</Text>
               <TouchableOpacity onPress={handleChangePassword}>
                 <Text style={styles.changeText}>Change</Text>
               </TouchableOpacity>
             </View>
 
-            <Text style={styles.accountText}>Username: {userName}</Text>
-            <Text style={styles.accountText}>Email: {email}</Text>
-            <Text style={styles.accountText}>Adress: {address}</Text>
-          </View>
+            <View style={styles.accountRow}>
+              <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
+              <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
+            </View>
 
-          <TouchableOpacity onPress={handleLogout} style={styles.logoutButton}>
-            <Text style={styles.buttonTextWhite}>Log out</Text>
-          </TouchableOpacity>
+            <View style={styles.accountRow}>
+              <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
+              <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
+            </View>
+
+            <View style={styles.accountRow}>
+              <Text style={[styles.accountText, styles.accountLabel]}>My Bundle:</Text>
+              <Text style={[styles.accountTextGrey, styles.accountValue]}>Basic Bundle {userBundle}</Text>
+            </View>
+
+            <Text style={styles.accountText}>Pictures left: 3/27</Text>
+            <Text style={styles.accountText}>Address: {address}</Text>
+          </View>
         </View>
+
         <TouchableOpacity onPress={handleLogout}>
-            <Text style={[styles.buttonTextWhite]}>Log out</Text>
-          </TouchableOpacity>
+          <Text style={styles.buttonTextWhite}>Log out</Text>
+        </TouchableOpacity>
+
         <View style={styles.bottomContainer}>
           <TouchableOpacity onPress={handleTermsAndConditions}>
             <Text style={styles.bottomText}>Terms & Conditions</Text>
@@ -154,12 +160,10 @@ export default function SettingsPage() {
           <TouchableOpacity onPress={handlePrivacyPolicyPage}>
             <Text style={styles.bottomText}>Privacy Policy</Text>
           </TouchableOpacity>
-        
+
           <TouchableOpacity onPress={handleSupportPage}>
             <Text style={styles.bottomText}>Q&A + Support</Text>
           </TouchableOpacity>
-          
-          {/* Add more settings options as needed */}
         </View>
       </View>
     </ImageBackground>
@@ -170,7 +174,7 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', // White transparent background
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
   },
   container: {
     flex: 1,
@@ -182,13 +186,13 @@ const styles = StyleSheet.create({
     top: 40,
     left: 20,
     padding: 10,
-    color: 'white', // Set the icon color to white
+    color: 'white',
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: 'white',
+    color: 'rgba(8,77,136,255)',
   },
   settingContainer: {
     width: '90%',
@@ -198,40 +202,41 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    backgroundColor: 'white', // White background color for settings container
+    backgroundColor: 'white',
   },
   settingText: {
     fontSize: 18,
-    color: 'grey', // Black text color for settings
+    color: 'rgba(8,77,136,255)',
   },
   accountContainer: {
-    width: '90%',
+    width: '90%', // Adjust the width as needed
     marginVertical: 20,
     padding: 20,
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    backgroundColor: 'white', // White background color for account container
+    backgroundColor: 'white',
     alignItems: 'center',
+    
   },
   accountHeaderText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'grey', // Black text color for account header
+    color: 'rgba(8,77,136,255)',
     marginBottom: 10,
   },
   accountText: {
     fontSize: 16,
-    color: 'grey', // Grey text color for account details
+    color: 'rgba(8,77,136,255)',
     marginBottom: 5,
   },
   settingRow: {
-    flexDirection: 'row', // Align items horizontally
-    justifyContent: 'space-between', // Align items at both ends of the row
-    alignItems: 'center', // Center items vertically in the row
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   buttonTextWhite: {
-    color: 'white', // Set the text color to white
+    color: 'white',
     fontWeight: 'bold',
     fontSize: 18,
     borderWidth: 1,
@@ -268,11 +273,18 @@ const styles = StyleSheet.create({
   },
   accountRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 5,
+    width: '100%',
   },
-  logoutButton: {
-    alignSelf: 'flex-end',
+  accountLabel: {
+    flex: 1,
+    fontSize: 16,
+    color: 'rgba(8,77,136,255)',
+  },
+  accountValue: {
+    flex: 2,
+    fontSize: 16,
+    color: 'grey',
   },
 });
