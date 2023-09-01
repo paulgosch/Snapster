@@ -18,6 +18,8 @@ import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
 import CheckoutPage from './CheckoutPage';
 import ForgotPasswordPage from './ForgotPasswordPage';
+import VerificationPage from './VerificationPage';
+import CreateNewPasswordPage from './CreateNewPasswordPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -173,6 +175,20 @@ function App() {
         <Stack.Screen
           name={Pages.ForgotPasswordPage}
           component={ForgotPasswordPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.VerificationPage}
+          component={VerificationPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.CreateNewPasswordPage}
+          component={CreateNewPasswordPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

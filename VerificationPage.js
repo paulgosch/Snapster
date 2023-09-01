@@ -1,25 +1,16 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors } from './constants';
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
+export default function VerificationPage() {
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isCodeValid, setIsCodeValid] = useState(false);
   const navigation = useNavigation();
 
-  const handleResetPassword = async () => {
-    // Implement your password reset logic here
-    setLoading(true);
-
-    // Simulate a delay for demonstration purposes
-    setTimeout(() => {
-      setLoading(false);
-      alert(`A password reset link has been sent to ${email}`);
-
-      // Navigate to the VerificationPage
-      navigation.navigate(Pages.VerificationPage);
-    }, 2000);
+  // Simulated email verification logic --> this is still missing
+  const verifyCode = () => {     
+      navigation.navigate(Pages.CreateNewPasswordPage);
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
@@ -27,27 +18,32 @@ export default function ForgotPasswordPage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <Text style={styles.title}>Forgot Password</Text>
+        <Text style={styles.title}>Verification</Text>
         <Text style={styles.description}>
-          Enter your email address, and we'll send you a password reset link.
+          Please enter the verification code sent to your email:
         </Text>
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="Enter Verification Code"
           placeholderTextColor={Colors.PrimaryColor}
-          value={email}
-          onChangeText={setEmail}
+          value={verificationCode}
+          onChangeText={setVerificationCode}
         />
-        {loading ? (
+        {isCodeValid ? (
           <View style={styles.loadingContainer}>
             <View style={styles.loadingContent}>
-              <Text style={styles.loadingText}>Sending...</Text>
+              <Text style={styles.loadingText}>Verification successful!</Text>
             </View>
           </View>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-            <Text style={styles.buttonText}>Reset Password</Text>
-          </TouchableOpacity>
+          <>
+            <TouchableOpacity style={styles.button} onPress={verifyCode}>
+              <Text style={styles.buttonText}>Verify Code</Text>
+            </TouchableOpacity>
+            {verificationCode !== '' && (
+              <Text style={styles.errorText}>Invalid verification code. Please try again.</Text>
+            )}
+          </>
         )}
         <TouchableOpacity onPress={() => navigation.navigate(Pages.LoginPage)}>
           <Text style={styles.backText}>Back to Login</Text>

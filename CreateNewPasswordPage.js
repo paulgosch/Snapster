@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors } from './constants';
 
-export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
+export default function CreateNewPasswordPage() {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigation = useNavigation();
 
-  const handleResetPassword = async () => {
+  const handleCreateNewPassword = async () => {
     // Implement your password reset logic here
     setLoading(true);
 
     // Simulate a delay for demonstration purposes
     setTimeout(() => {
       setLoading(false);
-      alert(`A password reset link has been sent to ${email}`);
+      alert('Password successfully changed.');
 
-      // Navigate to the VerificationPage
-      navigation.navigate(Pages.VerificationPage);
+      // Navigate to the LoginPage or any other page as needed
+      navigation.navigate(Pages.LoginPage);
     }, 2000);
   };
 
@@ -27,26 +28,32 @@ export default function ForgotPasswordPage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <Text style={styles.title}>Forgot Password</Text>
-        <Text style={styles.description}>
-          Enter your email address, and we'll send you a password reset link.
-        </Text>
+        <Text style={styles.title}>Create New Password</Text>
         <TextInput
           style={styles.input}
-          placeholder="Email"
+          placeholder="New Password"
           placeholderTextColor={Colors.PrimaryColor}
-          value={email}
-          onChangeText={setEmail}
+          secureTextEntry={true}
+          value={newPassword}
+          onChangeText={setNewPassword}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm Password"
+          placeholderTextColor={Colors.PrimaryColor}
+          secureTextEntry={true}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
         />
         {loading ? (
           <View style={styles.loadingContainer}>
             <View style={styles.loadingContent}>
-              <Text style={styles.loadingText}>Sending...</Text>
+              <Text style={styles.loadingText}>Changing Password...</Text>
             </View>
           </View>
         ) : (
-          <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-            <Text style={styles.buttonText}>Reset Password</Text>
+          <TouchableOpacity style={styles.button} onPress={handleCreateNewPassword}>
+            <Text style={styles.buttonText}>Change Password</Text>
           </TouchableOpacity>
         )}
         <TouchableOpacity onPress={() => navigation.navigate(Pages.LoginPage)}>
@@ -73,12 +80,6 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     textAlign: 'center',
     marginBottom: 10,
-  },
-  description: {
-    fontSize: 16,
-    color: Colors.PrimaryColor,
-    textAlign: 'center',
-    marginBottom: 20,
   },
   input: {
     height: 40,

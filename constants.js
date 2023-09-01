@@ -1,3 +1,6 @@
+import { verifyPasswordResetCode } from "firebase/auth";
+import VerificationPage from "./VerificationPage";
+
 export const Pages = {
     FirstScreen: 'FirstScreen',
     HomeScreen: 'HomeScreen',
@@ -13,14 +16,16 @@ export const Pages = {
     StorePage: 'StorePage',
     SupportPage: 'SupportPage',
     CheckoutPage: 'CheckoutPage',
-    ForgotPasswordPage: 'ForgotPasswordPage'
+    ForgotPasswordPage: 'ForgotPasswordPage',
+    VerificationPage: 'VerificationPage',
+    CreateNewPasswordPage: 'CreateNewPasswordPage'
   };
 
   export const Colors = {
-    PrimaryColor: '#94C5B0',
-    SecondaryColor: 'rgba(8,77,136,255)',
+    PrimaryColor: 'white',
+    SecondaryColor: '#212529',
     TertiaryColor: 'grey',
-    Background: '#1D694A',
+    Background: '#CED4DA',
     ErrorColor: 'red',
   };
   
