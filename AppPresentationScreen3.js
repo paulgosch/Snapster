@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginTop: 15,
     marginBottom: 20,
     top: 70,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontFamily: 'neucha-regular',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginBottom: 20,
     top: 70,
     textAlign: 'center',
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   nextButtonText: {
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
   },

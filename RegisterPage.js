@@ -7,7 +7,7 @@ import AppPresentationScreen from './AppPresentationScreen'; // Import the new s
 import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
-import { Pages } from './constants';
+import { Pages, Colors } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 40,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     textAlign: 'center', // Center the title horizontally
     marginTop: 60, // Adjust the marginTop value as needed
   },
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
   button: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     width: '30%', // Make the button half as wide as the parent
   },
   buttonText: {
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -251,12 +251,12 @@ const styles = StyleSheet.create({
   },
   agreeText: {
     fontSize: 14,
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginLeft: 5, // Add some space between the checkbox and "Agree with"
   },
   termsText: {
     fontSize: 14,
-    color: 'white',
+    color: Colors.PrimaryColor,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
     marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   loadingText: {
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
   passwordInput: {
     flex: 1,
     height: 40,
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
   eyeIconContainer: {
     padding: 10,

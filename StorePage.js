@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pages } from './constants';
+import { Pages, Colors } from './constants';
 import Icon from 'react-native-vector-icons/Feather';
 
 const basicBundleImage = require('./assets/storeexample.png');
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
   bundlesContainer: {
     width: '80%', // Set a fixed width for the container
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular',
     fontSize: 18,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
 });
 

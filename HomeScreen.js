@@ -4,7 +4,7 @@ import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons'; // Import the Feather component
 import { Camera } from 'expo-camera';
-import { Pages } from './constants';
+import { Pages, Colors } from './constants';
 import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';

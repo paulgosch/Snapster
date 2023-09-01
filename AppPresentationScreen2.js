@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Pages } from './constants';
+import { Pages,Colors } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginBottom: 20,
     marginTop: 15,
     top: 70,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontFamily: 'neucha-regular',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginBottom: 20,
     top: 70,
     textAlign: 'center',
@@ -106,20 +106,20 @@ const styles = StyleSheet.create({
   skipText: {
     fontSize: 18,
     fontFamily: 'neucha-regular',
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontWeight: 'bold',
   },
   nextButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderWidth: 1,
-    borderColor: 'white',
+    bordercolor: Colors.PrimaryColor,
     borderRadius: 8,
     top: 120,
     paddingVertical: 10,
     paddingHorizontal: 20,
   },
   nextButtonText: {
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
   },
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
   },
   dotActive: {
-    backgroundColor: 'white',
+    backgroundcolor: Colors.PrimaryColor,
   },
   imageContainer: {
     position: 'absolute',

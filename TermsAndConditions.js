@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import Icon from 'react-native-vector-icons/Feather';
+import { Colors } from './constants';
 
 export default function TermsAndConditionsScreen() {
   const pdfUrl = "https://drive.google.com/uc?export=download&id=1vlelO-YcMg4zPprmgOszatYTVTQOpiOa";
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular',
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginBottom: 20,
   },
   webViewContainer: {

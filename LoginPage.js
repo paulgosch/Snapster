@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, Keyboar
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
-import { Pages } from './constants';
+import { Pages,Colors } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function LoginPage() {
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 50,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     textAlign: 'center', // Center the title horizontally
     marginTop: 40, // Adjust the marginTop value as needed
   },
@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
   button: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   loadingText: {
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
   },

@@ -14,4 +14,10 @@ export const Pages = {
     SupportPage: 'SupportPage',
     CheckoutPage: 'CheckoutPage',
   };
+
+  export const Colors = {
+    PrimaryColor: 'white',
+    SecondaryColor: 'rgba(8,77,136,255)',
+    TertiaryColor: 'grey',
+  };
   

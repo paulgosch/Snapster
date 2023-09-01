@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Pages } from './constants';
+import { Pages, Colors } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -68,13 +68,13 @@ const customFont = require('./assets/Neucha-Regular.otf');
     middle:{   fontFamily: 'neucha-regular', // this is ust for fun
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     },
     title: {
       fontFamily: 'neucha-regular', // Apply the custom font
       fontSize: 50,
       fontWeight: 'bold',
-      color: 'white',
+      color: Colors.PrimaryColor,
     },
     backgroundImage: {
       flex: 1,

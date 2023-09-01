@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView }
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Linking } from 'react-native';
+import { Colors } from './constants';
 
 export default function SupportScreen() {
     const navigation = useNavigation(); // Use the useNavigation hook here
@@ -147,7 +148,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular',
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     top: 50,
     marginBottom: 20,
   },
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
   answer: {
     fontFamily: 'neucha-regular',
     fontSize: 16,
-    color: 'grey',
+    color: Colors.TertiaryColor,
     marginBottom: 10,
   },
   questionContainer: {
@@ -189,7 +190,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular',
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     top: 50,
   },
   rowContainer: {
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular',
     fontSize: 16,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
     marginHorizontal: 5,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',

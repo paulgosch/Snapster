@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 50,
     fontWeight: 'bold',
-    color: 'white',
+    color: Colors.PrimaryColor,
   },
 });

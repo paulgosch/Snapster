@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pages } from './constants';
+import { Pages, Colors } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -85,7 +85,7 @@ export default function SettingsPage() {
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <FeatherIcon name="arrow-left" size={24} color="white" />
+          <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
 
@@ -174,7 +174,6 @@ const styles = StyleSheet.create({
   background: {
     flex: 1,
     resizeMode: 'cover',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
   },
   container: {
     flex: 1,
@@ -186,13 +185,13 @@ const styles = StyleSheet.create({
     top: 40,
     left: 20,
     padding: 10,
-    color: 'white',
+    color: Colors.PrimaryColor
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: 'rgba(8,77,136,255)',
+    color: Colors.SecondaryColor
   },
   settingContainer: {
     width: '90%',
@@ -206,7 +205,7 @@ const styles = StyleSheet.create({
   },
   settingText: {
     fontSize: 18,
-    color: 'rgba(8,77,136,255)',
+    color: Colors.SecondaryColor,
   },
   accountContainer: {
     width: '90%', // Adjust the width as needed
@@ -222,12 +221,12 @@ const styles = StyleSheet.create({
   accountHeaderText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'rgba(8,77,136,255)',
+    color: Colors.SecondaryColor,
     marginBottom: 10,
   },
   accountText: {
     fontSize: 16,
-    color: 'rgba(8,77,136,255)',
+    color: Colors.SecondaryColor,
     marginBottom: 5,
   },
   settingRow: {
@@ -257,7 +256,7 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     fontFamily: 'neucha-regular',
-    color: 'white',
+    color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 2,
@@ -265,7 +264,7 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'dotted',
   },
   changeText: {
-    color: 'grey',
+    color: Colors.TertiaryColor,
     textDecorationLine: 'underline',
   },
   accountDetails: {
@@ -280,11 +279,11 @@ const styles = StyleSheet.create({
   accountLabel: {
     flex: 1,
     fontSize: 16,
-    color: 'rgba(8,77,136,255)',
+    color: Colors.SecondaryColor,
   },
   accountValue: {
     flex: 2,
     fontSize: 16,
-    color: 'grey',
+    color: Colors.TertiaryColor,
   },
 });
