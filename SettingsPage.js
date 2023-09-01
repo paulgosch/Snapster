@@ -82,7 +82,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <ImageBackground source={backgroundImageSource} style={styles.background}>
+    <View style={[styles.container, { backgroundColor: Colors.Background }]}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
@@ -166,7 +166,7 @@ export default function SettingsPage() {
           </TouchableOpacity>
         </View>
       </View>
-    </ImageBackground>
+    </View>
   );
 }
 

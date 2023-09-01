@@ -17,8 +17,10 @@ export const Pages = {
   };
 
   export const Colors = {
-    PrimaryColor: 'white',
+    PrimaryColor: '#94C5B0',
     SecondaryColor: 'rgba(8,77,136,255)',
     TertiaryColor: 'grey',
+    Background: '#1D694A',
+    ErrorColor: 'red',
   };
   
