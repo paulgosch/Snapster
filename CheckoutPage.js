@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackgroun
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
+import {Pages, Colors} from './constants'
 
 const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj'; // this is our real Client ID from paypal
 const YOUR_APP_SECRET = 'YOUR_APP_SECRET';
@@ -14,17 +15,8 @@ const CheckoutPage = () => {
   const [orderID, setOrderID] = useState(null);
   const navigation = useNavigation(); // Use the useNavigation hook here
 
-  const createOrder = async () => {
-    try {
-      const response = await axios.post('http://YOUR_SERVER_URL/create-paypal-order', {
-        clientID: YOUR_CLIENT_ID,
-        secret: YOUR_APP_SECRET,
-      });
-      
-      setOrderID(response.data.id);
-    } catch (error) {
-      console.error('Error creating order:', error);
-    }
+  const createOrder = () => {
+    navigation.navigate(Pages.Paypal);
   };
 
   const capturePayment = async () => {
