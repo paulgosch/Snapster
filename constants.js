@@ -18,7 +18,7 @@ export const Pages = {
     CheckoutPage: 'CheckoutPage',
     ForgotPasswordPage: 'ForgotPasswordPage',
     VerificationPage: 'VerificationPage',
-    CreateNewPasswordPage: 'CreateNewPasswordPage'
+    CreateNewPasswordPage: 'CreateNewPasswordPage',
     Paypal: 'PaypalPage',
   };
 
