@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
+import Icon from 'react-native-vector-icons/Feather';
 
 export default function PrivacyPolicyPage() {
   const pdfUrl = "https://drive.google.com/uc?export=download&id=1vlelO-YcMg4zPprmgOszatYTVTQOpiOa";
@@ -18,8 +19,8 @@ export default function PrivacyPolicyPage() {
       resizeMode="cover"
     >
       <View style={styles.container}>
-        <TouchableOpacity onPress={handleGoBack} style={styles.backButton}>
-          <Text style={styles.backButtonText}>{'<'}</Text>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Icon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Privacy Policy</Text>
         <View style={styles.webViewContainer}>
