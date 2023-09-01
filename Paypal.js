@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import {
-    View,
     ActivityIndicator
 } from 'react-native'
 import axios from 'axios'
 import { WebView } from 'react-native-webview';
 import queryString from 'query-string';
-import { useNavigation } from '@react-navigation/native';
+import privateConstants from './privateConstants';
 
 export default class Paypal extends Component {
     state = {
@@ -41,7 +40,10 @@ export default class Paypal extends Component {
                         "handling_fee": "0",
                         "shipping_discount": "0",
                         "insurance": "0"
-                    }
+                    }, 
+                    "payment_options": {
+                   "allowed_payment_method": "IMMEDIATE_PAY"
+        }
                 }
 
             }],
@@ -55,7 +57,7 @@ export default class Paypal extends Component {
             {//A21AAIf8bUUl-PiGQRnua7CiWPzxqSZiXKg0aHxU__NK8hhdL2IP6SKrhYZgh5wvg5GbmgM3IHLhJygj3bdQ4-qSCLPSXDn-w
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
-                    'Authorization': 'Basic QWRibG5IVklrOTk5dlZ5UldxSVpQU3RmclBHNHd4ajV3TDliQ2s1RzYwX3BBNGNUQXpHU1FFMXNPaU1zZFZ4dlRUbW5TQmpDZGxsMjNwaEE6RVB0U2tuMGlLNkNfUFZFVk1DY1RNN3o1M055Znk0OThkT2h3TEo0SEtWaWswM0R4by1PU2NLczNiM0VvdFhsb1kwLXN3bTVtbzE0S2lfX2o=' // Your authorization value
+                    'Authorization': 'Basic ' + privateConstants.PaypalKey // Your authorization value
                 }
             }
         )
@@ -121,8 +123,7 @@ export default class Paypal extends Component {
     }
 
     render() {
-        const { navigation } = this.props;
-        const { approvalUrl, webViewVisible, showIntermediatePage } = this.state
+        const { approvalUrl, webViewVisible } = this.state
         return (
             {webViewVisible} ? (
                     approvalUrl ? <WebView
