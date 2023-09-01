@@ -13,6 +13,7 @@ export const Pages = {
     StorePage: 'StorePage',
     SupportPage: 'SupportPage',
     CheckoutPage: 'CheckoutPage',
+    ForgotPasswordPage: 'ForgotPasswordPage'
   };
 
   export const Colors = {

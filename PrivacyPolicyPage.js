@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react
 import { WebView } from 'react-native-webview';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import Icon from 'react-native-vector-icons/Feather';
+import { Pages,Colors } from './constants';
 
 export default function PrivacyPolicyPage() {
   const pdfUrl = "https://drive.google.com/uc?export=download&id=1vlelO-YcMg4zPprmgOszatYTVTQOpiOa";

@@ -17,6 +17,7 @@ import SupportPage from './Supportpage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
 import CheckoutPage from './CheckoutPage';
+import ForgotPasswordPage from './ForgotPasswordPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -165,6 +166,13 @@ function App() {
         <Stack.Screen
           name={Pages.CheckoutPage}
           component={CheckoutPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.ForgotPasswordPage}
+          component={ForgotPasswordPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
