@@ -15,17 +15,8 @@ const CheckoutPage = () => {
   const [orderID, setOrderID] = useState(null);
   const navigation = useNavigation(); // Use the useNavigation hook here
 
-  const createOrder = async () => {
-    try {
-      const response = await axios.post('http://YOUR_SERVER_URL/create-paypal-order', {
-        clientID: YOUR_CLIENT_ID,
-        secret: YOUR_APP_SECRET,
-      });
-      
-      setOrderID(response.data.id);
-    } catch (error) {
-      console.error('Error creating order:', error);
-    }
+  const createOrder = () => {
+    navigation.navigate(Pages.Paypal);
   };
 
   const capturePayment = async () => {

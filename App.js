@@ -27,6 +27,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
+import Paypal from './Paypal';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
@@ -168,6 +169,13 @@ function App() {
         <Stack.Screen
           name={Pages.CheckoutPage}
           component={CheckoutPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+         <Stack.Screen
+          name={Pages.Paypal}
+          component={Paypal}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

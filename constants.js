@@ -19,6 +19,7 @@ export const Pages = {
     ForgotPasswordPage: 'ForgotPasswordPage',
     VerificationPage: 'VerificationPage',
     CreateNewPasswordPage: 'CreateNewPasswordPage'
+    Paypal: 'PaypalPage',
   };
 
   export const Colors = {
