@@ -30,6 +30,10 @@ export default function LoginPage() {
     }
   };
 
+  const handleForgotPassword = () => {
+    navigation.navigate(Pages.ForgotPasswordPage);
+  };
+
   const backgroundImageSource = require('./assets/Background.jpg');
 
 
@@ -55,6 +59,9 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
         />
+         <TouchableOpacity onPress={handleForgotPassword}>
+          <Text style={styles.forgotPassword}>Forgot Password</Text>
+        </TouchableOpacity>
         {loading ? (
           <View style={styles.loadingContainer}>
             <View style={styles.loadingContent}>
@@ -82,7 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
     textAlign: 'center', // Center the title horizontally
-    marginTop: 40, // Adjust the marginTop value as needed
+    padding: 10,
   },
   container: {
     flex: 1,
@@ -92,6 +99,7 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     borderColor: 'white',
+    borderRadius: 8,
     borderWidth: 1,
     marginBottom: 10,
     paddingLeft: 10,
@@ -104,8 +112,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 8,
-    alignSelf: 'center', // Center the button horizontally
-    width: '30%', // Make the button half as wide as the parent
+    alignSelf: 'center', 
+    width: '30%', 
   },
   buttonText: {
     color: 'white',
@@ -128,5 +136,14 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  forgotPassword: {
+    color: Colors.PrimaryColor,
+    fontSize: 16,
+    textDecorationLine: 'underline', // Add underline style
+    marginBottom: 10, // Add some spacing between "Forgot Password" and the login button
+    textAlign: 'center',
+    paddingTop: 10,
+    marginBottom: 20
   },
 });

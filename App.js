@@ -17,6 +17,9 @@ import SupportPage from './Supportpage';
 import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
 import CheckoutPage from './CheckoutPage';
+import ForgotPasswordPage from './ForgotPasswordPage';
+import VerificationPage from './VerificationPage';
+import CreateNewPasswordPage from './CreateNewPasswordPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -24,6 +27,7 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
+import Paypal from './Paypal';
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
@@ -165,6 +169,34 @@ function App() {
         <Stack.Screen
           name={Pages.CheckoutPage}
           component={CheckoutPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+         <Stack.Screen
+          name={Pages.Paypal}
+          component={Paypal}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.ForgotPasswordPage}
+          component={ForgotPasswordPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.VerificationPage}
+          component={VerificationPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.CreateNewPasswordPage}
+          component={CreateNewPasswordPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
