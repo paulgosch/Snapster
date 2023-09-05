@@ -1,5 +1,4 @@
 import { verifyPasswordResetCode } from "firebase/auth";
-import VerificationPage from "./VerificationPage";
 
 export const Pages = {
     FirstScreen: 'FirstScreen',
