@@ -19,11 +19,13 @@ export const Pages = {
     VerificationPage: 'VerificationPage',
     CreateNewPasswordPage: 'CreateNewPasswordPage',
     Paypal: 'PaypalPage',
+    PaymentMethodPage: 'PaymentMethodPage',
+    NewCardPage: 'NewCardPage',
   };
 
   export const Colors = {
     PrimaryColor: 'white',
-    SecondaryColor: '#212529',
+    SecondaryColor: 'black',
     TertiaryColor: 'grey',
     Background: '#CED4DA',
     ErrorColor: 'red',

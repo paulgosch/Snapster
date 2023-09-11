@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
   settingsButton: {
     bottom: '20%', // Move the button to the bottom left corner
     left: '40%', // Move the button to the bottom left corner
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,
@@ -301,7 +300,6 @@ const styles = StyleSheet.create({
   storeButton: {
     bottom: '20%', // Move the button to the bottom right corner
     right: '40%', // Move the button to the bottom right corner
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,
@@ -312,7 +310,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   cameraSwitchButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderColor: 'white',
     borderRadius: 4,
     paddingVertical: 4,
@@ -323,7 +320,6 @@ const styles = StyleSheet.create({
   },
   flashButton: {
     left: 45, // Move the button to the top left corner
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,
@@ -332,7 +328,6 @@ const styles = StyleSheet.create({
     left: '77.5%', // Adjust the left position
   },
   timerButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)', // White transparent background
     borderColor: 'white', // Change the button border color to white
     borderRadius: 4,
     paddingVertical: 4,

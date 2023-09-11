@@ -35,6 +35,10 @@ export default function SettingsPage() {
     }
   };
 
+  const handlePaymentMethodPage = () => {
+    navigation.navigate(Pages.PaymentMethodPage);
+  };
+
   const handleSoundsChange = async (value) => {
     try {
       await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
@@ -82,8 +86,8 @@ export default function SettingsPage() {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: Colors.Background }]}>
-      <View style={styles.container}>
+      <ImageBackground source={backgroundImageSource} style={styles.container}>
+        <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
         </TouchableOpacity>
@@ -145,8 +149,11 @@ export default function SettingsPage() {
 
             <Text style={styles.accountText}>Pictures left: 3/27</Text>
             <Text style={styles.accountText}>Address: {address}</Text>
-          </View>
         </View>
+        </View>
+        <TouchableOpacity onPress={handlePaymentMethodPage} style={styles.paymentMethodButton}>
+            <Text style={styles.paymentMethodButtonText}>Payment Method</Text>
+          </TouchableOpacity>
 
         <TouchableOpacity onPress={handleLogout}>
           <Text style={styles.buttonTextWhite}>Log out</Text>
@@ -166,7 +173,7 @@ export default function SettingsPage() {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+      </ImageBackground>
   );
 }
 
@@ -285,5 +292,20 @@ const styles = StyleSheet.create({
     flex: 2,
     fontSize: 16,
     color: Colors.TertiaryColor,
+  },
+  paymentMethodButton: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  paymentMethodButtonText: {
+    color: 'white', // Adjust the color as necessary
+    fontSize: 16, // Adjust the font size as necessary
   },
 });
