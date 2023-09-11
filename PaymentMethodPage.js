@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const cardImage = require('C:/Users/paulg/Desktop/App1/App1/assets/CardPaymentMasterCard.png');
+const paypalimage = require('C:/Users/paulg/Desktop/App1/App1/assets/paypalimage.png');
 
 export default function PaymentPage() {
     const navigation = useNavigation();
@@ -51,7 +52,7 @@ export default function PaymentPage() {
         />
         <TextInput 
           style={styles.textInput}
-          placeholder="Paul Henrik Gosch" 
+          placeholder="#Name" 
           placeholderTextColor="#aaa"
         />
         <TextInput 
@@ -62,11 +63,18 @@ export default function PaymentPage() {
         />
         <TextInput 
           style={styles.textInput}
-          placeholder="**** **** **** *347"
+          placeholder="**** **** **** *345"
           placeholderTextColor="#aaa"
           keyboardType="numeric"
         />
       </View>
+
+      <Text style={styles.cardManagementTitle}>Or Check out with</Text>
+
+      <View style={styles.paypalImageContainer}>
+  <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+</View>
+
     </ImageBackground>
   );
 }
@@ -117,6 +125,7 @@ const styles = StyleSheet.create({
   },
   cardDetailsContainer: {
     padding: 16,
+    paddingTop: 0,
     backgroundColor: 'white',
     borderRadius: 8,
     marginVertical: 16,
@@ -130,5 +139,15 @@ const styles = StyleSheet.create({
   },
   textInput2: {
     height: 40,
+  },
+  paypalImageContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
+    backgroundColor: 'white', // Set a white background color
+    borderRadius: 10, // Optional: to have rounded corners
+  },
+  paypalImage: {
+    width: 150, // Adjust the width as necessary
+    height: 50, // Adjust the height as necessary
   },
 });

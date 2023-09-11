@@ -79,7 +79,7 @@ export default function NewCardPage() {
       </View>
       <View style={styles.saveButtonContainer}>
         <TouchableOpacity style={styles.saveButton}>
-          <Text style={styles.saveButtonText}>Save</Text>
+          <Text style={styles.saveButtonText}>Add Card</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
@@ -145,18 +145,18 @@ const styles = StyleSheet.create({
   },
   saveButton: {
     padding: 10,
-    color: 'white',
+    color: '#FF9817',
     fontWeight: 'bold',
     fontSize: 18,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#FF9817',
     borderRadius: 4,
     paddingVertical: 4,
     paddingHorizontal: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 152, 23, 0.05)',
   },
   saveButtonText: {
-    color: 'white',
+    color: '#FF9817',
     fontSize: 16,
     fontWeight: 'bold',
   },

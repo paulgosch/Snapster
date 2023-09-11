@@ -85,9 +85,13 @@ export default function SettingsPage() {
     navigation.navigate(Pages.HomeScreen, { soundEffectsEnabled });
   };
 
+  const handleAccountPage = () => {
+    navigation.navigate('AccountPage'); // Navigate to AccountPage when My Account is clicked
+  };
+
   return (
-      <ImageBackground source={backgroundImageSource} style={styles.container}>
-        <View style={styles.container}>
+    <ImageBackground source={backgroundImageSource} style={styles.container}>
+      <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
         </TouchableOpacity>
@@ -113,50 +117,16 @@ export default function SettingsPage() {
           </View>
         </View>
 
-        <View style={styles.accountContainer}>
+        <TouchableOpacity style={styles.accountContainer} onPress={handleAccountPage}>
           <Text style={styles.accountHeaderText}>My Account</Text>
-          <View style={styles.accountDetails}>
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{fullName}</Text>
-              <TouchableOpacity onPress={handleChangeFullName}>
-                <Text style={styles.changeText}>Change</Text>
-              </TouchableOpacity>
-            </View>
+        </TouchableOpacity>
 
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Password:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>********</Text>
-              <TouchableOpacity onPress={handleChangePassword}>
-                <Text style={styles.changeText}>Change</Text>
-              </TouchableOpacity>
-            </View>
+        <TouchableOpacity style={styles.button} onPress={handlePaymentMethodPage}>
+          <Text style={styles.buttonText}>Payment Method</Text>
+        </TouchableOpacity>
 
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>My Bundle:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>Basic Bundle {userBundle}</Text>
-            </View>
-
-            <Text style={styles.accountText}>Pictures left: 3/27</Text>
-            <Text style={styles.accountText}>Address: {address}</Text>
-        </View>
-        </View>
-        <TouchableOpacity onPress={handlePaymentMethodPage} style={styles.paymentMethodButton}>
-            <Text style={styles.paymentMethodButtonText}>Payment Method</Text>
-          </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleLogout}>
-          <Text style={styles.buttonTextWhite}>Log out</Text>
+        <TouchableOpacity style={styles.button} onPress={handleLogout}>
+          <Text style={styles.buttonText}>Log out</Text>
         </TouchableOpacity>
 
         <View style={styles.bottomContainer}>
@@ -173,18 +143,14 @@ export default function SettingsPage() {
           </TouchableOpacity>
         </View>
       </View>
-      </ImageBackground>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
   container: {
     flex: 1,
-    alignItems: 'center',
+    padding: 16,
     justifyContent: 'center',
   },
   backButton: {
@@ -192,16 +158,16 @@ const styles = StyleSheet.create({
     top: 40,
     left: 20,
     padding: 10,
-    color: Colors.PrimaryColor
   },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    marginBottom: 10,
-    color: Colors.SecondaryColor
+    marginBottom: 20,
+    color: 'white',
+    alignSelf: 'center',
   },
   settingContainer: {
-    width: '90%',
+    width: '100%',
     marginVertical: 10,
     paddingHorizontal: 20,
     paddingVertical: 15,
@@ -212,45 +178,41 @@ const styles = StyleSheet.create({
   },
   settingText: {
     fontSize: 18,
-    color: Colors.SecondaryColor,
-  },
-  accountContainer: {
-    width: '90%', // Adjust the width as needed
-    marginVertical: 20,
-    padding: 20,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    
-  },
-  accountHeaderText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: Colors.SecondaryColor,
-    marginBottom: 10,
-  },
-  accountText: {
-    fontSize: 16,
-    color: Colors.SecondaryColor,
-    marginBottom: 5,
+    color: 'grey',
   },
   settingRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  buttonTextWhite: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
+  accountContainer: {
+    width: '80%',
+    marginVertical: 10,
+    padding: 5,
     borderWidth: 1,
     borderColor: 'white',
-    borderRadius: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    borderRadius: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  accountHeaderText: {
+    fontSize: 18,
+    color: 'white',
+  },
+  button: {
+    width: '80%',
+    marginVertical: 10,
+    padding: 5,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    alignItems: 'center',
+  },
+  buttonText: {
+    fontSize: 18,
+    color: 'white',
   },
   bottomContainer: {
     position: 'absolute',
@@ -269,43 +231,5 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
-  },
-  changeText: {
-    color: Colors.TertiaryColor,
-    textDecorationLine: 'underline',
-  },
-  accountDetails: {
-    marginBottom: 10,
-  },
-  accountRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 5,
-    width: '100%',
-  },
-  accountLabel: {
-    flex: 1,
-    fontSize: 16,
-    color: Colors.SecondaryColor,
-  },
-  accountValue: {
-    flex: 2,
-    fontSize: 16,
-    color: Colors.TertiaryColor,
-  },
-  paymentMethodButton: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 18,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 4,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-  },
-  paymentMethodButtonText: {
-    color: 'white', // Adjust the color as necessary
-    fontSize: 16, // Adjust the font size as necessary
   },
 });

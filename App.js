@@ -21,6 +21,7 @@ import ForgotPasswordPage from './ForgotPasswordPage';
 import VerificationPage from './VerificationPage';
 import CreateNewPasswordPage from './CreateNewPasswordPage';
 import NewCardPage from './NewCardPage';
+import AccountPage from './AccountPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -213,6 +214,13 @@ function App() {
         <Stack.Screen
           name={Pages.NewCardPage}
           component={NewCardPage}
+          options={{
+            headerShown: false, // Hide the header for the new screen if needed
+          }}
+        />
+        <Stack.Screen
+          name={Pages.AccountPage}
+          component={AccountPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

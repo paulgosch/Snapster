@@ -21,11 +21,12 @@ export const Pages = {
     Paypal: 'PaypalPage',
     PaymentMethodPage: 'PaymentMethodPage',
     NewCardPage: 'NewCardPage',
+    AccountPage: 'AccountPage',
   };
 
   export const Colors = {
     PrimaryColor: 'white',
-    SecondaryColor: 'black',
+    SecondaryColor: 'grey',
     TertiaryColor: 'grey',
     Background: '#CED4DA',
     ErrorColor: 'red',
