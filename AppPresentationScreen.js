@@ -2,16 +2,19 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Pages,Colors } from './constants';
+import { Pages, Colors } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 const { width } = Dimensions.get('window');
 const photoofgirl = require('./assets/photoofgirl.png');
+const houseImage = require('./assets/photoofhouse.png');
+const deliveryImage = require('./assets/photoofdelivery.png');
 
 export default function AppPresentationScreen() {
   const [fontLoaded, setFontLoaded] = React.useState(false);
-  const navigation = useNavigation(); // Use the useNavigation hook here
+  const [currentStep, setCurrentStep] = React.useState(0);
+  const navigation = useNavigation();
 
   React.useEffect(() => {
     async function loadFont() {
@@ -24,15 +27,37 @@ export default function AppPresentationScreen() {
   }, []);
 
   if (!fontLoaded) {
-    return null; // Wait for the font to load
+    return null;
   }
 
+  const steps = [
+    {
+      title: 'Step 1: Capture the Moment',
+      text: 'Sign up, choose a bundle, snap a picture, and preserve precious moments with a simple click.',
+      image: photoofgirl,
+    },
+    {
+      title: 'Step 2: Transform Digital to Tangible',
+      text: 'Say goodbye to digital albums as we transform your photo into a stunning hardcopy print.',
+      image: houseImage,
+    },
+    {
+      title: 'Step 3: Delivery to Your Doorstep',
+      text: 'Sit back and relax once you\'ve taken all your pictures, as we take care of delivering your personalized prints right to your doorstep.',
+      image: deliveryImage,
+    },
+  ];
+
   const handleNextScreen = () => {
-    navigation.navigate(Pages.AppPresentationScreen2); // Replace "AppPresentationScreen3" with the next screen's route name
+    if (currentStep < steps.length - 1) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      navigation.navigate(Pages.HomeScreen);
+    }
   };
 
   const handleSkip = () => {
-    navigation.navigate(Pages.HomeScreen); // Direct to HomePage when "Skip" is pressed
+    navigation.navigate(Pages.HomeScreen);
   };
 
   return (
@@ -42,33 +67,27 @@ export default function AppPresentationScreen() {
           <Text style={styles.skipText}>Skip</Text>
         </TouchableOpacity>
 
-        {/* Add the new image */}
         <View style={styles.imageContainer}>
-          <Image source={photoofgirl} style={styles.photoofgirl} resizeMode="contain" />
+          <Image source={steps[currentStep].image} style={styles.image} resizeMode="contain" />
         </View>
 
-        {/* Text */}
-        <Text style={styles.text}>Sign up, choose a bundle, snap a picture, and preserve precious moments with a simple click.</Text>
+        <Text style={styles.text}>{steps[currentStep].text}</Text>
+        <Text style={styles.title}>{steps[currentStep].title}</Text>
 
-        {/* Title */}
-        <Text style={styles.title}>Step 1: Capture the Moment</Text>
-
-        {/* Add the three dots */}
         <View style={styles.dotsContainer}>
-          <View style={[styles.dot, styles.dotActive]} />
-          <View style={styles.dot} />
-          <View style={styles.dot} />
+          {steps.map((_, index) => (
+            <View key={index} style={[styles.dot, currentStep === index && styles.dotActive]} />
+          ))}
         </View>
 
-        {/* Add the "Next" button */}
         <TouchableOpacity style={styles.nextButton} onPress={handleNextScreen}>
           <Text style={styles.nextButtonText}>Next</Text>
         </TouchableOpacity>
-
       </View>
     </ImageBackground>
   );
 }
+
 
 
 const styles = StyleSheet.create({
@@ -148,6 +167,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   photoofgirl: {
+    width: width * 1, // Adjust the size as needed
+    height: width * 1.2, // Maintain aspect ratio
+    marginBottom: 30,
+  },
+  image: {
     width: width * 1, // Adjust the size as needed
     height: width * 1.2, // Maintain aspect ratio
     marginBottom: 30,

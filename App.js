@@ -9,8 +9,6 @@ import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
 import FirstScreen from './FirstScreen';
 import AppPresentationScreen from './AppPresentationScreen';
-import AppPresentationScreen2 from './AppPresentationScreen2'; // Import the new screen components
-import AppPresentationScreen3 from './AppPresentationScreen3'; // Import the new screen components
 import HomeScreen from './HomeScreen'; // Import the new screen component
 import SettingsPage from './SettingsPage';
 import SupportPage from './Supportpage';
@@ -108,20 +106,6 @@ function App() {
         <Stack.Screen
           name={Pages.AppPresentationScreen}
           component={AppPresentationScreen}
-          options={{
-            headerShown: false, // Hide the header for the new screen if needed
-          }}
-        />
-        <Stack.Screen
-          name={Pages.AppPresentationScreen2}
-          component={AppPresentationScreen2}
-          options={{
-            headerShown: false, // Hide the header for the new screen if needed
-          }}
-        />
-        <Stack.Screen
-          name={Pages.AppPresentationScreen3}
-          component={AppPresentationScreen3}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}

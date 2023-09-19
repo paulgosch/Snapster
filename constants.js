@@ -7,8 +7,6 @@ export const Pages = {
     LoginPage: 'LoginPage',
     RegisterPage: 'RegisterPage',
     AppPresentationScreen: 'AppPresentationScreen',
-    AppPresentationScreen2: 'AppPresentationScreen2',
-    AppPresentationScreen3: 'AppPresentationScreen3',
     TermsAndConditions: 'TermsAndConditionsPage',
     SettingsPage: 'SettingsPage',
     PrivacyPolicyPage: 'PrivacyPolicyPage',
