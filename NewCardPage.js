@@ -5,7 +5,7 @@ import { Colors } from './constants';
 import { useNavigation } from '@react-navigation/native';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-const cardImage = require('C:/Users/paulg/Desktop/App1/App1/assets/CardPaymentMasterCard.png');
+const cardImage = require('/assets/CardPaymentMasterCard.png');
 
 export default function NewCardPage() {
   const navigation = useNavigation();
