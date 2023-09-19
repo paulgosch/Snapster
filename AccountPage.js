@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, Alert } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -22,6 +22,27 @@ export default function ProfilePage() {
 
   const handleGoBack = () => {
     navigation.goBack(); // Define a function to handle going back
+  };
+
+  const handleMyPicturesPage = () => {
+    navigation.navigate('MyPicturesPage');
+  };
+  const handleaddAdress = () => {
+    navigation.navigate();
+  };
+  const handleDeleteAccount = () => {
+    Alert.alert(
+      "Delete Account",
+      "Are you sure you want to delete your account? This action cannot be undone.",
+      [
+        {
+          text: "Cancel",
+          onPress: () => {},
+          style: "cancel"
+        },
+        { text: "Delete", onPress: () => { /* Add your delete account handler here */ } }
+      ]
+    );
   };
 
   return (
@@ -66,18 +87,25 @@ export default function ProfilePage() {
             </View>
 
             <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>My Bundle:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>Basic Bundle {userBundle}</Text>
+              <Text style={[styles.centeredText, styles.accountLabel]}>My Adress</Text>
             </View>
-
-            <Text style={styles.accountText}>Pictures left: 3/27</Text>
-            <Text style={styles.accountText}>Address: {address}</Text>
+            <View style={styles.accountRow}>
+          <Text style={styles.accountText}>Address: {address}</Text>
+          <TouchableOpacity onPress={handleaddAdress}>
+          <Text style={styles.addAddressText}>add address</Text>
+         </TouchableOpacity>
+</View>
+            
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => { /* Add your delete account handler here */ }} style={styles.deleteAccountButton}>
-  <Text style={styles.deleteAccountText}>Delete Account</Text>
-</TouchableOpacity>
+        <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
+          <Text style={styles.myPicturesText}>My Pictures</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
+        <Text style={styles.changeText}>Delete Account</Text>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Logout</Text>
@@ -150,6 +178,7 @@ const styles = StyleSheet.create({
     accountRow: {
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'space-between', // Add this line
       marginBottom: 5,
     },
     accountText: {
@@ -191,6 +220,30 @@ const styles = StyleSheet.create({
       paddingBottom: 10, // Add bottom padding
     },
     deleteAccountText: {
+      color: '#FF9817', // Use the same orange color as the "Change" text
+      fontSize: 16, // Set a font size for the text
+    },
+    centeredText: {
+      textAlign: 'center',
+      fontSize: 14, // Adjust the font size to be slightly smaller
+      fontWeight: 'bold',
+      color: 'black',
+      paddingTop: 10,
+    },
+    myPictures: {
+      marginBottom: 20,
+      padding: 10,
+      borderWidth: 1,
+      borderColor: 'white',
+      borderRadius: 8,
+      alignItems: 'center',
+    },
+    myPicturesText: {
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
+    },
+    addAddressText: {
       color: '#FF9817', // Use the same orange color as the "Change" text
       fontSize: 16, // Set a font size for the text
     },

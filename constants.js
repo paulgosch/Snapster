@@ -20,6 +20,7 @@ export const Pages = {
     PaymentMethodPage: 'PaymentMethodPage',
     NewCardPage: 'NewCardPage',
     AccountPage: 'AccountPage',
+    MyPicturesPage: 'MyPicturesPage'
   };
 
   export const Colors = {
