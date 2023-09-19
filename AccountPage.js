@@ -75,6 +75,10 @@ export default function ProfilePage() {
           </View>
         </View>
 
+        <TouchableOpacity onPress={() => { /* Add your delete account handler here */ }} style={styles.deleteAccountButton}>
+  <Text style={styles.deleteAccountText}>Delete Account</Text>
+</TouchableOpacity>
+
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
@@ -181,5 +185,13 @@ const styles = StyleSheet.create({
       left: 20,
       zIndex: 1, // Ensure the back button is above other elements
       padding: 10,
+    },
+    deleteAccountButton: {
+      alignSelf: 'center', // Center the button horizontally
+      paddingBottom: 10, // Add bottom padding
+    },
+    deleteAccountText: {
+      color: '#FF9817', // Use the same orange color as the "Change" text
+      fontSize: 16, // Set a font size for the text
     },
   });
