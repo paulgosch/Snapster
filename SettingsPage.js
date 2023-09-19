@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   accountContainer: {
-    width: '80%',
+    width: '100%',
     marginVertical: 10,
     padding: 5,
     borderWidth: 1,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    width: '80%',
+    width: '100%',
     marginVertical: 10,
     padding: 5,
     borderWidth: 1,
