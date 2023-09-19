@@ -52,6 +52,10 @@ export default function SettingsPage() {
   const handleBack = () => {
     navigation.goBack();
   };
+  const handleRateApp = () => {
+    // Implement the function to navigate to the app store page
+  };
+
 
   const handleSupportPage = () => {
     navigation.navigate(Pages.SupportPage);
@@ -69,7 +73,7 @@ export default function SettingsPage() {
     navigation.navigate(Pages.WelcomePage);
   };
 
-  const handleNotificationChange = (value) => {
+  const handleNotificationChange = () => {
     // Implement logic to toggle notification settings
   };
 
@@ -99,7 +103,7 @@ export default function SettingsPage() {
 
         <View style={styles.settingContainer}>
           <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Enable Notifications</Text>
+            <Text style={styles.settingText}>Notifications</Text>
             <Switch
               value={false}
               onValueChange={handleNotificationChange}
@@ -109,7 +113,7 @@ export default function SettingsPage() {
 
         <View style={styles.settingContainer}>
           <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Mute Sounds</Text>
+            <Text style={styles.settingText}>Sounds</Text>
             <Switch
               value={soundEffectsEnabled}
               onValueChange={handleSoundsChange}
@@ -117,16 +121,32 @@ export default function SettingsPage() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.accountContainer} onPress={handleAccountPage}>
+        <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
+        <View style={styles.buttonContent}>
+        <FeatherIcon name="credit-card" size={24} color="white" style={{ marginRight: 10 }} /> 
           <Text style={styles.accountHeaderText}>My Account</Text>
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={handlePaymentMethodPage}>
+        <View style={styles.buttonContent}>
+        <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>Payment Method</Text>
+          </View>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.button} onPress={handleRateApp}>
+       <View style={styles.buttonContent}>
+        <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
+        <Text style={styles.buttonText}>Rate this App</Text>
+       </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
+        <TouchableOpacity style={styles.accountContainer} onPress={handleLogout}>
+        <View style={styles.buttonContent}>
+        <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>Log out</Text>
+          </View>
         </TouchableOpacity>
 
         <View style={styles.bottomContainer}>
@@ -186,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   accountContainer: {
-    width: '100%',
+    width: '50%',
     marginVertical: 10,
     padding: 5,
     borderWidth: 1,
@@ -208,7 +228,6 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    alignItems: 'center',
   },
   buttonText: {
     fontSize: 18,
@@ -231,5 +250,9 @@ const styles = StyleSheet.create({
     marginVertical: 2,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
+  },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
