@@ -102,9 +102,10 @@ export default function SettingsPage() {
         <Text style={styles.title}>Settings</Text>
 
         <View style={styles.settingContainer}>
-          <View style={styles.settingRow}>
-            <Text style={styles.settingText}>Notifications</Text>
-            <Switch
+        <View style={styles.settingRow}>
+        <FeatherIcon name="bell" size={24} color="grey" style={{ marginRight: 10 }} /> 
+          <Text style={styles.settingText}>Notifications</Text>
+          <Switch
               value={false}
               onValueChange={handleNotificationChange}
             />
@@ -112,7 +113,8 @@ export default function SettingsPage() {
         </View>
 
         <View style={styles.settingContainer}>
-          <View style={styles.settingRow}>
+        <View style={styles.settingRow}>
+        <FeatherIcon name="volume-1" size={24} color="grey" style={{ marginRight: 10 }} /> 
             <Text style={styles.settingText}>Sounds</Text>
             <Switch
               value={soundEffectsEnabled}
