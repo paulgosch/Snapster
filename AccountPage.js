@@ -15,6 +15,7 @@ export default function ProfilePage() {
   };
 
   const handleChangePassword = () => {
+    navigation.navigate('ForgotPasswordPage');
     // Implement logic to change the password
   };
 

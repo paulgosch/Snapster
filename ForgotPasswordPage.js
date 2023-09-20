@@ -52,9 +52,6 @@ export default function ForgotPasswordPage() {
             <Text style={styles.buttonText}>Reset Password</Text>
           </TouchableOpacity>
         )}
-        <TouchableOpacity onPress={() => navigation.navigate(Pages.LoginPage)}>
-          <Text style={styles.backText}>Back to Login</Text>
-        </TouchableOpacity>
       </KeyboardAvoidingView>
     </ImageBackground>
   );
