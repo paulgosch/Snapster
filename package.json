@@ -18,7 +18,7 @@
     "expo": "~49.0.5",
     "expo-camera": "~13.4.2",
     "expo-status-bar": "~1.6.0",
-    "firebase": "^10.1.0",
+    "firebase": "^10.4.0",
     "install": "^0.13.0",
     "npm": "^9.8.1",
     "query-string": "^8.1.0",

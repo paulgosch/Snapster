@@ -8,7 +8,6 @@ import { Pages, Colors } from './constants';
 import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 import { TapGestureHandler, State } from 'react-native-gesture-handler';
 
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -50,19 +49,6 @@ export default function HomeScreen({ route }) {
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(true); // Initialize as true or as needed
 
   useEffect(() => {
-    // Retrieve the sound effects setting from AsyncStorage
-    async function loadSoundEffectsSetting() {
-      try {
-        const value = await AsyncStorage.getItem('soundEffectsEnabled');
-        if (value !== null) {
-          setSoundEffectsEnabled(value === 'true');
-        }
-      } catch (error) {
-        console.error('Error loading sound effects setting:', error);
-      }
-    }
-  
-    loadSoundEffectsSetting();
   }, []);
 
   useEffect(() => {

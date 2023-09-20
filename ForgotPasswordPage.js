@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors } from './constants';
+import { FIREBASE_AUTH } from './firebaseConfig'; // Adjust the path as necessary
+import { sendPasswordResetEmail } from 'firebase/auth'; // Import the function from the auth package
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -9,17 +11,18 @@ export default function ForgotPasswordPage() {
   const navigation = useNavigation();
 
   const handleResetPassword = async () => {
-    // Implement your password reset logic here
     setLoading(true);
 
-    // Simulate a delay for demonstration purposes
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await sendPasswordResetEmail(FIREBASE_AUTH, email); // Use the function with your FIREBASE_AUTH instance
       alert(`A password reset link has been sent to ${email}`);
+    } catch (error) {
+      console.error(error);
+      alert("Error sending password reset email. Please try again.");
+    }
 
-      // Navigate to the VerificationPage
-      navigation.navigate(Pages.VerificationPage);
-    }, 2000);
+    setLoading(false);
+    navigation.navigate(Pages.VerificationPage);
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');

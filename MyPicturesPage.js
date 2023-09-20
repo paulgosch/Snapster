@@ -42,10 +42,6 @@ export default function MyPicturesPage() {
         </View>
 
         <TouchableOpacity onPress={handleBuyMore}>
-        <Text style={styles.Shop}>Past Bundles</Text>
-              </TouchableOpacity>
-
-        <TouchableOpacity onPress={handleBuyMore}>
         <Text style={styles.Shop}>Buy More!</Text>
               </TouchableOpacity>
       </View>

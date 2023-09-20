@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 
@@ -17,22 +16,11 @@ export default function SettingsPage() {
   }, []);
 
   const loadSoundEffectsSetting = async () => {
-    try {
-      const value = await AsyncStorage.getItem('soundEffectsEnabled');
-      if (value !== null) {
-        setSoundEffectsEnabled(value === 'true');
-      }
-    } catch (error) {
-      console.error('Error loading sound effects setting:', error);
-    }
+   
   };
 
   const saveSoundEffectsSetting = async (value) => {
-    try {
-      await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
-    } catch (error) {
-      console.error('Error saving sound effects setting:', error);
-    }
+
   };
 
   const handlePaymentMethodPage = () => {

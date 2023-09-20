@@ -16,7 +16,6 @@ import PrivacyPolicyPage from './PrivacyPolicyPage';
 import StorePage from './StorePage';
 import CheckoutPage from './CheckoutPage';
 import ForgotPasswordPage from './ForgotPasswordPage';
-import VerificationPage from './VerificationPage';
 import CreateNewPasswordPage from './CreateNewPasswordPage';
 import NewCardPage from './NewCardPage';
 import AccountPage from './AccountPage';
@@ -172,13 +171,6 @@ function App() {
         <Stack.Screen
           name={Pages.ForgotPasswordPage}
           component={ForgotPasswordPage}
-          options={{
-            headerShown: false, // Hide the header for the new screen if needed
-          }}
-        />
-        <Stack.Screen
-          name={Pages.VerificationPage}
-          component={VerificationPage}
           options={{
             headerShown: false, // Hide the header for the new screen if needed
           }}
