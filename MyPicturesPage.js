@@ -29,7 +29,10 @@ export default function MyPicturesPage() {
         <View style={styles.header}>
           <Text style={styles.title}>My Pictures</Text>
         </View>
-        
+
+        <Text style={styles.bundleInfo}>Current Bundle: Basic Bundle</Text>
+        <Text style={styles.bundleInfo}>Pictures remaining: 3/27</Text>
+
         <View style={styles.grid}>
           {[...Array(30)].map((_, index) => (
             <View style={styles.gridItem} key={index}>
@@ -37,8 +40,11 @@ export default function MyPicturesPage() {
             </View>
           ))}
         </View>
-        <Text style={styles.bundleInfo}>Current Bundle: Basic Bundle</Text>
-        <Text style={styles.bundleInfo}>Pictures remaining: 3/27</Text>
+
+        <TouchableOpacity onPress={handleBuyMore}>
+        <Text style={styles.Shop}>Past Bundles</Text>
+              </TouchableOpacity>
+
         <TouchableOpacity onPress={handleBuyMore}>
         <Text style={styles.Shop}>Buy More!</Text>
               </TouchableOpacity>
@@ -77,7 +83,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
-    marginTop: 20,
   },
   gridItem: {
     width: '18%',

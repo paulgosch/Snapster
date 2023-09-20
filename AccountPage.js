@@ -27,6 +27,11 @@ export default function ProfilePage() {
   const handleMyPicturesPage = () => {
     navigation.navigate('MyPicturesPage');
   };
+
+  const handleMyOrdersPage = () => {
+    navigation.navigate('MyOrdersPage');
+  };
+
   const handleaddAdress = () => {
     navigation.navigate();
   };
@@ -95,13 +100,21 @@ export default function ProfilePage() {
           <Text style={styles.addAddressText}>add address</Text>
          </TouchableOpacity>
 </View>
-            
+          
           </View>
         </View>
 
-        <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
-          <Text style={styles.myPicturesText}>My Pictures</Text>
+        <View style={styles.accountContainer}>
+          <Text style={styles.accountHeaderText}>My Pictures</Text>
+          <View style={styles.accountDetails}>
+          <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
+          <Text style={styles.myPicturesText}>My Snap-Bundles</Text>
         </TouchableOpacity>
+        <TouchableOpacity style={styles.myPictures} onPress={handleMyOrdersPage}>
+          <Text style={styles.myPicturesText}>My Orders</Text>
+        </TouchableOpacity>
+          </View>
+        </View>
 
         <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
         <Text style={styles.changeText}>Delete Account</Text>
@@ -158,7 +171,7 @@ const styles = StyleSheet.create({
     },
     accountContainer: {
         width: '100%', // Adjust the width as needed
-        marginVertical: 20,
+        marginVertical: 10,
         padding: 20,
         borderWidth: 1,
         borderColor: 'white',
@@ -167,7 +180,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
     accountHeaderText: {
-      fontSize: 24,
+      fontSize: 20,
       fontWeight: 'bold',
       color: 'black',
       marginBottom: 10,
@@ -234,14 +247,13 @@ const styles = StyleSheet.create({
       marginBottom: 20,
       padding: 10,
       borderWidth: 1,
-      borderColor: 'white',
+      borderColor: 'orange',
       borderRadius: 8,
       alignItems: 'center',
     },
     myPicturesText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
+      color: 'orange',
+      fontSize: 14,
     },
     addAddressText: {
       color: '#FF9817', // Use the same orange color as the "Change" text
