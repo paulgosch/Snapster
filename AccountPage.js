@@ -46,7 +46,47 @@ export default function ProfilePage() {
           onPress: () => {},
           style: "cancel"
         },
-        { text: "Delete", onPress: () => { /* Add your delete account handler here */ } }
+        { 
+          text: "Delete", 
+          onPress: async () => {
+            // Send a POST request to the Google Script
+            try {
+              const response = await fetch('https://script.google.com/macros/s/AKfycbzUAcoyzw-N9foLLYnqA5peLsJIXu6DmjKowlNVAWotXQIU_VLbny7GTrqsbhTsRUfy/exec', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  email: email // Assuming 'email' is the user's email from the state or redux store
+                }),
+              });
+  
+              if (response.ok) {
+                // Handle successful email sending here
+                console.log('Email sent successfully');
+                
+                // Inform the user about the 48-hour delay
+                Alert.alert(
+                  "Account Deletion in Progress",
+                  "Your account deletion request has been received. Please note that it can take up to 48 hours to delete your account.",
+                  [
+                    {
+                      text: "OK",
+                      onPress: () => {
+                        // Navigate to the WelcomeScreen after the user acknowledges the alert
+                        navigation.navigate('WelcomeScreen');
+                      }
+                    }
+                  ]
+                );
+              } else {
+                console.error('Failed to send email');
+              }
+            } catch (error) {
+              console.error('Error sending email:', error);
+            }
+          } 
+        }
       ]
     );
   };

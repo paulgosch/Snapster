@@ -7,6 +7,7 @@ import AppPresentationScreen from './AppPresentationScreen'; // Import the new s
 import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
+import { sendEmailVerification } from "firebase/auth";
 import { Pages, Colors } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -72,21 +73,32 @@ export default function RegisterScreen() {
       }
   
       try {
-        const response = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(response);
-  
-        // Pass the user data as parameters to the SettingsPage
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+        // Get the user from the userCredential object
+        const currentUser = userCredential.user;
+
+        // Check if the user object exists and send the verification email
+        if (currentUser) {
+            await sendEmailVerification(currentUser);
+            Alert.alert('Verification email sent!', 'Please check your email and verify your account.');
+        } else {
+            console.error("Unable to send verification email. Current user not found.");
+            Alert.alert('Error', 'Unable to send verification email. Please contact support.');
+        }
+
+        // Navigate to a different screen (e.g., AppPresentationScreen) after sending the verification email
         navigation.navigate(Pages.AppPresentationScreen);
       } catch (error) {
         console.log(error);
-        alert('Sign in failed: ' + error);
+        alert('Sign up failed: ' + error);
       } finally {
         setLoading(false);
       }
     } else {
       Alert.alert('You must agree to the T&C to continue');
     }
-  };
+};
 
   const backgroundImageSource = require('./assets/Background.jpg');
 
