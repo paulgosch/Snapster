@@ -24,9 +24,8 @@ import MyOrdersPage from './MyOrdersPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Pages, Colors, Fonts } from './constants';
 
-
-import {Pages} from './constants';
 import TermsAndConditionsScreen from './TermsAndConditions';
 import Paypal from './Paypal';
 import PaymentMethodPage from './PaymentMethodPage';
@@ -243,7 +242,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   title: {
-    fontFamily: 'neucha-regular', // Apply the custom font
+    fontFamily: Fonts.Title,
     fontSize: 50,
     fontWeight: 'bold',
     color: 'white',
@@ -253,7 +252,7 @@ const styles = StyleSheet.create({
     elevation: 0, // Remove the shadow for Android
   },
   headerTitle: {
-    fontFamily: 'neucha-regular', // Apply the custom font to the header title
+    fontFamily: Fonts.Title,
     fontSize: 24,
     color: 'white',
   },

@@ -31,4 +31,12 @@ export const Pages = {
     Background: '#CED4DA',
     ErrorColor: 'red',
   };
+
+  export const Fonts = {
+    Title: 'neucha-regular',
+    Subtitle: 'neucha-regular',
+    BodyText: 'neucha-regular',
+    Footer: 'neucha-regular',
+    Button: 'neucha-regular',
+  }
   

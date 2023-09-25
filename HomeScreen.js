@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Vibration } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons'; // Import the Feather component
+import { Feather } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';
-import { TapGestureHandler, State } from 'react-native-gesture-handler';
+import { Gesture, GestureDetector} from 'react-native-gesture-handler';
 
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -20,6 +20,16 @@ export default function HomeScreen({ route }) {
   const [cameraRef, setCameraRef] = React.useState(null);
   const navigation = useNavigation(); // Use the useNavigation hook here
   const { userName } = useSelector((state) => state.user);
+
+  const doubleTap = Gesture.Tap({
+    numberOfTaps: 2,
+    onEnd: (event, success) => {
+      if (success) {
+        toggleCameraType();
+      }
+    },
+  });
+
 
   const toggleCameraType = () => {
     setType(
@@ -148,7 +158,6 @@ export default function HomeScreen({ route }) {
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.headerTop}>
-          {/* Title "Snapster" and "3/27" */}
           <Text style={styles.title}> Snapster </Text>
           <Text style={styles.progressText}>3/27</Text>
           <TouchableOpacity style={styles.flashButton} onPress={toggleFlashMode}>
@@ -161,8 +170,6 @@ export default function HomeScreen({ route }) {
           <TouchableOpacity style={styles.cameraSwitchButton} onPress={toggleCameraType}>
             <Feather name="rotate-cw" size={24} color="white" />
           </TouchableOpacity>
-
-          {/* Render countdown text when timer is active */}
           {isTimerActive ? (
             <Text style={styles.timerText}>{countdownText}</Text>
           ) : (
@@ -171,40 +178,37 @@ export default function HomeScreen({ route }) {
             </TouchableOpacity>
           )}
         </View>
-
-
-        {/* Move the camera container slightly up */}
-        <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
-          <Camera flashMode={flashMode}
-            style={styles.camera}
-            type={type}
-            ref={(ref) => setCameraRef(ref)}
-          />
-        </View>
+        <GestureDetector
+          gesture={doubleTap}
+        >
+          <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
+            <Camera
+              flashMode={flashMode}
+              style={styles.camera}
+              type={type}
+              ref={(ref) => setCameraRef(ref)}
+            />
+          </View>
+        </GestureDetector>
 
         <View style={styles.headerBottom}>
-          {/* Move the settings icon to the bottom right corner */}
           <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
             <Feather name="settings" size={24} color="white" />
           </TouchableOpacity>
-
-          {/* Move the shopping cart icon to the bottom left corner */}
           <TouchableOpacity style={styles.storeButton} onPress={handleStore}>
             <Feather name="shopping-cart" size={24} color="white" />
           </TouchableOpacity>
         </View>
 
-        {/* Move the button below the camera window */}
         <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
-          <Text style={[styles.buttonText, styles.buttonTextWhite]}>Take Photo</Text>
+          <Text style={[styles.buttonText]}>Take Photo</Text>
         </TouchableOpacity>
 
         {isTimerActive && <Text style={styles.timerText}>{timer}</Text>}
       </View>
     </ImageBackground>
   );
-}
-
+          }
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -231,13 +235,13 @@ const styles = StyleSheet.create({
     width: '100%', // Occupy the full width
   },
   title: {
-    fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: Fonts.Title,
   },
   progressText: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.BodyText,
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
@@ -257,8 +261,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 18,
-  },
-  buttonTextWhite: {
+    fontFamily: Fonts.Button,
     color: 'white', // Set the button text color to white
   },
   camera: {
@@ -294,6 +297,7 @@ const styles = StyleSheet.create({
   settingsButtonText: {
     fontSize: 18,
     color: 'white',
+    fontFamily: Fonts.Button,
   },
   cameraSwitchButton: {
     borderColor: 'white',
@@ -332,6 +336,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 5,
     position: 'absolute', 
     top: 55,
-     right: 20 
+     right: 20 ,
+     fontFamily: Fonts.Button,
   },
 });
+

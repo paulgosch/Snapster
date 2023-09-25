@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackgroun
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
-import { Pages,Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 
 const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj'; // this is our real Client ID from paypal
 const YOUR_APP_SECRET = 'YOUR_APP_SECRET';
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 20,
     color: Colors.PrimaryColor,
+    fontFamily: Fonts.Title,
   },
   backButton: {
     position: 'absolute',
@@ -79,6 +80,7 @@ const styles = StyleSheet.create({
     left: 20,
     zIndex: 1,
     padding: 10,
+    fontFamily: Fonts.Button,
   },
 });
 

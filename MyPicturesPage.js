@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions }
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const blurryImagePlaceholder = require('./assets/CardPaymentMasterCard.jpg'); // replace with your blurry image
@@ -68,12 +69,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     top: 20,
+    fontFamily: Fonts.Title,
   },
   bundleInfo: {
     fontSize: 16,
     color: 'white',
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: Fonts.BodyText,
   },
   grid: {
     flexDirection: 'row',
@@ -100,5 +103,6 @@ const styles = StyleSheet.create({
         color: '#FF9817', // Use the same orange color as the "Change" text
         fontSize: 16, // Set a font size for the text
         alignSelf: 'center',
+        fontFamily: Fonts.Button,
   }
 });

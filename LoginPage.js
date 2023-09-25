@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, Keyboar
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
-import { Pages,Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function LoginPage() {
@@ -84,12 +84,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontFamily: 'neucha-regular', // Apply the custom font
     fontSize: 50,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
     textAlign: 'center', // Center the title horizontally
     padding: 10,
+    fontFamily: Fonts.Title,
   },
   container: {
     flex: 1,
@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: Fonts.Button,
   },
   loadingContainer: {
     height: 40, // Fixed height to keep the container from expanding
@@ -136,6 +137,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: Fonts.Button,
   },
   forgotPassword: {
     color: Colors.PrimaryColor,
@@ -144,6 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 10, // Add some spacing between "Forgot Password" and the login button
     textAlign: 'center',
     paddingTop: 10,
-    marginBottom: 20
+    marginBottom: 20,
+    fontFamily: Fonts.Button,
   },
 });

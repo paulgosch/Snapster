@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import Icon from 'react-native-vector-icons/Feather';
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 
 export default function PrivacyPolicyPage() {
   const navigation = useNavigation(); // Use the useNavigation hook here
@@ -157,17 +157,17 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   backButtonText: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.Button,
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
   },
   title: {
-    fontFamily: 'neucha-regular',
     fontSize: 30,
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
+    fontFamily: Fonts.Title,
   },
   scrollView: {
     flex: 1,
@@ -179,5 +179,6 @@ const styles = StyleSheet.create({
   privacyPolicyText: {
     fontSize: 16,
     padding: 20,
+    fontFamily: Fonts.BodyText,
   },
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground, Image, TextInput } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import { useNavigation } from '@react-navigation/native';
 
 const backgroundImageSource = require('./assets/Background.jpg');
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     color: 'white',
+    fontFamily: Fonts.Title,
   },
   cardManagementContainer: {
     top: '10%',
@@ -106,6 +107,7 @@ const styles = StyleSheet.create({
   cardManagementTitle: {
     fontSize: 18,
     color: 'white',
+    fontFamily: Fonts.Title,
   },
   addButton: {
     padding: 10,
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: 'red',
     fontSize: 16,
+    fontFamily: Fonts.Button,
   },
   cardImageContainer: {
     alignItems: 'center',
@@ -136,9 +139,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     paddingHorizontal: 8,
+    fontFamily: Fonts.BodyText,
   },
   textInput2: {
     height: 40,
+    fontFamily: Fonts.BodyText,
   },
   paypalImageContainer: {
     alignItems: 'center',

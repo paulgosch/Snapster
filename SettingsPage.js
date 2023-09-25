@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: 'white',
     alignSelf: 'center',
+    fontFamily: Fonts.Title,
   },
   settingContainer: {
     width: '100%',
@@ -189,6 +190,7 @@ const styles = StyleSheet.create({
   settingText: {
     fontSize: 18,
     color: 'grey',
+    fontFamily: Fonts.Subtitle,
   },
   settingRow: {
     flexDirection: 'row',
@@ -209,6 +211,7 @@ const styles = StyleSheet.create({
   accountHeaderText: {
     fontSize: 18,
     color: 'white',
+    fontFamily: Fonts.Subtitle,
   },
   button: {
     width: '100%',
@@ -222,6 +225,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     color: 'white',
+    fontFamily: Fonts.Button,
   },
   bottomContainer: {
     position: 'absolute',
@@ -233,13 +237,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   bottomText: {
-    fontFamily: 'neucha-regular',
     color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 2,
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
+    fontFamily: Fonts.Footer,
   },
   buttonContent: {
     flexDirection: 'row',

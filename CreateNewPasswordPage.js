@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 
 export default function CreateNewPasswordPage() {
   const [newPassword, setNewPassword] = useState('');
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: Fonts.Title,
   },
   input: {
     height: 40,

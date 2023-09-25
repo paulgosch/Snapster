@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView }
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Linking } from 'react-native';
-import { Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 
 export default function SupportScreen() {
     const navigation = useNavigation(); // Use the useNavigation hook here
@@ -145,15 +145,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    fontFamily: 'neucha-regular',
     fontSize: 30,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
     top: 50,
     marginBottom: 20,
+    fontFamily: Fonts.Title,
   },
   question: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.BodyText,
     fontSize: 16,
     fontWeight: 'bold',
     color: 'black',
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   answer: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.BodyText,
     fontSize: 16,
     color: Colors.TertiaryColor,
     marginBottom: 10,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   moreQuestionsText: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.Footer,
     fontSize: 16,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   contactButtonText: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.Footer,
     fontSize: 16,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,

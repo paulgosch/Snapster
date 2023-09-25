@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ImageBackground, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
-import { Pages,Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -48,5 +48,6 @@ const styles = StyleSheet.create({
     fontSize: 50,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
+    fontFamily: Fonts.Title,
   },
 });

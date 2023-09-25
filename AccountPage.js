@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, Alert
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const userIconPlaceholder = require('./assets/user-icon-image-placeholder.jpg');
@@ -184,6 +185,7 @@ const styles = StyleSheet.create({
       marginBottom: 20,
     },
     title: {
+      fontFamily: Fonts.Title,
       fontSize: 24,
       fontWeight: 'bold',
       color: 'white',
@@ -221,6 +223,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
       },
     accountHeaderText: {
+      fontFamily: Fonts.Subtitle,
       fontSize: 20,
       fontWeight: 'bold',
       color: 'black',
@@ -238,9 +241,11 @@ const styles = StyleSheet.create({
     accountText: {
       fontSize: 16,
       color: 'black',
+      fontFamily: Fonts.BodyText,
     },
     accountTextGrey: {
       color: 'grey',
+      fontFamily: Fonts.BodyText,
     },
     accountLabel: {
       flex: 1,
@@ -250,6 +255,7 @@ const styles = StyleSheet.create({
     },
     changeText: {
       color: '#FF9817',
+      fontFamily: Fonts.BodyText,
     },
     button: {
       backgroundColor: '#FF9817',
@@ -261,6 +267,7 @@ const styles = StyleSheet.create({
     buttonText: {
       color: '#fff',
       fontSize: 16,
+      fontFamily: Fonts.Button,
     },
     backButton: {
       position: 'absolute',
@@ -276,6 +283,7 @@ const styles = StyleSheet.create({
     deleteAccountText: {
       color: '#FF9817', // Use the same orange color as the "Change" text
       fontSize: 16, // Set a font size for the text
+      fontFamily: Fonts.Button,
     },
     centeredText: {
       textAlign: 'center',
@@ -283,6 +291,7 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: 'black',
       paddingTop: 10,
+      fontFamily: Fonts.BodyText,
     },
     myPictures: {
       marginBottom: 20,
@@ -295,9 +304,11 @@ const styles = StyleSheet.create({
     myPicturesText: {
       color: 'orange',
       fontSize: 14,
+      fontFamily: Fonts.Button,
     },
     addAddressText: {
       color: '#FF9817', // Use the same orange color as the "Change" text
       fontSize: 16, // Set a font size for the text
+      fontFamily: Fonts.BodyText,
     },
   });

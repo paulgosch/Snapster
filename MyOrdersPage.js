@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground }
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
+import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: Fonts.Title,
   },
   ordersContainer: {
     flex: 1,
@@ -72,11 +74,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 8,
+    fontFamily: Fonts.Subtitle,
   },
   orderDetail: {
     fontSize: 16,
     color: 'grey',
     marginBottom: 4,
+    fontFamily: Fonts.Text,
   },
   backButton: {
     position: 'absolute',
@@ -90,6 +94,7 @@ const styles = StyleSheet.create({
     color: 'white',
     textAlign: 'center',
     marginTop: 20,
+    fontFamily: Fonts.BodyText,
   },
 });
 

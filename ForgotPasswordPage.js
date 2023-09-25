@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import { FIREBASE_AUTH } from './firebaseConfig'; // Adjust the path as necessary
 import { sendPasswordResetEmail } from 'firebase/auth'; // Import the function from the auth package
 
@@ -73,12 +73,14 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     textAlign: 'center',
     marginBottom: 10,
+    fontFamily: Fonts.Title,
   },
   description: {
     fontSize: 16,
     color: Colors.PrimaryColor,
     textAlign: 'center',
     marginBottom: 20,
+    fontFamily: Fonts.BodyText,
   },
   input: {
     height: 40,
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: Fonts.Button,
   },
   loadingContainer: {
     height: 40,
@@ -120,6 +123,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: Fonts.Button,
   },
   backText: {
     color: Colors.PrimaryColor,
@@ -127,5 +131,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textAlign: 'center',
     marginTop: 20,
+    fontFamily: Fonts.Button,
   },
 });

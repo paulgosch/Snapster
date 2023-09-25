@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import Icon from 'react-native-vector-icons/Feather';
-import { Colors } from './constants';
+import { Colors, Fonts } from './constants';
 
 export default function TermsAndConditionsScreen() {
   const navigation = useNavigation(); // Use the useNavigation hook here
@@ -342,13 +342,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   backButtonText: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.Button,
     fontSize: 18,
     fontWeight: 'bold',
     color: 'white',
   },
   title: {
-    fontFamily: 'neucha-regular',
+    fontFamily: Fonts.Title,
     fontSize: 30,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
@@ -364,10 +364,12 @@ const styles = StyleSheet.create({
   termsAndConditionsText: {
     fontSize: 16,
     padding: 20,
+    fontFamily: Fonts.BodyText,
   },
   headerText: {
     fontSize: 16,
     padding: 20,
     fontWeight: 'bold',
+    fontFamily: Fonts.BodyTitle,
   },
 });

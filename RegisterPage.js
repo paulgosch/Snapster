@@ -8,7 +8,7 @@ import TermsAndConditions from './TermsAndConditions';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
 import { sendEmailVerification } from "firebase/auth";
-import { Pages, Colors } from './constants';
+import { Pages, Colors, Fonts } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
 
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   title: {
-    fontFamily: 'neucha-regular', // Apply the custom font
+    fontFamily: Fonts.Title,
     fontSize: 40,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
@@ -254,6 +254,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
+    fontFamily: Fonts.Button,
   },
   termsContainer: {
     flexDirection: 'row',
@@ -266,6 +267,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.PrimaryColor,
     marginLeft: 5, // Add some space between the checkbox and "Agree with"
+    fontFamily: Fonts.BodyText,
   },
   termsText: {
     fontSize: 14,
@@ -273,6 +275,7 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
     marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
+    fontFamily: Fonts.Button,
   },
   checkbox: {
     marginRight: 5, // Add some space between "Terms and Conditions" and the checkbox
@@ -292,6 +295,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     fontSize: 18,
     fontWeight: 'bold',
+    fontFamily: Fonts.Button,
   },
   passwordContainer: {
     flexDirection: 'row',
