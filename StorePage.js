@@ -4,7 +4,9 @@ import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import Icon from 'react-native-vector-icons/Feather';
 
-const basicBundleImage = require('./assets/storeexample.png');
+const basicBundleImage = require('./assets/Roll_basic.png');
+const standardBundleImage = require('./assets/Roll_standard.png');
+const premiumBundleImage = require('./assets/Roll_premium.png');
 const backgroundImageSource = require('./assets/Background.jpg');
 
 const StorePage = () => {
@@ -30,29 +32,38 @@ const StorePage = () => {
         <View style={styles.bundlesContainer}>
           <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
             <Image source={basicBundleImage} style={styles.bundleImage} />
-            <Text style={styles.bundleTitle}>Basic Bundle</Text>
-            <Text style={styles.bundleDescription}>A simple bundle with essential 27 Pictures.</Text>
-            <Text style={styles.bundleDescription}>+ free Delivery</Text>
-            <Text style={styles.bundlePrice}>€10.99</Text>
+            <View style={styles.textContainer}>
+              <Text style={styles.bundleTitle}>Basic Bundle</Text>
+              <Text style={styles.bundleDescription}>A friendly start for newcomers.</Text>
+              <Text style={styles.bundleDescription}>+ with 17 Pictures </Text>
+              <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+              <Text style={styles.bundleDescription}>+ free Delivery</Text>
+              <Text style={styles.bundlePrice}>€10.99</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
-            <Text style={styles.bundleTitle}>Standard Bundle</Text>
-            <Text style={styles.bundleDescription}>
-              A well-rounded bundle with 
-            </Text>
-            <Text style={styles.bundleDescription}>35 Pictures.</Text>
-            <Text style={styles.bundleDescription}>+ free Delivery</Text>
-            <Text style={styles.bundlePrice}>€19.99</Text>
+            <Image source={standardBundleImage} style={styles.bundleImage} />
+            <View style={styles.textContainer}>
+              <Text style={styles.bundleTitle}>Standard Bundle</Text>
+              <Text style={styles.bundleDescription}>For our regular snap enthusiasts.</Text>
+              <Text style={styles.bundleDescription}>+ with 27 Pictures </Text>
+              <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+              <Text style={styles.bundleDescription}>+ free Delivery</Text>
+              <Text style={styles.bundlePrice}>€19.99</Text>
+            </View>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
-            <Text style={styles.bundleTitle}>Premium Bundle</Text>
-            <Text style={styles.bundleDescription}>
-              The ultimate bundle with 40 Pictures and an exclusive item.
-            </Text>
-            <Text style={styles.bundleDescription}>+ free Delivery</Text>
-            <Text style={styles.bundlePrice}>€24.99</Text>
+            <Image source={premiumBundleImage} style={styles.bundleImage} />
+            <View style={styles.textContainer}>
+              <Text style={styles.bundleTitle}>Premium Bundle</Text>
+              <Text style={styles.bundleDescription}>The ultimate pick for photography lovers.</Text>
+              <Text style={styles.bundleDescription}>+ with 47 Pictures </Text>
+              <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+              <Text style={styles.bundleDescription}>+ free Delivery</Text>
+              <Text style={styles.bundlePrice}>€24.99</Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -79,24 +90,29 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Title,
   },
   bundlesContainer: {
-    width: '80%', // Set a fixed width for the container
+    width: '80%',
     height: '78%',
-    alignItems: 'center', // Center bundles vertically
+    alignItems: 'center',
   },
   bundle: {
+    flexDirection: 'row',
     backgroundColor: '#fff',
     padding: 20,
     borderRadius: 8,
     alignItems: 'center',
     marginBottom: 20,
     elevation: 4,
-    width: '100%', // Set the width of each bundle to be 100% of the container
+    width: '100%',
   },
   bundleImage: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginBottom: 10,
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginRight: 10,
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: 'center',
   },
   bundleTitle: {
     fontSize: 20,
@@ -105,7 +121,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Subtitle,
   },
   bundleDescription: {
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: 5,
     color: '#666',
     fontFamily: Fonts.BodyText,
@@ -115,12 +131,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#2ecc71',
     fontFamily: Fonts.BodyText,
+    textAlign: 'right',
   },
   backButton: {
     position: 'absolute',
     top: 40,
     left: 20,
-    zIndex: 1, // Ensure the back button is above the bundles
+    zIndex: 1,
     padding: 10,
   },
   backButtonText: {
