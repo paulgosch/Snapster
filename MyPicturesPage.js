@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-const basicBundleImage = require('./assets/Rolls.png');
+const BundleImage = require('./assets/Rolls.png');
 const blurryImagePlaceholder = require('./assets/CardPaymentMasterCard.jpg'); // replace with your blurry image
 
 export default function MyPicturesPage() {
@@ -44,7 +44,7 @@ export default function MyPicturesPage() {
         </View>
 
         <TouchableOpacity onPress={handleBuyMore}>
-        <Image source={basicBundleImage} style={styles.bundleImage} />
+        <Image source={BundleImage} style={styles.bundleImage} />
         <Text style={styles.Shop}>Buy More!</Text>
               </TouchableOpacity>
       </View>
