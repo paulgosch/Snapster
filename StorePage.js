@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image, ImageBackground, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import Icon from 'react-native-vector-icons/Feather';
@@ -30,6 +30,8 @@ const StorePage = () => {
         <Text style={styles.title}>Welcome to Our Store!</Text>
 
         <View style={styles.bundlesContainer}>
+
+          
           <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
             <Image source={basicBundleImage} style={styles.bundleImage} />
             <View style={styles.textContainer}>
@@ -38,7 +40,7 @@ const StorePage = () => {
               <Text style={styles.bundleDescription}>+ with 17 Pictures </Text>
               <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
               <Text style={styles.bundleDescription}>+ free Delivery</Text>
-              <Text style={styles.bundlePrice}>€10.99</Text>
+              <Text style={styles.bundlePrice}>€4.99</Text>
             </View>
           </TouchableOpacity>
 
@@ -50,7 +52,7 @@ const StorePage = () => {
               <Text style={styles.bundleDescription}>+ with 27 Pictures </Text>
               <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
               <Text style={styles.bundleDescription}>+ free Delivery</Text>
-              <Text style={styles.bundlePrice}>€19.99</Text>
+              <Text style={styles.bundlePrice}>€8.99</Text>
             </View>
           </TouchableOpacity>
 
@@ -62,7 +64,7 @@ const StorePage = () => {
               <Text style={styles.bundleDescription}>+ with 47 Pictures </Text>
               <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
               <Text style={styles.bundleDescription}>+ free Delivery</Text>
-              <Text style={styles.bundlePrice}>€24.99</Text>
+              <Text style={styles.bundlePrice}>€12.99</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BodyText,
   },
   bundlePrice: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     color: '#2ecc71',
     fontFamily: Fonts.BodyText,

@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions,Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
+const basicBundleImage = require('./assets/Rolls.png');
 const blurryImagePlaceholder = require('./assets/CardPaymentMasterCard.jpg'); // replace with your blurry image
 
 export default function MyPicturesPage() {
@@ -43,6 +44,7 @@ export default function MyPicturesPage() {
         </View>
 
         <TouchableOpacity onPress={handleBuyMore}>
+        <Image source={basicBundleImage} style={styles.bundleImage} />
         <Text style={styles.Shop}>Buy More!</Text>
               </TouchableOpacity>
       </View>
@@ -104,5 +106,12 @@ const styles = StyleSheet.create({
         fontSize: 16, // Set a font size for the text
         alignSelf: 'center',
         fontFamily: Fonts.Button,
-  }
+  },
+  bundleImage: {
+    width: 100, // Adjust as needed
+    height: 100, // Adjust as needed
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    marginBottom: 10, // Space between the image and the "Buy More" text
+  },
 });

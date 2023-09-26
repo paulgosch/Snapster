@@ -8,8 +8,7 @@ import { Pages, Colors, Fonts } from './constants';
 import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';
-import { Gesture, GestureDetector} from 'react-native-gesture-handler';
-
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
 
@@ -57,6 +56,11 @@ export default function HomeScreen({ route }) {
 
   // Updated sound effects logic
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(true); // Initialize as true or as needed
+
+  const stopTimer = () => {
+    setIsTimerActive(false);
+    setTimer(10); // Reset the timer to 10 seconds
+  };
 
   useEffect(() => {
   }, []);
@@ -171,12 +175,13 @@ export default function HomeScreen({ route }) {
             <Feather name="rotate-cw" size={24} color="white" />
           </TouchableOpacity>
           {isTimerActive ? (
-            <Text style={styles.timerText}>{countdownText}</Text>
-          ) : (
-            <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
-              <Feather name="clock" size={24} color={isTimerActive ? 'red' : 'white'} />
-            </TouchableOpacity>
-          )}
+          <View style={styles.timerOverlay}>
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
+            <Feather name="clock" size={24} color={timer === 10 ? 'white' : 'red'} />
+          </TouchableOpacity>
+        )}
         </View>
         <GestureDetector
           gesture={doubleTap}
@@ -204,11 +209,22 @@ export default function HomeScreen({ route }) {
           <Text style={[styles.buttonText]}>Take Photo</Text>
         </TouchableOpacity>
 
-        {isTimerActive && <Text style={styles.timerText}>{timer}</Text>}
+        {isTimerActive ? (
+          <View style={styles.timerOverlay}>
+            <Text style={styles.timerTextLarge}>{timer}</Text>
+            <TouchableOpacity style={styles.stopButton} onPress={stopTimer}>
+              <Text style={styles.stopButtonText}>Stop</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
+            
+          </TouchableOpacity>
+        )}
       </View>
     </ImageBackground>
   );
-          }
+}
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -338,6 +354,29 @@ const styles = StyleSheet.create({
     top: 55,
      right: 20 ,
      fontFamily: Fonts.Button,
+  },
+  timerOverlay: {
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    alignItems: 'center',
+  },
+  timerTextLarge: {
+    fontSize: 80,
+    color: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white
+    fontFamily: Fonts.Title,
+    textAlign: 'center',
+  },
+  stopButton: {
+    marginTop: 20,
+    padding: 10,
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white
+    borderRadius: 8,
+  },
+  stopButtonText: {
+    fontSize: 18,
+    color: 'black',
+    fontFamily: Fonts.Button,
   },
 });
 
