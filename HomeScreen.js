@@ -170,21 +170,25 @@ export default function HomeScreen({ route }) {
             <Feather name="shopping-cart" size={24} color="white" />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
-          <Text style={[styles.buttonText]}>Take Photo</Text>
-        </TouchableOpacity>
-        {isTimerActive && (
-          <View style={styles.timerOverlay}>
-            <Text style={styles.timerTextLarge}>{timer}</Text>
-            <TouchableOpacity style={styles.stopButton} onPress={stopTimer}>
-              <Text style={styles.stopButtonText}>Stop</Text>
+        {isTimerActive ? (
+          <>
+            <View style={styles.timerOverlay}>
+              <Text style={styles.timerTextLarge}>{timer}</Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={stopTimer}>
+              <Text style={[styles.buttonText]}>Stop</Text>
             </TouchableOpacity>
-          </View>
+          </>
+        ) : (
+          <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
+            <Text style={[styles.buttonText]}>Take Photo</Text>
+          </TouchableOpacity>
         )}
       </View>
     </ImageBackground>
   );
 }
+
 const styles = StyleSheet.create({
   background: {
     flex: 1,
@@ -322,7 +326,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTextLarge: {
-    fontSize: 80,
+    fontSize: 100,
     color: 'rgba(255, 255, 255, 0.7)', // Semi-transparent white
     fontFamily: Fonts.Title,
     textAlign: 'center',
