@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackgroun
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
-import { Pages,Colors, Fonts } from './constants';
+import { Pages,Colors } from './constants';
 import { useStripe, CardField, useConfirmPayment } from '@stripe/stripe-react-native';
 import Constants from "expo-constants";
 
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#efefefef",
-    fontFamily: Fonts.BodyText,
+
     borderRadius: 8,
     fontSize: 20,
     height: 50,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Vibration } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ export default function HomeScreen({ route }) {
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = React.useState(null);
   const [cameraRef, setCameraRef] = React.useState(null);
-  const navigation = useNavigation(); // Use the useNavigation hook here
+  const navigation = useNavigation();
   const { userName } = useSelector((state) => state.user);
 
   const doubleTap = Gesture.Tap({
@@ -28,7 +28,6 @@ export default function HomeScreen({ route }) {
       }
     },
   });
-
 
   const toggleCameraType = () => {
     setType(
@@ -47,26 +46,24 @@ export default function HomeScreen({ route }) {
         : Camera.Constants.FlashMode.off
     );
   };
-  
-  const [timer, setTimer] = useState(10); // Initial timer value is 10 seconds
+
+  const [timer, setTimer] = useState(10);
   const [isTimerActive, setIsTimerActive] = useState(false);
-
-  // New state variable for countdown text
-  const [countdownText, setCountdownText] = useState('');
-
-  // Updated sound effects logic
-  const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(true); // Initialize as true or as needed
+  const [isTimerEnabled, setIsTimerEnabled] = useState(false); // New state variable
 
   const stopTimer = () => {
     setIsTimerActive(false);
-    setTimer(10); // Reset the timer to 10 seconds
+    setTimer(10);
+  };
+
+  const toggleTimer = () => {
+    setIsTimerEnabled(!isTimerEnabled);
+    if (isTimerActive) {
+      stopTimer();
+    }
   };
 
   useEffect(() => {
-  }, []);
-
-  useEffect(() => {
-    // Start the countdown when the timer is active
     let interval;
     if (isTimerActive && timer > 0) {
       interval = setInterval(() => {
@@ -74,23 +71,43 @@ export default function HomeScreen({ route }) {
       }, 1000);
     }
 
-    // When the timer reaches 0, take a photo and reset the timer
     if (timer === 0) {
-      takePicture();
-      setTimer(10); // Reset the timer to 10 seconds
-      setIsTimerActive(false); // Disable the timer
+      capturePhoto();
+      setTimer(10);
+      setIsTimerActive(false);
     }
 
-    // Clean up the interval when component unmounts or timer is inactive
     return () => clearInterval(interval);
   }, [timer, isTimerActive]);
 
   const startTimer = () => {
-    // Start the timer when the button is pressed
     setIsTimerActive(true);
+  };
 
-    // Set the initial countdown text
-    setCountdownText('10');
+  const capturePhoto = async () => {
+    if (cameraRef) {
+      console.log('Taking picture...');
+      let photo = await cameraRef.takePictureAsync();
+      const fetchRep = await fetch(photo.uri);
+      const theBlob = await fetchRep.blob();
+      uploadBytesResumable(
+        ref(storage, 'images/' + photo.uri.substring(photo.uri.lastIndexOf('/') + 1)),
+        theBlob
+      ).then((snapshot) => {
+        console.log('Success!');
+        console.log(snapshot.metadata);
+      });
+    } else {
+      console.log('Camera reference is not set');
+    }
+  };
+
+  const takePicture = async () => {
+    if (isTimerEnabled) {
+      startTimer();
+    } else {
+      await capturePhoto();
+    }
   };
 
   React.useEffect(() => {
@@ -106,63 +123,20 @@ export default function HomeScreen({ route }) {
   }, []);
 
   if (!fontLoaded) {
-    return null; // Wait for the font to load
+    return null;
   }
   if (hasPermission === null) {
     return <View />;
   }
-
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
-  const handleSettings = () => {
-    navigation.navigate(Pages.SettingsPage);
-  };
-  const handleStore = () => {
-    navigation.navigate(Pages.StorePage);
-  };
-
-  // Updated sound effects logic
-  const playSoundEffect = () => {
-    if (soundEffectsEnabled) {
-      // Implement the logic to play the sound effect here
-    }
-  };
-
-  const takePicture = async () => {
-    if (cameraRef) {
-      console.log('Taking picture...');
-      try {
-        let photo = await cameraRef.takePictureAsync();
-        const fetchRep = await fetch(photo.uri);
-        const theBlob = await fetchRep.blob();
-
-        console.log('photo', photo);
-        console.log('photo uri: ', photo.uri);
-        uploadBytesResumable(
-          ref(storage, 'images/' + photo.uri.substring(photo.uri.lastIndexOf('/') + 1)),
-          theBlob
-        ).then((snapshot) => {
-          console.log('Success!');
-          console.log(snapshot.metadata);
-
-          // Play the sound effect when the picture is taken
-          playSoundEffect();
-        });
-      } catch (error) {
-        console.error('Error taking picture:', error); // Log error if something goes wrong
-      }
-    } else {
-      console.log('Camera reference is not set'); // Log if cameraRef is not set
-    }
-  };
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.headerTop}>
-          <Text style={styles.title}> Snapster </Text>
+          <Text style={styles.title}>Snapster</Text>
           <Text style={styles.progressText}>3/27</Text>
           <TouchableOpacity style={styles.flashButton} onPress={toggleFlashMode}>
             <Feather
@@ -174,18 +148,11 @@ export default function HomeScreen({ route }) {
           <TouchableOpacity style={styles.cameraSwitchButton} onPress={toggleCameraType}>
             <Feather name="rotate-cw" size={24} color="white" />
           </TouchableOpacity>
-          {isTimerActive ? (
-          <View style={styles.timerOverlay}>
-          </View>
-        ) : (
-          <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
-            <Feather name="clock" size={24} color={timer === 10 ? 'white' : 'red'} />
+          <TouchableOpacity style={styles.timerButton} onPress={toggleTimer}>
+            <Feather name="clock" size={24} color={isTimerEnabled ? 'green' : 'white'} />
           </TouchableOpacity>
-        )}
         </View>
-        <GestureDetector
-          gesture={doubleTap}
-        >
+        <GestureDetector gesture={doubleTap}>
           <View style={[styles.cameraContainer, styles.cameraBorderRadius]}>
             <Camera
               flashMode={flashMode}
@@ -195,31 +162,24 @@ export default function HomeScreen({ route }) {
             />
           </View>
         </GestureDetector>
-
         <View style={styles.headerBottom}>
-          <TouchableOpacity style={styles.settingsButton} onPress={handleSettings}>
+          <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate(Pages.SettingsPage)}>
             <Feather name="settings" size={24} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.storeButton} onPress={handleStore}>
+          <TouchableOpacity style={styles.storeButton} onPress={() => navigation.navigate(Pages.StorePage)}>
             <Feather name="shopping-cart" size={24} color="white" />
           </TouchableOpacity>
         </View>
-
         <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
           <Text style={[styles.buttonText]}>Take Photo</Text>
         </TouchableOpacity>
-
-        {isTimerActive ? (
+        {isTimerActive && (
           <View style={styles.timerOverlay}>
             <Text style={styles.timerTextLarge}>{timer}</Text>
             <TouchableOpacity style={styles.stopButton} onPress={stopTimer}>
               <Text style={styles.stopButtonText}>Stop</Text>
             </TouchableOpacity>
           </View>
-        ) : (
-          <TouchableOpacity style={styles.timerButton} onPress={startTimer}>
-            
-          </TouchableOpacity>
         )}
       </View>
     </ImageBackground>

@@ -24,7 +24,9 @@ import MyOrdersPage from './MyOrdersPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore'; 
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {StripeProvider} from '@stripe/stripe-react-native'
 import { Pages, Colors, Fonts } from './constants';
+
 
 import TermsAndConditionsScreen from './TermsAndConditions';
 import Paypal from './Paypal';
@@ -68,6 +70,7 @@ function App() {
   }
 
   return (
+    <StripeProvider publishableKey="pk_test_51Ns6QXHzXDpjYI6L16I1XG8xTTP9pqSkRNHZKgs7bWdFEDuUhs1cfTIEXXmio6pB3suP9ES6X6jMbszfHnENLvy500Wgyem90b" merchantIdentifier="merchantId">
     <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator initialRouteName={Pages.HomeScreen} headerMode="screen">
@@ -219,6 +222,8 @@ function App() {
       </Stack.Navigator>
     </NavigationContainer>
     </Provider>
+    </StripeProvider>
+
   );
 }
 
