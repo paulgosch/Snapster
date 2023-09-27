@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackground, TextInput,Image } from 'react-native'; // Import ImageBackground
+import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackground, TextInput, Image, Platform, KeyboardAvoidingView, ScrollView } from 'react-native';
 import axios from 'axios';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
@@ -16,7 +16,7 @@ const paypalimage = require('./assets/paypalimage.png'); // Import the PayPal im
 const API_URL = "http://172.16.62.62:3000";
 const cardImage = require('./assets/CardPaymentMasterCard.png');
 
-const CheckoutPage = () => {
+const CheckoutPage = ({ route }) => {
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
   const [clientSecret, setClientSecret] = useState('');
@@ -27,7 +27,9 @@ const CheckoutPage = () => {
     navigation.navigate(Pages.Paypal);
   };
 
-  
+  const basicBundleImage = require('./assets/Roll_basic.png');
+const standardBundleImage = require('./assets/Roll_standard.png');
+const premiumBundleImage = require('./assets/Roll_premium.png');
 
   const fetchPaymentIntentClientSecret =async () => {
     const response = await fetch(`${API_URL}/create-payment-intent/24pack`, {
@@ -39,6 +41,9 @@ const CheckoutPage = () => {
     const { clientSecret, error } = await response.json();
     return { clientSecret, error };
   };
+
+
+const selectedBundle = route.params?.bundle;
 
   const capturePayment = async () => {
     //1.Gather the customer's billing information (e.g., email)
@@ -106,14 +111,60 @@ const CheckoutPage = () => {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+        >
+            <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} style={{ flex: 1 }}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
-        <Text style={styles.title}>Payment Method</Text>
+        <Text style={styles.title}>Checkout Page</Text>
         <View style={styles.cardImageContainer}>
-        <Image source={cardImage} style={styles.cardImage} resizeMode="contain" />
+  {selectedBundle === 'basic' && (
+    <View style={styles.bundle}>
+      <Image source={basicBundleImage} style={styles.bundleImage} />
+      <View style={styles.textContainer}>
+        <Text style={styles.bundleTitle}>Basic Bundle</Text>
+        <Text style={styles.bundleDescription}>A friendly start for newcomers.</Text>
+        <Text style={styles.bundleDescription}>+ with 17 Pictures </Text>
+        <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+        <Text style={styles.bundleDescription}>+ free Delivery</Text>
+        <Text style={styles.bundlePrice}>€4.99</Text>
       </View>
+    </View>
+  )}
+  {selectedBundle === 'standard' && (
+    <View style={styles.bundle}>
+      <Image source={standardBundleImage} style={styles.bundleImage} />
+      <View style={styles.textContainer}>
+        <Text style={styles.bundleTitle}>Standard Bundle</Text>
+        <Text style={styles.bundleDescription}>For our regular snap enthusiasts.</Text>
+        <Text style={styles.bundleDescription}>+ with 27 Pictures </Text>
+        <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+        <Text style={styles.bundleDescription}>+ free Delivery</Text>
+        <Text style={styles.bundlePrice}>€8.99</Text>
+      </View>
+    </View>
+  )}
+  {selectedBundle === 'premium' && (
+    <View style={styles.bundle}>
+      <Image source={premiumBundleImage} style={styles.bundleImage} />
+      <View style={styles.textContainer}>
+        <Text style={styles.bundleTitle}>Premium Bundle</Text>
+        <Text style={styles.bundleDescription}>The ultimate pick for photography lovers.</Text>
+        <Text style={styles.bundleDescription}>+ with 47 Pictures </Text>
+        <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
+        <Text style={styles.bundleDescription}>+ free Delivery</Text>
+        <Text style={styles.bundlePrice}>€12.99</Text>
+      </View>
+    </View>
+  )}
+</View>
+      <Text style={styles.paymentmethod}>Payment Method</Text>
+      <View style={styles.container2}>
+      <Text style={styles.subtitle}>Email</Text>
         <TextInput
           autoCapitalize="none"
           placeholder="E-mail"
@@ -121,6 +172,7 @@ const CheckoutPage = () => {
           onChange={value => setEmail(value.nativeEvent.text)}
           style={styles.input}
         />
+         <Text style={styles.subtitle}>Card Information</Text>
         <CardField
           postalCodeEnabled={false}
           placeholder={{
@@ -139,35 +191,41 @@ const CheckoutPage = () => {
       >
         <Text style={styles.payButtonText}>Pay with Card</Text>
       </TouchableOpacity>
+      </View>
 
-        <Text style={styles.cardManagementTitle}>Or Check out with</Text>
+        <Text style={styles.ortext}>Or</Text>
 
       <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
         <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
       </TouchableOpacity>
+      
       </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     </ImageBackground>
-  );
-};
+);
+        }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    margin: 20,
+    margin: 10,
   },
   input: {
     backgroundColor: "#efefefef",
     borderRadius: 8,
-    fontSize: 20,
+    fontSize: 16,
     height: 50,
     padding: 10,
+    fontFamily: Fonts.BodyText,
   },
   card: {
     backgroundColor: "#efefefef",
+    fontFamily: Fonts.BodyText,
   },
   cardContainer: {
     height: 50,
-    marginVertical: 30,
+    marginVertical: 10,
   },
   backgroundContainer: {
     flex: 1,
@@ -179,7 +237,6 @@ const styles = StyleSheet.create({
   },
   paypalImageContainer: {
     alignItems: 'center',
-    marginVertical: 20,
     backgroundColor: 'white',
     borderRadius: 10,
   },
@@ -187,10 +244,12 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
   },
-  cardManagementTitle: {
+  ortext: {
     fontSize: 18,
     color: 'white',
     fontFamily: Fonts.Title,
+    marginVertical: 10,
+    alignSelf: 'center', // This will center the button horizontally
   },
   cardImageContainer: {
     alignItems: 'center',
@@ -207,22 +266,75 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   payButtonContainer: {
-    marginTop: 20,
-    padding: 15,
-    backgroundColor: 'red', // or any color you prefer
-    borderRadius: 8,
+    paddingVertical: 4,  // Adjusted padding for better shape
+    paddingHorizontal: 10,
+    backgroundColor: '#E50914',  // Slightly deeper shade of red
+    borderRadius: 8,  // Increased for pill shape
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5, // for Android
-  },
-  payButtonText: {
+    alignSelf: 'center',
+},
+payButtonText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,  // Slightly bigger font size
+    fontWeight: '500',  // Not too bold, not too light
+    letterSpacing: 0.5,  // Spacing between letters for better readability
+},
+  subtitle: {
+    fontSize: 16,
+    color: 'grey',
+    fontFamily: Fonts.Title,
+    marginTop: 5,
+    left: 10,
+  },
+  container2: {
+    padding: 16,
+    paddingTop: 10,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    marginVertical: 10,
+  },
+  paymentmethod:{
+    fontSize: 24,
+    color: 'white',
+    fontFamily: Fonts.Title,
+    marginTop: 5,
+    alignSelf: 'center',
+  },
+  bundle: {
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+    elevation: 4,
+    width: '100%',
+  },
+  bundleTitle: {
+    fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 5,
+    fontFamily: Fonts.Subtitle,
+  },
+  bundleDescription: {
+    textAlign: 'left',
+    marginBottom: 5,
+    color: '#666',
+    fontFamily: Fonts.BodyText,
+  },
+  bundlePrice: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#2ecc71',
+    fontFamily: Fonts.BodyText,
+    textAlign: 'right',
+  },
+  bundleImage: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginRight: 10,
   },
 });
 
