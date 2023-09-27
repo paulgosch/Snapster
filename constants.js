@@ -17,8 +17,6 @@ export const Pages = {
     VerificationPage: 'VerificationPage',
     CreateNewPasswordPage: 'CreateNewPasswordPage',
     Paypal: 'PaypalPage',
-    PaymentMethodPage: 'PaymentMethodPage',
-    NewCardPage: 'NewCardPage',
     AccountPage: 'AccountPage',
     MyPicturesPage: 'MyPicturesPage',
     MyOrdersPage: 'MyOrdersPage',
