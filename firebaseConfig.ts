@@ -3,8 +3,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
-import {getFirestore} from "firebase/firestore";
-import {getDatabase, ref, set} from "firebase/database";
+import { getFirestore } from "firebase/firestore";
+import { getDatabase, ref, set } from "firebase/database";
 
 // TODO: Add SDKs for Firebase products that you want to use
 

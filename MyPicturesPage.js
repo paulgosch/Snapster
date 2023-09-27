@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions,Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions, Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -44,9 +44,9 @@ export default function MyPicturesPage() {
         </View>
 
         <TouchableOpacity onPress={handleBuyMore}>
-        <Image source={BundleImage} style={styles.bundleImage} />
-        <Text style={styles.Shop}>Buy More!</Text>
-              </TouchableOpacity>
+          <Image source={BundleImage} style={styles.bundleImage} />
+          <Text style={styles.Shop}>Buy More!</Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   Shop: {
-        color: '#FF9817', // Use the same orange color as the "Change" text
-        fontSize: 16, // Set a font size for the text
-        alignSelf: 'center',
-        fontFamily: Fonts.Button,
+    color: '#FF9817', // Use the same orange color as the "Change" text
+    fontSize: 16, // Set a font size for the text
+    alignSelf: 'center',
+    fontFamily: Fonts.Button,
   },
   bundleImage: {
     width: 100, // Adjust as needed

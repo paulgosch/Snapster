@@ -30,8 +30,8 @@ const StorePage = () => {
 
         <View style={styles.bundlesContainer}>
 
-          
-        <TouchableOpacity style={styles.bundle} onPress={() => handleBundleOrder('basic')}>
+
+          <TouchableOpacity style={styles.bundle} onPress={() => handleBundleOrder('basic')}>
             <Image source={basicBundleImage} style={styles.bundleImage} />
             <View style={styles.textContainer}>
               <Text style={styles.bundleTitle}>Basic Bundle</Text>

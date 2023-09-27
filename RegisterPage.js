@@ -29,7 +29,7 @@ export default function RegisterScreen() {
   const [agreeChecked, setAgreeChecked] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  
+
   const auth = FIREBASE_AUTH;
   const navigation = useNavigation();
   const handleTermsAndConditions = () => {
@@ -52,10 +52,10 @@ export default function RegisterScreen() {
       Alert.alert('Name and Username are required fields');
       return;
     }
-    
+
     if (agreeChecked) {
       setLoading(true);
-  
+
       if (password !== confirmPassword) {
         // Show an alert if the password and confirm password fields don't match
         Alert.alert('Password and Confirm Password fields must match');
@@ -71,7 +71,7 @@ export default function RegisterScreen() {
         setLoading(false);
         return;
       }
-  
+
       try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -80,11 +80,11 @@ export default function RegisterScreen() {
 
         // Check if the user object exists and send the verification email
         if (currentUser) {
-            await sendEmailVerification(currentUser);
-            Alert.alert('Verification email sent!', 'Please check your email and verify your account.');
+          await sendEmailVerification(currentUser);
+          Alert.alert('Verification email sent!', 'Please check your email and verify your account.');
         } else {
-            console.error("Unable to send verification email. Current user not found.");
-            Alert.alert('Error', 'Unable to send verification email. Please contact support.');
+          console.error("Unable to send verification email. Current user not found.");
+          Alert.alert('Error', 'Unable to send verification email. Please contact support.');
         }
 
         // Navigate to a different screen (e.g., AppPresentationScreen) after sending the verification email
@@ -98,7 +98,7 @@ export default function RegisterScreen() {
     } else {
       Alert.alert('You must agree to the T&C to continue');
     }
-};
+  };
 
   const backgroundImageSource = require('./assets/Background.jpg');
 

@@ -6,18 +6,18 @@ import { Linking } from 'react-native';
 import { Pages, Colors, Fonts } from './constants';
 
 export default function SupportScreen() {
-    const navigation = useNavigation(); // Use the useNavigation hook here
-  
-    const [showAnswers, setShowAnswers] = useState({});
-  
-    const handleGoBack = () => {
-      navigation.goBack(); // Navigate back to the previous screen
-    };
+  const navigation = useNavigation(); // Use the useNavigation hook here
 
-    const handleMoreQuestions = () => {
-        // Open the default email app with the specified recipient
-        Linking.openURL('mailto:snapster.germany@gmail.com');
-      };
+  const [showAnswers, setShowAnswers] = useState({});
+
+  const handleGoBack = () => {
+    navigation.goBack(); // Navigate back to the previous screen
+  };
+
+  const handleMoreQuestions = () => {
+    // Open the default email app with the specified recipient
+    Linking.openURL('mailto:snapster.germany@gmail.com');
+  };
 
   const questionsAndAnswers = [
     {
@@ -38,7 +38,7 @@ export default function SupportScreen() {
     {
       question: "Is my personal information and photos secure with Snapster?",
       answer:
-      "Yes, we take the security and privacy of your personal information very seriously. Snapster employs robust security measures to protect your data, and we do not share your photos or personal information with any third parties. For more detailed information about our privacy practices, you can visit our Privacy Policy page, where we outline how we collect, use, and safeguard your data.",
+        "Yes, we take the security and privacy of your personal information very seriously. Snapster employs robust security measures to protect your data, and we do not share your photos or personal information with any third parties. For more detailed information about our privacy practices, you can visit our Privacy Policy page, where we outline how we collect, use, and safeguard your data.",
     },
     {
       question: "Can I send printed photos as gifts to my friends and family?",
@@ -48,7 +48,7 @@ export default function SupportScreen() {
     {
       question: "What payment methods are accepted on Snapster?",
       answer:
-      "Currently, we only accept PayPal. We're working to add more payment methods soon. Thank you for your patience!",
+        "Currently, we only accept PayPal. We're working to add more payment methods soon. Thank you for your patience!",
     },
     {
       question: "Are there any discounts or promotions available on Snapster?",
@@ -61,7 +61,7 @@ export default function SupportScreen() {
         "If you encounter any issues with your order or have questions about our services, please don't hesitate to contact our customer support team. We're here to assist you and ensure your satisfaction with our app and products.",
     },
   ];
-   
+
   const handleToggleAnswer = (index) => {
     setShowAnswers((prevState) => ({
       ...prevState,
@@ -75,52 +75,52 @@ export default function SupportScreen() {
       style={styles.backgroundImage}
       resizeMode="cover"
     >
-       <ScrollView style={styles.scrollContainer}>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon name="arrow-left" size={24} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Support Page</Text>
-  
-        <View style={styles.whiteContainer}>
-          {questionsAndAnswers.map((qa, index) => (
-            <View key={index} style={styles.questionContainer}>
-              <TouchableOpacity onPress={() => handleToggleAnswer(index)}>
-                <View style={styles.questionHeader}>
-                  <Icon
-                    name={showAnswers[index] ? 'minus-circle' : 'plus-circle'}
-                    size={24}
-                    color="black"
-                  />
-                  <Text style={styles.question}>{qa.question}</Text>
-                </View>
-              </TouchableOpacity>
-              {showAnswers[index] && <Text style={styles.answer}>{qa.answer}</Text>}
+      <ScrollView style={styles.scrollContainer}>
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <Icon name="arrow-left" size={24} color="white" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Support Page</Text>
+
+          <View style={styles.whiteContainer}>
+            {questionsAndAnswers.map((qa, index) => (
+              <View key={index} style={styles.questionContainer}>
+                <TouchableOpacity onPress={() => handleToggleAnswer(index)}>
+                  <View style={styles.questionHeader}>
+                    <Icon
+                      name={showAnswers[index] ? 'minus-circle' : 'plus-circle'}
+                      size={24}
+                      color="black"
+                    />
+                    <Text style={styles.question}>{qa.question}</Text>
+                  </View>
+                </TouchableOpacity>
+                {showAnswers[index] && <Text style={styles.answer}>{qa.answer}</Text>}
+              </View>
+            ))}
+
+            {/* Additional text and contact buttons in the same row */}
+            <View style={styles.additionalContainer}>
+              <View style={styles.rowContainer}>
+                <Text style={styles.moreQuestionsText}>More Questions?</Text>
+                <TouchableOpacity onPress={handleMoreQuestions}>
+                  <View style={styles.contactButton}>
+                    <Text style={styles.contactButtonText}>Contact us here!</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.rowContainer}>
+                <Text style={styles.moreQuestionsText}>Feedback?</Text>
+                <TouchableOpacity onPress={handleMoreQuestions}>
+                  <View style={styles.contactButton}>
+                    <Text style={styles.contactButtonText}>Contact us here!</Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
-          ))}
-  
-          {/* Additional text and contact buttons in the same row */}
-          <View style={styles.additionalContainer}>
-          <View style={styles.rowContainer}>
-            <Text style={styles.moreQuestionsText}>More Questions?</Text>
-            <TouchableOpacity onPress={handleMoreQuestions}>
-              <View style={styles.contactButton}>
-                <Text style={styles.contactButtonText}>Contact us here!</Text>
-              </View>
-            </TouchableOpacity>
           </View>
-  
-          <View style={styles.rowContainer}>
-            <Text style={styles.moreQuestionsText}>Feedback?</Text>
-            <TouchableOpacity onPress={handleMoreQuestions}>
-              <View style={styles.contactButton}>
-                <Text style={styles.contactButtonText}>Contact us here!</Text>
-              </View>
-            </TouchableOpacity>
-          </View>
-         </View>
         </View>
-      </View>
       </ScrollView>
     </ImageBackground>
   );

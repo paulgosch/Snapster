@@ -18,7 +18,7 @@ export default class Paypal extends Component {
 
     closeWebView = () => {
         this.setState({ webViewVisible: false });
-      };
+    };
     componentDidMount() {
         let currency = '1 EUR'
         currency.replace(" EUR", "")
@@ -30,24 +30,24 @@ export default class Paypal extends Component {
             },
             "transactions": [
                 {
-                "amount": {
-                    "total": "1",
-                    "currency": "EUR",
-                    "details": {
-                        "subtotal": "1",
-                        "tax": "0",
-                        "shipping": "0",
-                        "handling_fee": "0",
-                        "shipping_discount": "0",
-                        "insurance": "0"
-                    }
-                },
-                "payment_options" : {
-    
-                    "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
-                
-                },
-            }],
+                    "amount": {
+                        "total": "1",
+                        "currency": "EUR",
+                        "details": {
+                            "subtotal": "1",
+                            "tax": "0",
+                            "shipping": "0",
+                            "handling_fee": "0",
+                            "shipping_discount": "0",
+                            "insurance": "0"
+                        }
+                    },
+                    "payment_options": {
+
+                        "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
+
+                    },
+                }],
             "redirect_urls": {
                 "return_url": "https://example.com",
                 "cancel_url": "https://example.com"
@@ -125,18 +125,18 @@ export default class Paypal extends Component {
 
     render() {
         const { navigation } = this.props;
-        const { approvalUrl, webViewVisible  } = this.state
+        const { approvalUrl, webViewVisible } = this.state
         return (
-            {webViewVisible} ? (
-                    approvalUrl ? <WebView
-                        style={{ height: '100%', width: '100%',  marginTop: 20 }}
-                        source={{ uri: approvalUrl }}
-                        onNavigationStateChange={this._onNavigationStateChange}
-                        javaScriptEnabled={true}
-                        domStorageEnabled={true}
-                        startInLoadingState={false}
-                    /> : <ActivityIndicator />
-        ): null
+            { webViewVisible } ? (
+                approvalUrl ? <WebView
+                    style={{ height: '100%', width: '100%', marginTop: 20 }}
+                    source={{ uri: approvalUrl }}
+                    onNavigationStateChange={this._onNavigationStateChange}
+                    javaScriptEnabled={true}
+                    domStorageEnabled={true}
+                    startInLoadingState={false}
+                /> : <ActivityIndicator />
+            ) : null
         )
     }
 }
