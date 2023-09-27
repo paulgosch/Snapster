@@ -27,10 +27,6 @@ export default function SettingsPage() {
 
   };
 
-  const handlePaymentMethodPage = () => {
-    navigation.navigate(Pages.PaymentMethodPage);
-  };
-
   const handleSoundsChange = async (value) => {
     try {
       await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
@@ -144,13 +140,6 @@ export default function SettingsPage() {
         <View style={styles.buttonContent}>
         <FeatherIcon name="credit-card" size={24} color="white" style={{ marginRight: 10 }} /> 
           <Text style={styles.accountHeaderText}>My Account</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handlePaymentMethodPage}>
-        <View style={styles.buttonContent}>
-        <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
-          <Text style={styles.buttonText}>Payment Method</Text>
           </View>
         </TouchableOpacity>
         
