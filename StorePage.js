@@ -12,9 +12,8 @@ const backgroundImageSource = require('./assets/Background.jpg');
 const StorePage = () => {
   const navigation = useNavigation();
 
-  const handleBundleOrder = () => {
-    // Navigate to the CheckoutPage
-    navigation.navigate(Pages.CheckoutPage);
+  const handleBundleOrder = (selectedBundle) => {
+    navigation.navigate(Pages.CheckoutPage, { bundle: selectedBundle });
   };
 
   const handleGoBack = () => {
@@ -32,7 +31,7 @@ const StorePage = () => {
         <View style={styles.bundlesContainer}>
 
           
-          <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
+        <TouchableOpacity style={styles.bundle} onPress={() => handleBundleOrder('basic')}>
             <Image source={basicBundleImage} style={styles.bundleImage} />
             <View style={styles.textContainer}>
               <Text style={styles.bundleTitle}>Basic Bundle</Text>
@@ -44,7 +43,7 @@ const StorePage = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
+          <TouchableOpacity style={styles.bundle} onPress={() => handleBundleOrder('standard')}>
             <Image source={standardBundleImage} style={styles.bundleImage} />
             <View style={styles.textContainer}>
               <Text style={styles.bundleTitle}>Standard Bundle</Text>
@@ -56,7 +55,7 @@ const StorePage = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.bundle} onPress={handleBundleOrder}>
+          <TouchableOpacity style={styles.bundle} onPress={() => handleBundleOrder('premium')}>
             <Image source={premiumBundleImage} style={styles.bundleImage} />
             <View style={styles.textContainer}>
               <Text style={styles.bundleTitle}>Premium Bundle</Text>
