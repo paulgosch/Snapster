@@ -126,18 +126,22 @@ export default function ProfilePage() {
             <View style={styles.accountRow}>
               <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
               <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
+              <Text style={styles.invisibleText}>Change</Text>
+
             </View>
 
             <View style={styles.accountRow}>
               <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
               <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
+              <Text style={styles.invisibleText}>Change</Text>
+
             </View>
 
             <View style={styles.accountRow}>
               <Text style={[styles.centeredText, styles.accountLabel]}>My Adress</Text>
             </View>
             <View style={styles.accountRow}>
-          <Text style={styles.accountText}>Address: {address}</Text>
+          <Text style={styles.accountText}>{address}</Text>
           <TouchableOpacity onPress={handleaddAdress}>
           <Text style={styles.addAddressText}>add address</Text>
          </TouchableOpacity>
@@ -177,6 +181,7 @@ const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
+      
       padding: 16,
       marginTop: 40, // Add top margin to lower all elements
     },
@@ -231,31 +236,48 @@ const styles = StyleSheet.create({
     },
     accountDetails: {
       width: '100%', // Adjusted to cover 100% of the accountContainer width
+      
     },
     accountRow: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'left',
       justifyContent: 'space-between', // Add this line
       marginBottom: 5,
     },
     accountText: {
+      
       fontSize: 16,
       color: 'black',
       fontFamily: Fonts.BodyText,
+      width:"75%",
+      alignSelf:"left",
+      alignItems:"left"
     },
     accountTextGrey: {
       color: 'grey',
       fontFamily: Fonts.BodyText,
+      alignItems:"left",
+      alignSelf:"left",
+
     },
     accountLabel: {
       flex: 1,
     },
     accountValue: {
       flex: 2,
+      alignItems:"left",
+      textAlign: 'left',
     },
     changeText: {
       color: '#FF9817',
       fontFamily: Fonts.BodyText,
+      
+    },
+    invisibleText: {
+      color: '#FF9817',
+      opacity:"0",
+      fontFamily: Fonts.BodyText,
+      
     },
     button: {
       backgroundColor: '#FF9817',
