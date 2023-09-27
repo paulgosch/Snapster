@@ -117,15 +117,18 @@ const selectedBundle = route.params?.bundle;
         >
             <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} style={{ flex: 1 }}>
       <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
-          <Icon name="arrow-left" size={24} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Checkout Page</Text>
+      <View style={styles.headerContainer}>
+    <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <Icon name="arrow-left" size={24} color="white" />
+    </TouchableOpacity>
+    <Text style={styles.title}>Checkout Page</Text>
+    <View style={{ width: 24 }} /> 
+</View>
         <View style={styles.cardImageContainer}>
-  {selectedBundle === 'basic' && (
-    <View style={styles.bundle}>
-      <Image source={basicBundleImage} style={styles.bundleImage} />
-      <View style={styles.textContainer}>
+        {selectedBundle === 'basic' && (
+       <View style={styles.bundle}>
+       <Image source={basicBundleImage} style={styles.bundleImage} />
+        <View style={styles.textContainer}>
         <Text style={styles.bundleTitle}>Basic Bundle</Text>
         <Text style={styles.bundleDescription}>A friendly start for newcomers.</Text>
         <Text style={styles.bundleDescription}>+ with 17 Pictures </Text>
@@ -162,54 +165,54 @@ const selectedBundle = route.params?.bundle;
     </View>
   )}
 </View>
-      <Text style={styles.paymentmethod}>Payment Method</Text>
-      <View style={styles.container2}>
-      <Text style={styles.subtitle}>Email</Text>
-        <TextInput
-          autoCapitalize="none"
-          placeholder="E-mail"
-          keyboardType="email-address"
-          onChange={value => setEmail(value.nativeEvent.text)}
-          style={styles.input}
-        />
-         <Text style={styles.subtitle}>Card Information</Text>
-        <CardField
-          postalCodeEnabled={false}
-          placeholder={{
-            number: "4242 4242 4242 4242",
-          }}
-          cardStyle={styles.card}
-          style={styles.cardContainer}
-          onCardChange={cardDetails => {
-            setCardDetails(cardDetails);
-          }}
-        />
-          <TouchableOpacity 
-        onPress={capturePayment} 
-        style={styles.payButtonContainer} 
-        disabled={loading}
-      >
-        <Text style={styles.payButtonText}>Pay with Card</Text>
-      </TouchableOpacity>
-      </View>
+<Text style={styles.paymentmethod}>Payment Method</Text>
+                    <View style={styles.container2}>
+                        <Text style={styles.subtitle}>Email</Text>
+                        <TextInput
+                            autoCapitalize="none"
+                            placeholder="E-mail"
+                            keyboardType="email-address"
+                            onChange={value => setEmail(value.nativeEvent.text)}
+                            style={styles.input}
+                        />
+                        <Text style={styles.subtitle}>Card Information</Text>
+                        <CardField
+                            postalCodeEnabled={false}
+                            placeholder={{
+                                number: "4242 4242 4242 4242",
+                            }}
+                            cardStyle={styles.card}
+                            style={styles.cardContainer}
+                            onCardChange={cardDetails => {
+                                setCardDetails(cardDetails);
+                            }}
+                        />
+                        <TouchableOpacity 
+                            onPress={capturePayment} 
+                            style={styles.payButtonContainer} 
+                            disabled={loading}
+                        >
+                            <Text style={styles.payButtonText}>Pay with Card</Text>
+                        </TouchableOpacity>
+                    </View>
 
-        <Text style={styles.ortext}>Or</Text>
+                    <Text style={styles.ortext}>Or</Text>
 
-      <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
-        <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
-      </TouchableOpacity>
-      
-      </View>
+                    <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
+                        <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
         </KeyboardAvoidingView>
     </ImageBackground>
 );
+
         }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    margin: 10,
+    margin: 20,
   },
   input: {
     backgroundColor: "#efefefef",
@@ -218,22 +221,18 @@ const styles = StyleSheet.create({
     height: 50,
     padding: 10,
     fontFamily: Fonts.BodyText,
-  },
+    marginBottom: 15, // Added margin for spacing
+},
   card: {
     backgroundColor: "#efefefef",
     fontFamily: Fonts.BodyText,
   },
   cardContainer: {
     height: 50,
-    marginVertical: 10,
-  },
+    
+},
   backgroundContainer: {
     flex: 1,
-  },
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    margin: 20,
   },
   paypalImageContainer: {
     alignItems: 'center',
@@ -253,26 +252,20 @@ const styles = StyleSheet.create({
   },
   cardImageContainer: {
     alignItems: 'center',
-    marginVertical: 20,
   },
   cardImage: {
     width: 300, // Adjust the width as necessary
     height: 190, // Adjust the height as necessary
   },
-  title: {
-    fontSize: 24,
-    color: 'white',
-    fontFamily: Fonts.Title,
-    alignSelf: 'center',
-  },
   payButtonContainer: {
-    paddingVertical: 4,  // Adjusted padding for better shape
-    paddingHorizontal: 10,
-    backgroundColor: '#E50914',  // Slightly deeper shade of red
-    borderRadius: 8,  // Increased for pill shape
+    paddingVertical: 6,  // Adjusted padding for better shape
+    paddingHorizontal: 10, // Increased padding for better shape
+    backgroundColor: '#003087',
+    borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
+    marginTop: 10, // Added margin for spacing
 },
 payButtonText: {
     color: 'white',
@@ -280,25 +273,23 @@ payButtonText: {
     fontWeight: '500',  // Not too bold, not too light
     letterSpacing: 0.5,  // Spacing between letters for better readability
 },
-  subtitle: {
-    fontSize: 16,
-    color: 'grey',
-    fontFamily: Fonts.Title,
-    marginTop: 5,
-    left: 10,
-  },
-  container2: {
-    padding: 16,
-    paddingTop: 10,
-    backgroundColor: 'white',
-    borderRadius: 8,
-    marginVertical: 10,
-  },
+subtitle: {
+  fontSize: 16,
+  color: '#003087',
+  fontFamily: Fonts.Title,
+  marginBottom: 5, // Added margin for spacing
+  left: 10,
+},
+container2: {
+  padding: 20, // Increased padding for better spacing
+  backgroundColor: 'white',
+  borderRadius: 8,
+  marginVertical: 10,
+},
   paymentmethod:{
     fontSize: 24,
     color: 'white',
     fontFamily: Fonts.Title,
-    marginTop: 5,
     alignSelf: 'center',
   },
   bundle: {
@@ -322,6 +313,7 @@ payButtonText: {
     marginBottom: 5,
     color: '#666',
     fontFamily: Fonts.BodyText,
+    
   },
   bundlePrice: {
     fontSize: 22,
@@ -329,13 +321,33 @@ payButtonText: {
     color: '#2ecc71',
     fontFamily: Fonts.BodyText,
     textAlign: 'right',
+    
   },
   bundleImage: {
     width: 100,
     height: 100,
     resizeMode: 'contain',
     marginRight: 10,
-  },
+    flex: 1,  // Add this line
+},
+textContainer: {
+    flex: 2,  // Add this line
+    paddingRight: 10,  // Add some padding to prevent text from touching the edge
+},
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',  // Add this line
+    marginBottom: 20,
+},
+  backButton: {
+  marginRight: 10,  // To give some space between the back button and the title
+},
+  title: {
+  fontSize: 24,
+  color: 'white',
+  fontFamily: Fonts.Title,
+},
 });
 
 export default CheckoutPage;
