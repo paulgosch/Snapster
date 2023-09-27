@@ -99,7 +99,7 @@ export default function HomeScreen({ route }) {
       const fetchRep = await fetch(photo.uri);
       const theBlob = await fetchRep.blob();
       uploadBytesResumable(
-        ref(storage, 'images/' + photo.uri.substring(photo.uri.lastIndexOf('/') + 1)),
+        ref(storage, '/images/'+ userName + "/userna" + photo.uri.substring(photo.uri.lastIndexOf('/') + 1)),
         theBlob
       ).then((snapshot) => {
         console.log('Success!');
@@ -112,7 +112,6 @@ export default function HomeScreen({ route }) {
     } else {
       console.log('Camera reference is not set');
     }
-
   };
 
   const takePicture = async () => {

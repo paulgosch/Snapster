@@ -26,6 +26,7 @@ export default function WelcomePage() {
     // Wait for the font to load
     return null;
   }
+
   const navigation = useNavigation();
 
   const handleLoginPress = () => {
