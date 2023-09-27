@@ -23,20 +23,6 @@ export default function SettingsPage() {
    
   };
 
-  const saveSoundEffectsSetting = async (value) => {
-
-  };
-
-  const handleSoundsChange = async (value) => {
-    try {
-      await AsyncStorage.setItem('soundEffectsEnabled', value.toString());
-    } catch (error) {
-      console.error('Error saving sound effects setting:', error);
-    }
-
-    setSoundEffectsEnabled(value);
-  };
-
   const handleBack = () => {
     navigation.goBack();
   };
@@ -80,10 +66,6 @@ export default function SettingsPage() {
     navigation.navigate(Pages.WelcomePage);
   };
 
-  const handleNotificationChange = () => {
-    // Implement logic to toggle notification settings
-  };
-
   const handleChangeFullName = () => {
     // Implement logic to navigate to the screen where the user can change their full name
   };
@@ -114,31 +96,9 @@ export default function SettingsPage() {
         </TouchableOpacity>
         <Text style={styles.title}>Settings</Text>
 
-        <View style={styles.settingContainer}>
-        <View style={styles.settingRow}>
-        <FeatherIcon name="bell" size={24} color="grey" style={{ marginRight: 10 }} /> 
-          <Text style={styles.settingText}>Notifications</Text>
-          <Switch
-              value={false}
-              onValueChange={handleNotificationChange}
-            />
-          </View>
-        </View>
-
-        <View style={styles.settingContainer}>
-        <View style={styles.settingRow}>
-        <FeatherIcon name="volume-1" size={24} color="grey" style={{ marginRight: 10 }} /> 
-            <Text style={styles.settingText}>Sounds</Text>
-            <Switch
-              value={soundEffectsEnabled}
-              onValueChange={handleSoundsChange}
-            />
-          </View>
-        </View>
-
         <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
         <View style={styles.buttonContent}>
-        <FeatherIcon name="credit-card" size={24} color="white" style={{ marginRight: 10 }} /> 
+        <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} /> 
           <Text style={styles.accountHeaderText}>My Account</Text>
           </View>
         </TouchableOpacity>
