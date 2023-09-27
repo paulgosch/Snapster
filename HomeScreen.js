@@ -18,7 +18,7 @@ export default function HomeScreen({ route }) {
   const [buttonOpacity] = useState(new Animated.Value(1));
   const [buttonText, setButtonText] = React.useState("Take Photo");
   const [isUploading, setIsUploading] = useState(false);  // state to track uploading status
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = React.useState(null);
@@ -104,20 +104,20 @@ export default function HomeScreen({ route }) {
       ).then((snapshot) => {
         console.log('Success!');
         console.log(snapshot.metadata);
-          // After fade-in, start fade-out
-          animateButtonOpacity(1, "Take Photo"); // enable the button after animatio
-          setIsUploading(false); // Begin uploading animation
+        // After fade-in, start fade-out
+        animateButtonOpacity(1, "Take Photo"); // enable the button after animatio
+        setIsUploading(false); // Begin uploading animation
 
       });
     } else {
       console.log('Camera reference is not set');
-    } 
+    }
 
   };
 
   const takePicture = async () => {
     animateButtonOpacity(0.5, "Uploading");
-      if (isTimerEnabled) {
+    if (isTimerEnabled) {
       startTimer();
     } else {
       await capturePhoto();
@@ -144,14 +144,14 @@ export default function HomeScreen({ route }) {
       useNativeDriver: true,
       easing: Easing.linear,
     });
-  
+
     const fadeOut = Animated.timing(buttonOpacity, {
       toValue: 1,
       duration: 300,
       useNativeDriver: true,
       easing: Easing.linear,
     });
-  
+
     Animated.loop(
       Animated.sequence([
         fadeIn,
@@ -168,45 +168,49 @@ export default function HomeScreen({ route }) {
       const data = snapshot.val();
       console.log(data);
       Object.entries(data).forEach(([key, value]) => {
-        switch(key){
+        switch (key) {
           case "username":
             dispatch({
               type: 'SET_USERNAME',
-              payload: value})
-              break;
+              payload: value
+            })
+            break;
           case "email":
             dispatch({
               type: 'SET_EMAIL',
-              payload: value})
-              break;
+              payload: value
+            })
+            break;
           case "name":
             dispatch({
               type: 'SET_FULLNAME',
-              payload: value})
-              break;
+              payload: value
+            })
+            break;
           case "address":
             dispatch({
               type: 'SET_ADDRESS',
-              payload: Object.values(value).join(' ')})
-              break;
-
+              payload: Object.values(value).join(' ')
+            })
+            break;
           case "username":
             dispatch({
               type: 'SET_USERNAME',
-              payload: value})
-              break;
-
-        }})
+              payload: value
+            })
+            break;
+        }
+      })
     })
-/*     get(child(reference)).then((snapshot) => {
-      if(snapshot.exists()) {
-        console.log(snapshot.val());
-      }else{
-        console.log("No data available")
-      }
-    }).catch((error) => {
-      console.log(error);
-    }) */
+    /*     get(child(reference)).then((snapshot) => {
+          if(snapshot.exists()) {
+            console.log(snapshot.val());
+          }else{
+            console.log("No data available")
+          }
+        }).catch((error) => {
+          console.log(error);
+        }) */
   }
 
   React.useEffect(() => {
@@ -233,13 +237,13 @@ export default function HomeScreen({ route }) {
   }
   const animateButtonOpacity = (toValue, textVal) => {
     Animated.timing(buttonOpacity, {
-        toValue: toValue,
-        duration: 150,
-        useNativeDriver: true,
+      toValue: toValue,
+      duration: 150,
+      useNativeDriver: true,
     }).start(
       setButtonText(textVal)
     );
-}
+  }
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
@@ -268,17 +272,17 @@ export default function HomeScreen({ route }) {
               type={type}
               ref={(ref) => setCameraRef(ref)}
             />
-              <Animated.View
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'white',
-            opacity: fadeAnim, // this should be the Animated.Value we discussed
-          }}
-        />
+            <Animated.View
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundColor: 'white',
+                opacity: fadeAnim, // this should be the Animated.Value we discussed
+              }}
+            />
           </View>
         </GestureDetector>
         <View style={styles.headerBottom}>
@@ -300,10 +304,10 @@ export default function HomeScreen({ route }) {
           </>
         ) : (
           <Animated.View style={[styles.button, styles.buttonWhite, { opacity: buttonOpacity }]}>
-          <TouchableOpacity onPress={takePicture}>
+            <TouchableOpacity onPress={takePicture}>
               <Text style={[styles.buttonText]}>{buttonText}</Text>
-          </TouchableOpacity>
-      </Animated.View>
+            </TouchableOpacity>
+          </Animated.View>
         )}
       </View>
     </ImageBackground>
@@ -406,7 +410,7 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     paddingHorizontal: 10,
     marginLeft: 32,
-    position: 'absolute', 
+    position: 'absolute',
     left: '60%', // Adjust the left position
   },
   flashButton: {
@@ -415,7 +419,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 4,
     paddingHorizontal: 15,
-    position: 'absolute', 
+    position: 'absolute',
     left: '77.5%', // Adjust the left position
   },
   timerButton: {
@@ -435,10 +439,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     paddingVertical: 4,
     paddingHorizontal: 5,
-    position: 'absolute', 
+    position: 'absolute',
     top: 55,
-     right: 20 ,
-     fontFamily: Fonts.Button,
+    right: 20,
+    fontFamily: Fonts.Button,
   },
   timerOverlay: {
     position: 'absolute',

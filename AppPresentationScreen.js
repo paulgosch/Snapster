@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Title,
     fontSize: 24,
     fontWeight: 'bold',
-   color: Colors.PrimaryColor,
+    color: Colors.PrimaryColor,
     marginBottom: 20,
     marginTop: 15,
     top: 70,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 20,
     fontFamily: 'neucha-regular',
-   color: Colors.PrimaryColor,
+    color: Colors.PrimaryColor,
     marginBottom: 20,
     top: 70,
     textAlign: 'center',

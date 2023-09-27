@@ -9,78 +9,77 @@ const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
 
 
-  export default function WelcomePage() {
-    // ... your existing code ...
-    const [fontLoaded, setFontLoaded] = useState(false);
-
-    useEffect(() => {
-      async function loadFont() {
-        await Font.loadAsync({
-          'neucha-regular': customFont,
-        });
-        setFontLoaded(true);
-      }
-      loadFont();
-    }, []);
-  
-    if (!fontLoaded) {
-      // Wait for the font to load
-      return null;
+export default function WelcomePage() {
+  // ... your existing code ...
+  const [fontLoaded, setFontLoaded] = useState(false);
+  useEffect(() => {
+    async function loadFont() {
+      await Font.loadAsync({
+        'neucha-regular': customFont,
+      });
+      setFontLoaded(true);
     }
-    const navigation = useNavigation();
+    loadFont();
+  }, []);
 
-    const handleLoginPress = () => {
-      // Code to navigate to the login page
-      navigation.navigate(Pages.LoginPage);
-    };
-  
-    const handleRegisterPress = () => {
-      // Code to navigate to the register page
-      navigation.navigate(Pages.RegisterPage);
-    };  
-  
-    return (
-      <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
-        <View style={styles.container}>
-          <View style={styles.upperHalf}>
-            <Icon name="camera" size={36} color="black" style={styles.cameraIcon} />
-            <Text style={styles.title}>Snapster</Text>
-          </View>
-          <Text style={styles.middle}>Ready to bring your digital photos</Text>
-          <Text style={styles.middle}>to life?</Text>
-          <View style={styles.lowerHalf}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-                <Text style={styles.buttonText}>Login</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.button} onPress={handleRegisterPress}>
-                <Text style={styles.buttonText}>Register</Text>
-              </TouchableOpacity>
-            </View>
+  if (!fontLoaded) {
+    // Wait for the font to load
+    return null;
+  }
+  const navigation = useNavigation();
+
+  const handleLoginPress = () => {
+    // Code to navigate to the login page
+    navigation.navigate(Pages.LoginPage);
+  };
+
+  const handleRegisterPress = () => {
+    // Code to navigate to the register page
+    navigation.navigate(Pages.RegisterPage);
+  };
+
+  return (
+    <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
+      <View style={styles.container}>
+        <View style={styles.upperHalf}>
+          <Icon name="camera" size={36} color="black" style={styles.cameraIcon} />
+          <Text style={styles.title}>Snapster</Text>
+        </View>
+        <Text style={styles.middle}>Ready to bring your digital photos</Text>
+        <Text style={styles.middle}>to life?</Text>
+        <View style={styles.lowerHalf}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
+              <Text style={styles.buttonText}>Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={handleRegisterPress}>
+              <Text style={styles.buttonText}>Register</Text>
+            </TouchableOpacity>
           </View>
         </View>
-      </ImageBackground>
-    );
-  }
-  
+      </View>
+    </ImageBackground>
+  );
+}
 
-  const styles = StyleSheet.create({
-    middle:{   
+
+const styles = StyleSheet.create({
+  middle: {
     fontFamily: Fonts.BodyText,
     fontSize: 25,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
-    },
-    title: {
-      fontFamily: Fonts.Title,
-      fontSize: 50,
-      fontWeight: 'bold',
-      color: Colors.PrimaryColor,
-    },
-    backgroundImage: {
-      flex: 1,
-      width: '100%',
-    },
+  },
+  title: {
+    fontFamily: Fonts.Title,
+    fontSize: 50,
+    fontWeight: 'bold',
+    color: Colors.PrimaryColor,
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+  },
   container: {
     flex: 1,
     justifyContent: 'center',

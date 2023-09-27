@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking,Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -20,13 +20,13 @@ export default function SettingsPage() {
   }, []);
 
   const loadSoundEffectsSetting = async () => {
-   
+
   };
 
   const handleBack = () => {
     navigation.goBack();
   };
-  
+
   const handleRateApp = () => {
     Alert.alert(
       "Rate this App",
@@ -97,34 +97,34 @@ export default function SettingsPage() {
         <Text style={styles.title}>Settings</Text>
 
         <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
-        <View style={styles.buttonContent}>
-        <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} /> 
-          <Text style={styles.accountHeaderText}>My Account</Text>
+          <View style={styles.buttonContent}>
+            <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
+            <Text style={styles.accountHeaderText}>My Account</Text>
           </View>
-        </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.button} onPress={handleRateApp}>
-       <View style={styles.buttonContent}>
-        <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
-        <Text style={styles.buttonText}>Rate this App </Text>
-       </View>
         </TouchableOpacity>
 
-<TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
-        <View style={styles.buttonContent}>
-         <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
-          <Text style={styles.buttonText}>Follow us on Instagram</Text>
+        <TouchableOpacity style={styles.button} onPress={handleRateApp}>
+          <View style={styles.buttonContent}>
+            <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
+            <Text style={styles.buttonText}>Rate this App </Text>
           </View>
-          </TouchableOpacity>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
+          <View style={styles.buttonContent}>
+            <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
+            <Text style={styles.buttonText}>Follow us on Instagram</Text>
+          </View>
+        </TouchableOpacity>
 
         <TouchableOpacity style={styles.accountContainer} onPress={handleLogout}>
-        <View style={styles.buttonContent}>
-        <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
-          <Text style={styles.buttonText}>Log out</Text>
+          <View style={styles.buttonContent}>
+            <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
+            <Text style={styles.buttonText}>Log out</Text>
           </View>
         </TouchableOpacity>
 
-        
+
 
         <View style={styles.bottomContainer}>
           <TouchableOpacity onPress={handleTermsAndConditions}>

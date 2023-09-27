@@ -36,7 +36,7 @@ function userReducer(state = initialState, action) {
 }
 const rootReducer = {
     user: userReducer,
-  };
+};
 
 // Create store
-export const store = configureStore({reducer:rootReducer});
+export const store = configureStore({ reducer: rootReducer });

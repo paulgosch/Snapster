@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View} from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
@@ -17,12 +17,12 @@ export default function LoginPage() {
   const handleLogin = async () => {
     setLoading(true);
     try {
-      const response = await signInWithEmailAndPassword(auth, userName, password);      
+      const response = await signInWithEmailAndPassword(auth, userName, password);
       console.log(response);
       navigation.navigate(Pages.HomeScreen);
       dispatch({ type: 'SET_USER', payload: { userName, email } });
 
-    } catch(error){
+    } catch (error) {
       console.log(error)
       alert("Sign in failed: " + error);
     } finally {
@@ -59,7 +59,7 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
         />
-         <TouchableOpacity onPress={handleForgotPassword}>
+        <TouchableOpacity onPress={handleForgotPassword}>
           <Text style={styles.forgotPassword}>Forgot Password</Text>
         </TouchableOpacity>
         {loading ? (
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 8,
-    alignSelf: 'center', 
-    width: '30%', 
+    alignSelf: 'center',
+    width: '30%',
   },
   buttonText: {
     color: 'white',

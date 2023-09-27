@@ -44,11 +44,11 @@ export default function ProfilePage() {
       [
         {
           text: "Cancel",
-          onPress: () => {},
+          onPress: () => { },
           style: "cancel"
         },
-        { 
-          text: "Delete", 
+        {
+          text: "Delete",
           onPress: async () => {
             // Send a POST request to the Google Script
             try {
@@ -61,11 +61,11 @@ export default function ProfilePage() {
                   email: email // Assuming 'email' is the user's email from the state or redux store
                 }),
               });
-  
+
               if (response.ok) {
                 // Handle successful email sending here
                 console.log('Email sent successfully');
-                
+
                 // Inform the user about the 48-hour delay
                 Alert.alert(
                   "Account Deletion in Progress",
@@ -86,7 +86,7 @@ export default function ProfilePage() {
             } catch (error) {
               console.error('Error sending email:', error);
             }
-          } 
+          }
         }
       ]
     );
@@ -95,14 +95,14 @@ export default function ProfilePage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
-      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+        <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color="white" />
         </TouchableOpacity>
         <View style={styles.header}>
           <Text style={styles.title}>Profile</Text>
         </View>
         <View style={styles.profileImageContainer}>
-        <Image source={userIconPlaceholder} style={styles.profileImage} />
+          <Image source={userIconPlaceholder} style={styles.profileImage} />
         </View>
         <View style={styles.accountContainer}>
           <Text style={styles.accountHeaderText}>My Account</Text>
@@ -141,29 +141,29 @@ export default function ProfilePage() {
               <Text style={[styles.centeredText, styles.accountLabel]}>My Adress</Text>
             </View>
             <View style={styles.accountRow}>
-          <Text style={styles.accountText}>{address}</Text>
-          <TouchableOpacity onPress={handleaddAdress}>
-          <Text style={styles.addAddressText}>add address</Text>
-         </TouchableOpacity>
-</View>
-          
+              <Text style={styles.accountText}>{address}</Text>
+              <TouchableOpacity onPress={handleaddAdress}>
+                <Text style={styles.addAddressText}>add address</Text>
+              </TouchableOpacity>
+            </View>
+
           </View>
         </View>
 
         <View style={styles.accountContainer}>
           <Text style={styles.accountHeaderText}>My Pictures</Text>
           <View style={styles.accountDetails}>
-          <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
-          <Text style={styles.myPicturesText}>My Snap-Bundles</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.myPictures} onPress={handleMyOrdersPage}>
-          <Text style={styles.myPicturesText}>My Orders</Text>
-        </TouchableOpacity>
+            <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
+              <Text style={styles.myPicturesText}>My Snap-Bundles</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.myPictures} onPress={handleMyOrdersPage}>
+              <Text style={styles.myPicturesText}>My Orders</Text>
+            </TouchableOpacity>
           </View>
         </View>
 
         <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
-        <Text style={styles.changeText}>Delete Account</Text>
+          <Text style={styles.changeText}>Delete Account</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
@@ -175,162 +175,162 @@ export default function ProfilePage() {
 }
 
 const styles = StyleSheet.create({
-    background: {
-      flex: 1,
-      resizeMode: 'cover',
-    },
-    container: {
-      flex: 1,
-      
-      padding: 16,
-      marginTop: 40, // Add top margin to lower all elements
-    },
-    header: {
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    title: {
-      fontFamily: Fonts.Title,
-      fontSize: 24,
-      fontWeight: 'bold',
-      color: 'white',
-    },
-    profileImageContainer: {
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    profileImage: {
-      width: 125,
-      height: 125,
-      borderRadius: 75,
-    },
-    detailsContainer: {
-      marginBottom: 20,
-    },
-    label: {
-      fontSize: 16,
-      color: 'grey',
-      marginBottom: 4,
-    },
-    value: {
-      fontSize: 18,
-      color: 'grey',
-      marginBottom: 16,
-    },
-    accountContainer: {
-        width: '100%', // Adjust the width as needed
-        marginVertical: 10,
-        padding: 20,
-        borderWidth: 1,
-        borderColor: 'white',
-        borderRadius: 8,
-        backgroundColor: 'white',
-        alignItems: 'center',
-      },
-    accountHeaderText: {
-      fontFamily: Fonts.Subtitle,
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: 'black',
-      marginBottom: 10,
-    },
-    accountDetails: {
-      width: '100%', // Adjusted to cover 100% of the accountContainer width
-      
-    },
-    accountRow: {
-      flexDirection: 'row',
-      alignItems: 'left',
-      justifyContent: 'space-between', // Add this line
-      marginBottom: 5,
-    },
-    accountText: {
-      
-      fontSize: 16,
-      color: 'black',
-      fontFamily: Fonts.BodyText,
-      width:"75%",
-      alignSelf:"left",
-      alignItems:"left"
-    },
-    accountTextGrey: {
-      color: 'grey',
-      fontFamily: Fonts.BodyText,
-      alignItems:"left",
-      alignSelf:"left",
+  background: {
+    flex: 1,
+    resizeMode: 'cover',
+  },
+  container: {
+    flex: 1,
 
-    },
-    accountLabel: {
-      flex: 1,
-    },
-    accountValue: {
-      flex: 2,
-      alignItems:"left",
-      textAlign: 'left',
-    },
-    changeText: {
-      color: '#FF9817',
-      fontFamily: Fonts.BodyText,
-      
-    },
-    invisibleText: {
-      color: '#FF9817',
-      opacity:"0",
-      fontFamily: Fonts.BodyText,
-      
-    },
-    button: {
-      backgroundColor: '#FF9817',
-      padding: 12,
-      borderRadius: 4,
-      alignItems: 'center',
-      marginBottom: 10,
-    },
-    buttonText: {
-      color: '#fff',
-      fontSize: 16,
-      fontFamily: Fonts.Button,
-    },
-    backButton: {
-      position: 'absolute',
-      top: 40,
-      left: 20,
-      zIndex: 1, // Ensure the back button is above other elements
-      padding: 10,
-    },
-    deleteAccountButton: {
-      alignSelf: 'center', // Center the button horizontally
-      paddingBottom: 10, // Add bottom padding
-    },
-    deleteAccountText: {
-      color: '#FF9817', // Use the same orange color as the "Change" text
-      fontSize: 16, // Set a font size for the text
-      fontFamily: Fonts.Button,
-    },
-    centeredText: {
-      textAlign: 'center',
-      fontSize: 14, // Adjust the font size to be slightly smaller
-      fontWeight: 'bold',
-      color: 'black',
-      paddingTop: 10,
-      fontFamily: Fonts.BodyText,
-    },
-    myPictures: {
-      marginBottom: 20,
-      padding: 10,
-      borderWidth: 1,
-      borderColor: 'orange',
-      borderRadius: 8,
-      alignItems: 'center',
-    },
-    myPicturesText: {
-      color: 'orange',
-      fontSize: 14,
-      fontFamily: Fonts.Button,
-    },
-    addAddressText: {
-      color: '#FF9817', // Use the same orange color as the "Change" text
-      fontSize: 16, // Set a font size for the text
-      fontFamily: Fonts.BodyText,
-    },
-  });
+    padding: 16,
+    marginTop: 40, // Add top margin to lower all elements
+  },
+  header: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontFamily: Fonts.Title,
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  profileImageContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  profileImage: {
+    width: 125,
+    height: 125,
+    borderRadius: 75,
+  },
+  detailsContainer: {
+    marginBottom: 20,
+  },
+  label: {
+    fontSize: 16,
+    color: 'grey',
+    marginBottom: 4,
+  },
+  value: {
+    fontSize: 18,
+    color: 'grey',
+    marginBottom: 16,
+  },
+  accountContainer: {
+    width: '100%', // Adjust the width as needed
+    marginVertical: 10,
+    padding: 20,
+    borderWidth: 1,
+    borderColor: 'white',
+    borderRadius: 8,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
+  accountHeaderText: {
+    fontFamily: Fonts.Subtitle,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
+    marginBottom: 10,
+  },
+  accountDetails: {
+    width: '100%', // Adjusted to cover 100% of the accountContainer width
+
+  },
+  accountRow: {
+    flexDirection: 'row',
+    alignItems: 'left',
+    justifyContent: 'space-between', // Add this line
+    marginBottom: 5,
+  },
+  accountText: {
+
+    fontSize: 16,
+    color: 'black',
+    fontFamily: Fonts.BodyText,
+    width: "75%",
+    alignSelf: "left",
+    alignItems: "left"
+  },
+  accountTextGrey: {
+    color: 'grey',
+    fontFamily: Fonts.BodyText,
+    alignItems: "left",
+    alignSelf: "left",
+
+  },
+  accountLabel: {
+    flex: 1,
+  },
+  accountValue: {
+    flex: 2,
+    alignItems: "left",
+    textAlign: 'left',
+  },
+  changeText: {
+    color: '#FF9817',
+    fontFamily: Fonts.BodyText,
+
+  },
+  invisibleText: {
+    color: '#FF9817',
+    opacity: "0",
+    fontFamily: Fonts.BodyText,
+
+  },
+  button: {
+    backgroundColor: '#FF9817',
+    padding: 12,
+    borderRadius: 4,
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontFamily: Fonts.Button,
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1, // Ensure the back button is above other elements
+    padding: 10,
+  },
+  deleteAccountButton: {
+    alignSelf: 'center', // Center the button horizontally
+    paddingBottom: 10, // Add bottom padding
+  },
+  deleteAccountText: {
+    color: '#FF9817', // Use the same orange color as the "Change" text
+    fontSize: 16, // Set a font size for the text
+    fontFamily: Fonts.Button,
+  },
+  centeredText: {
+    textAlign: 'center',
+    fontSize: 14, // Adjust the font size to be slightly smaller
+    fontWeight: 'bold',
+    color: 'black',
+    paddingTop: 10,
+    fontFamily: Fonts.BodyText,
+  },
+  myPictures: {
+    marginBottom: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: 'orange',
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  myPicturesText: {
+    color: 'orange',
+    fontSize: 14,
+    fontFamily: Fonts.Button,
+  },
+  addAddressText: {
+    color: '#FF9817', // Use the same orange color as the "Change" text
+    fontSize: 16, // Set a font size for the text
+    fontFamily: Fonts.BodyText,
+  },
+});
