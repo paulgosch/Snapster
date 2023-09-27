@@ -5,14 +5,16 @@ import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import { Pages, Colors, Fonts } from './constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
-import { storage } from './firebaseConfig';
+import { reference, storage } from './firebaseConfig';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import { get, set, child, onValue } from 'firebase/database';
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function HomeScreen({ route }) {
+  const dispatch = useDispatch();
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = React.useState(null);
@@ -103,12 +105,58 @@ export default function HomeScreen({ route }) {
   };
 
   const takePicture = async () => {
-    if (isTimerEnabled) {
+    loadUser()
+ /*        if (isTimerEnabled) {
       startTimer();
     } else {
       await capturePhoto();
-    }
+    } */
   };
+  const loadUser = async () => {
+    onValue(reference, (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      Object.entries(data).forEach(([key, value]) => {
+        switch(key){
+          case "username":
+            dispatch({
+              type: 'SET_USERNAME',
+              payload: value})
+              break;
+          case "email":
+            dispatch({
+              type: 'SET_EMAIL',
+              payload: value})
+              break;
+          case "name":
+            dispatch({
+              type: 'SET_FULLNAME',
+              payload: value})
+              break;
+          case "address":
+            dispatch({
+              type: 'SET_ADDRESS',
+              payload: Object.values(value).join(' ')})
+              break;
+
+          case "username":
+            dispatch({
+              type: 'SET_USERNAME',
+              payload: value})
+              break;
+
+        }})
+    })
+/*     get(child(reference)).then((snapshot) => {
+      if(snapshot.exists()) {
+        console.log(snapshot.val());
+      }else{
+        console.log("No data available")
+      }
+    }).catch((error) => {
+      console.log(error);
+    }) */
+  }
 
   React.useEffect(() => {
     async function loadFont() {
@@ -120,6 +168,7 @@ export default function HomeScreen({ route }) {
       setFontLoaded(true);
     }
     loadFont();
+    loadUser();
   }, []);
 
   if (!fontLoaded) {
