@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Animated, Easing } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
@@ -14,7 +14,11 @@ const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
 
 export default function HomeScreen({ route }) {
-  const dispatch = useDispatch();
+  const [fadeAnim] = useState(new Animated.Value(0));
+  const [buttonOpacity] = useState(new Animated.Value(1));
+  const [buttonText, setButtonText] = React.useState("Take Photo");
+  const [isUploading, setIsUploading] = useState(false);  // state to track uploading status
+    const dispatch = useDispatch();
   const [fontLoaded, setFontLoaded] = React.useState(false);
   const [type, setType] = React.useState(Camera.Constants.Type.back);
   const [hasPermission, setHasPermission] = React.useState(null);
@@ -87,7 +91,9 @@ export default function HomeScreen({ route }) {
   };
 
   const capturePhoto = async () => {
+    startAnimation()
     if (cameraRef) {
+      setIsUploading(true); // Begin uploading animation
       console.log('Taking picture...');
       let photo = await cameraRef.takePictureAsync();
       const fetchRep = await fetch(photo.uri);
@@ -98,20 +104,65 @@ export default function HomeScreen({ route }) {
       ).then((snapshot) => {
         console.log('Success!');
         console.log(snapshot.metadata);
+          // After fade-in, start fade-out
+          animateButtonOpacity(1, "Take Photo"); // enable the button after animatio
+          setIsUploading(false); // Begin uploading animation
+
       });
     } else {
       console.log('Camera reference is not set');
-    }
+    } 
+
   };
 
   const takePicture = async () => {
-    loadUser()
- /*        if (isTimerEnabled) {
+    animateButtonOpacity(0.5, "Uploading");
+      if (isTimerEnabled) {
       startTimer();
     } else {
       await capturePhoto();
-    } */
+    }
   };
+  const startAnimation = () => {
+    fadeAnim.setValue(0); // reset to initial value
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true, // use native driver for performance
+    }).start(() => {
+      // After fade-in, start fade-out
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 100,
+        useNativeDriver: true,
+      }).start(() => fadeAnim.setValue(0) // reset to initial value after animation ends
+      );
+    });
+    const fadeIn = Animated.timing(buttonOpacity, {
+      toValue: 0.5,
+      duration: 300,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    });
+  
+    const fadeOut = Animated.timing(buttonOpacity, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+      easing: Easing.linear,
+    });
+  
+    Animated.loop(
+      Animated.sequence([
+        fadeIn,
+        fadeOut,
+      ])
+    ).start(() => {
+      if (!isUploading) {
+        buttonOpacity.setValue(1); // reset to initial value when uploading completes
+      }
+    });
+  }
   const loadUser = async () => {
     onValue(reference, (snapshot) => {
       const data = snapshot.val();
@@ -180,7 +231,15 @@ export default function HomeScreen({ route }) {
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
   }
-
+  const animateButtonOpacity = (toValue, textVal) => {
+    Animated.timing(buttonOpacity, {
+        toValue: toValue,
+        duration: 150,
+        useNativeDriver: true,
+    }).start(
+      setButtonText(textVal)
+    );
+}
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
@@ -209,6 +268,17 @@ export default function HomeScreen({ route }) {
               type={type}
               ref={(ref) => setCameraRef(ref)}
             />
+              <Animated.View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'white',
+            opacity: fadeAnim, // this should be the Animated.Value we discussed
+          }}
+        />
           </View>
         </GestureDetector>
         <View style={styles.headerBottom}>
@@ -229,9 +299,11 @@ export default function HomeScreen({ route }) {
             </TouchableOpacity>
           </>
         ) : (
-          <TouchableOpacity style={[styles.button, styles.buttonWhite]} onPress={takePicture}>
-            <Text style={[styles.buttonText]}>Take Photo</Text>
+          <Animated.View style={[styles.button, styles.buttonWhite, { opacity: buttonOpacity }]}>
+          <TouchableOpacity onPress={takePicture}>
+              <Text style={[styles.buttonText]}>{buttonText}</Text>
           </TouchableOpacity>
+      </Animated.View>
         )}
       </View>
     </ImageBackground>
@@ -391,5 +463,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontFamily: Fonts.Button,
   },
+
 });
 
