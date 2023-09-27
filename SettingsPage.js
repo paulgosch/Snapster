@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking,Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { useSelector, useDispatch } from 'react-redux';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
 const backgroundImageSource = require('./assets/Background.jpg');
+const appleStoreURL = "https://apps.apple.com/us/app/facebook/id284882215"; // Example link for the Facebook app on the App Store
+const googlePlayURL = "https://play.google.com/store/apps/details?id=com.facebook.katana"; // Example link for the Facebook app on Google Play
+
 
 export default function SettingsPage() {
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(false);
@@ -40,8 +44,27 @@ export default function SettingsPage() {
   const handleBack = () => {
     navigation.goBack();
   };
+  
   const handleRateApp = () => {
-    // Implement the function to navigate to the app store page
+    Alert.alert(
+      "Rate this App",
+      "Choose a store to rate the app:",
+      [
+        {
+          text: "🍏 Apple App Store",
+          onPress: () => Linking.openURL(appleStoreURL).catch(err => console.error("Couldn't load App Store page", err))
+        },
+        {
+          text: "▶️ Google Play Store",
+          onPress: () => Linking.openURL(googlePlayURL).catch(err => console.error("Couldn't load Google Play Store page", err))
+        },
+        {
+          text: "Cancel",
+          style: "cancel"
+        }
+      ],
+      { cancelable: true }
+    );
   };
 
 
@@ -79,6 +102,12 @@ export default function SettingsPage() {
 
   const handleAccountPage = () => {
     navigation.navigate('AccountPage'); // Navigate to AccountPage when My Account is clicked
+  };
+
+  const handleInstagramRedirect = () => {
+    // You can use Linking from react-native to open the Instagram app or browser
+    const instagramURL = "https://www.instagram.com/snapsterstudios/?hl=de";
+    Linking.openURL(instagramURL).catch(err => console.error("Couldn't load Instagram page", err));
   };
 
   return (
@@ -128,9 +157,16 @@ export default function SettingsPage() {
         <TouchableOpacity style={styles.button} onPress={handleRateApp}>
        <View style={styles.buttonContent}>
         <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
-        <Text style={styles.buttonText}>Rate this App</Text>
+        <Text style={styles.buttonText}>Rate this App </Text>
        </View>
         </TouchableOpacity>
+
+<TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
+        <View style={styles.buttonContent}>
+         <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.buttonText}>Follow us on Instagram</Text>
+          </View>
+          </TouchableOpacity>
 
         <TouchableOpacity style={styles.accountContainer} onPress={handleLogout}>
         <View style={styles.buttonContent}>
@@ -138,6 +174,8 @@ export default function SettingsPage() {
           <Text style={styles.buttonText}>Log out</Text>
           </View>
         </TouchableOpacity>
+
+        
 
         <View style={styles.bottomContainer}>
           <TouchableOpacity onPress={handleTermsAndConditions}>
