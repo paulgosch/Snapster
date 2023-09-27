@@ -9,6 +9,8 @@ import { useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from './firebaseConfig';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+
+
 const customFont = require('./assets/Neucha-Regular.otf');
 const backgroundImageSource = require('./assets/Background.jpg');
 
