@@ -30,6 +30,7 @@ const CheckoutPage = ({ route }) => {
   const basicBundleImage = require('./assets/Roll_basic.png');
   const standardBundleImage = require('./assets/Roll_standard.png');
   const premiumBundleImage = require('./assets/Roll_premium.png');
+  const BG_linesSource = require('./assets/BG_lines.png');
 
   const fetchPaymentIntentClientSecret = async () => {
     const response = await fetch(`${API_URL}/create-payment-intent/24pack`, {
@@ -111,6 +112,7 @@ const CheckoutPage = ({ route }) => {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
@@ -165,7 +167,8 @@ const CheckoutPage = ({ route }) => {
                 </View>
               )}
             </View>
-            <Text style={styles.paymentmethod}>Payment Method</Text>
+            <View style={styles.Paymentmethodcontainer}>
+            <Text style={styles.paymentmethod}>Payment Method</Text></View>
             <View style={styles.container2}>
               <Text style={styles.subtitle}>Email</Text>
               <TextInput
@@ -245,10 +248,12 @@ const styles = StyleSheet.create({
   },
   ortext: {
     fontSize: 18,
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Title,
     marginVertical: 10,
     alignSelf: 'center', // This will center the button horizontally
+    backgroundColor: '#E2CAAE',
+    padding: 2,
   },
   cardImageContainer: {
     alignItems: 'center',
@@ -260,7 +265,8 @@ const styles = StyleSheet.create({
   payButtonContainer: {
     paddingVertical: 6,  // Adjusted padding for better shape
     paddingHorizontal: 10, // Increased padding for better shape
-    backgroundColor: '#003087',
+    borderColor: '#2A4D69',
+    backgroundColor: '#2A4D69',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -275,7 +281,7 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 16,
-    color: '#003087',
+   color: '#2A4D69',
     fontFamily: Fonts.Title,
     marginBottom: 5, // Added margin for spacing
     left: 10,
@@ -288,10 +294,20 @@ const styles = StyleSheet.create({
   },
   paymentmethod: {
     fontSize: 24,
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Title,
-    alignSelf: 'center',
-  },
+    
+},
+Paymentmethodcontainer: {
+  color: '#2A4D69',
+  borderWidth: 1,
+  borderColor: '#2A4D69',
+  borderRadius: 10,
+  padding: 4,
+  backgroundColor: 'rgba(255, 255, 255, 0.5)', // White transparent background
+  alignItems: 'center',
+},
+
   bundle: {
     flexDirection: 'row',
     backgroundColor: '#fff',
@@ -313,7 +329,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: '#666',
     fontFamily: Fonts.BodyText,
-
   },
   bundlePrice: {
     fontSize: 22,
@@ -345,8 +360,20 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 24,
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Title,
+    backgroundColor: '#E2CAAE',
+    padding: 2,
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });
 

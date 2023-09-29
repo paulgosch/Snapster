@@ -10,6 +10,7 @@ const { width } = Dimensions.get('window');
 const photoofgirl = require('./assets/photoofgirl.png');
 const houseImage = require('./assets/photoofhouse.png');
 const deliveryImage = require('./assets/photoofdelivery.png');
+const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function AppPresentationScreen() {
   const [fontLoaded, setFontLoaded] = React.useState(false);
@@ -62,6 +63,7 @@ export default function AppPresentationScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
         <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
           <Text style={styles.skipText}>Skip</Text>
@@ -178,5 +180,15 @@ const styles = StyleSheet.create({
     width: width * 1, // Adjust the size as needed
     height: width * 1.2, // Maintain aspect ratio
     marginBottom: 30,
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });

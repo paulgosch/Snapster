@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, ImageBackground, Alert } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -33,6 +34,10 @@ export default function ProfilePage() {
   };
 
   const handleMyOrdersPage = () => {
+    navigation.navigate('MyOrdersPage');
+  };
+  
+  const handleProfilPicture = () => {
     navigation.navigate('MyOrdersPage');
   };
 
@@ -105,8 +110,11 @@ export default function ProfilePage() {
           <Text style={styles.title}>Profile</Text>
         </View>
         <View style={styles.profileImageContainer}>
-          <Image source={userIconPlaceholder} style={styles.profileImage} />
-        </View>
+      <Image source={userIconPlaceholder} style={styles.profileImage} />
+      <TouchableOpacity style={styles.cameraIconContainer} onPress={handleProfilPicture}>
+        <Feather name="camera" size={24} color="#2A4D69" />
+      </TouchableOpacity>
+      </View>
         <View style={styles.accountContainer}>
         <View style={styles.button}>
           <Text style={styles.buttonText}>My Account</Text>
@@ -143,10 +151,10 @@ export default function ProfilePage() {
             </View>
 
             <View style={styles.accountRow}>
-              <Text style={[styles.centeredText, styles.accountLabel]}>My Adress</Text>
+              <Text style={[styles.accountText, styles.accountLabel]}>My Adress:</Text>
             </View>
             <View style={styles.accountRow}>
-              <Text style={styles.accountText}>{address}</Text>
+              <Text style={styles.accountTex}>{address}</Text>
               <TouchableOpacity onPress={handleaddAdress}>
                 <Text style={styles.addAddressText}>add address</Text>
               </TouchableOpacity>
@@ -186,7 +194,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-
     padding: 16,
     marginTop: 40, // Add top margin to lower all elements
   },
@@ -201,12 +208,23 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   profileImageContainer: {
-    alignItems: 'center',
+    flexDirection: 'row', // Ensure items are on the same row
+    justifyContent: 'center', // Center items horizontally
+    alignItems: 'center', // Center items vertically
     marginBottom: 20,
-  },
+    position: 'relative', // Set to relative to allow absolute positioning of children
+},
+cameraIconContainer: {
+    position: 'absolute',
+    right: '35%',
+    top: '65%',
+    borderRadius: 8, // To make it circular
+    padding: 5, // Padding around the icon
+    backgroundColor: '#E6EAEA',
+},
   profileImage: {
-    width: 125,
-    height: 125,
+    width: 100,
+    height: 100,
     borderRadius: 75,
     backgroundColor: 'white',
   },

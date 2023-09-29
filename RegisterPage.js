@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackground, KeyboardAvoidingView, ActivityIndicator,Image } from 'react-native';
 import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
@@ -11,6 +11,7 @@ import { sendEmailVerification } from "firebase/auth";
 import { Pages, Colors, Fonts } from './constants';
 import { useSelector, useDispatch } from 'react-redux';
 
+const BG_linesSource = require('./assets/BG_lines.png');
 
 const isPasswordStrongEnough = (password) => {
   // Password must have at least 6 characters, one number, and one uppercase letter
@@ -108,6 +109,7 @@ export default function RegisterScreen() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.titleContainer}>
           <Text style={styles.title}>Snapster</Text>
@@ -197,7 +199,7 @@ export default function RegisterScreen() {
           </View>
         ) : (
           <TouchableOpacity style={styles.button} onPress={handleRegister}>
-            <Text style={styles.buttonText}>Sign up</Text>
+            <Text style={styles.buttonText}>Sign-up</Text>
           </TouchableOpacity>
         )}
       </KeyboardAvoidingView>
@@ -238,19 +240,22 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingLeft: 10,
     color: Colors.PrimaryColor,
+    backgroundColor: '#E2CAAE',
+    
   },
   button: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#2A4D69',
+    backgroundColor: '#2A4D69',
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 8,
     alignSelf: 'center', // Center the button horizontally
     width: '30%', // Make the button half as wide as the parent
   },
+
   buttonText: {
-    color: Colors.PrimaryColor,
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -262,12 +267,14 @@ const styles = StyleSheet.create({
     alignItems: 'center', // Align items vertically
     marginTop: 10,
     paddingBottom: 15,
+    
   },
   agreeText: {
     fontSize: 14,
     color: Colors.PrimaryColor,
     marginLeft: 5, // Add some space between the checkbox and "Agree with"
     fontFamily: Fonts.BodyText,
+    backgroundColor: '#E2CAAE',
   },
   termsText: {
     fontSize: 14,
@@ -276,9 +283,11 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'dotted',
     marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
     fontFamily: Fonts.Button,
+    backgroundColor: '#E2CAAE',
   },
   checkbox: {
     marginRight: 5, // Add some space between "Terms and Conditions" and the checkbox
+    color: '#2A4D69',
   },
   loadingContainer: {
     height: 40, // Fixed height to keep the container from expanding
@@ -286,7 +295,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loadingContent: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)', // Transparent background for the text container
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 8,
@@ -296,6 +304,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: Fonts.Button,
+    backgroundColor: '#E2CAAE',
   },
   passwordContainer: {
     flexDirection: 'row',
@@ -305,6 +314,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginBottom: 10,
     paddingLeft: 10,
+    backgroundColor: '#E2CAAE',
   },
   passwordInput: {
     flex: 1,
@@ -313,5 +323,16 @@ const styles = StyleSheet.create({
   },
   eyeIconContainer: {
     padding: 10,
+   
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });
