@@ -34,15 +34,13 @@ export default function LoginPage() {
     navigation.navigate(Pages.ForgotPasswordPage);
   };
 
-  const BG_lines_upSource = require('./assets/BG_lines_up.png');
+  const BG_lines_upSource = require('./assets/BG_lines.png');
   const backgroundImageSource = require('./assets/Background.jpg');
-  const cameraImageSource = require('./assets/Camera_.png');
 
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
         <Image source={BG_lines_upSource} style={styles.BG_lines} />
-        <Image source={cameraImageSource} style={styles.CameraImageTop} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Snapster</Text>
         <View style={styles.inputContainer}>
@@ -115,22 +113,23 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
   },
   button: {
-   
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 8,
+    paddingVertical: 5,
+    paddingHorizontal: 0,
     alignSelf: 'center',
     width: '30%',
-    backgroundColor: '#E2CAAE', // Assuming you have a color defined for this in the Colors constant
+    borderColor: '#2A4D69',
+    backgroundColor: '#2A4D69',
   },
+
   buttonText: {
-    color: 'white',
-    fontSize: 18,
+    color: 'white', // Change text color to white
+    fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
     fontFamily: Fonts.Button,
+    textAlign: 'center',
   },
   loadingContainer: {
     height: 40, // Fixed height to keep the container from expanding
@@ -160,14 +159,14 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Button,
   },
   BG_lines: {
-    position: 'absolute',
+    position: 'absolute', // Absolute position
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover',
+    resizeMode: 'cover', // Cover the entire screen
   },
   CameraImageTop: {
     position: 'absolute',

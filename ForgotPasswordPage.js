@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import { FIREBASE_AUTH } from './firebaseConfig'; // Adjust the path as necessary
@@ -26,9 +26,11 @@ export default function ForgotPasswordPage() {
   };
 
   const backgroundImageSource = require('./assets/Background.jpg');
+  const BG_linesSource = require('./assets/BG_lines.png');
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Forgot Password</Text>
         <Text style={styles.description}>
@@ -132,5 +134,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     fontFamily: Fonts.Button,
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });

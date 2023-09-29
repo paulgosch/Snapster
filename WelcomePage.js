@@ -73,8 +73,9 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BodyText,
     fontSize: 25,
     fontWeight: 'bold',
-    color: Colors.PrimaryColor,
+    color: 'white',
     Top: 100,
+    padding: 2,
     alignSelf: "center",
   },
   title: {
@@ -116,13 +117,14 @@ const styles = StyleSheet.create({
     marginRight: 30,
     paddingHorizontal: 20,
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.15)', // White transparent background
+    borderColor: '#2A4D69',
+    backgroundColor: '#2A4D69',
     borderWidth: 1,
-    borderColor: 'white', // Change the button border color to white
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 20,
   },
+
   buttonText: {
     color: 'white', // Change text color to white
     fontSize: 24,

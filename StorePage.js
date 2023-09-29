@@ -91,6 +91,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     color: Colors.PrimaryColor,
     fontFamily: Fonts.Title,
+    backgroundColor: '#E2CAAE',
+    padding: 2,
   },
   bundlesContainer: {
     width: '80%',

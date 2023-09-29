@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking, Alert,Image } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking, Alert, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -7,25 +7,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-const appleStoreURL = "https://apps.apple.com/us/app/facebook/id284882215"; // Example link for the Facebook app on the App Store
-const googlePlayURL = "https://play.google.com/store/apps/details?id=com.facebook.katana"; // Example link for the Facebook app on Google Play
-
+const appleStoreURL = "https://apps.apple.com/us/app/facebook/id284882215";
+const googlePlayURL = "https://play.google.com/store/apps/details?id=com.facebook.katana";
+const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function SettingsPage() {
   const [soundEffectsEnabled, setSoundEffectsEnabled] = useState(false);
   const { userName, email, fullName, address, userBundle } = useSelector((state) => state.user);
   const navigation = useNavigation();
+  
   useEffect(() => {
     loadSoundEffectsSetting();
   }, []);
 
   const loadSoundEffectsSetting = async () => {
-
+    // Logic to load sound effects setting
   };
 
   const handleBack = () => {
     navigation.goBack();
-  };
+};
 
   const handleRateApp = () => {
     Alert.alert(
@@ -49,7 +50,6 @@ export default function SettingsPage() {
     );
   };
 
-
   const handleSupportPage = () => {
     navigation.navigate(Pages.SupportPage);
   };
@@ -67,11 +67,11 @@ export default function SettingsPage() {
   };
 
   const handleChangeFullName = () => {
-    // Implement logic to navigate to the screen where the user can change their full name
+    // Logic to navigate to the screen where the user can change their full name
   };
 
   const handleChangePassword = () => {
-    // Implement logic to change the password
+    // Logic to change the password
   };
 
   const handleSettings = () => {
@@ -79,71 +79,62 @@ export default function SettingsPage() {
   };
 
   const handleAccountPage = () => {
-    navigation.navigate('AccountPage'); // Navigate to AccountPage when My Account is clicked
+    navigation.navigate('AccountPage');
   };
 
   const handleInstagramRedirect = () => {
-    // You can use Linking from react-native to open the Instagram app or browser
     const instagramURL = "https://www.instagram.com/snapsterstudios/?hl=de";
     Linking.openURL(instagramURL).catch(err => console.error("Couldn't load Instagram page", err));
   };
 
-  const BG_linesSource = require('./assets/BG_lines.png');
-
   return (
     <ImageBackground source={backgroundImageSource} style={styles.container}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
-        </TouchableOpacity>
-        <View style={styles.topContainer}>
+      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+        <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
+      </TouchableOpacity>
+      <View style={styles.topContainer}>
         <Text style={styles.title}>Settings</Text>
+      </View>
+      <View style={styles.ContentContainer}>
+      <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
+        <View style={styles.buttonContent}>
+          <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.accountHeaderText}>My Account</Text>
         </View>
-        <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
-          <View style={styles.buttonContent}>
-            <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
-            <Text style={styles.accountHeaderText}>My Account</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleSupportPage}>
-          <View style={styles.buttonContent}>
-            <FeatherIcon name="book-open" size={24} color="white" style={{ marginRight: 10 }} />
-            <Text style={styles.buttonText}>About Snapster </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleRateApp}>
-          <View style={styles.buttonContent}>
-            <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
-            <Text style={styles.buttonText}>Rate this App </Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
-          <View style={styles.buttonContent}>
-            <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
-            <Text style={styles.buttonText}>Follow us on Instagram</Text>
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
-          <View style={styles.buttonContent}>
-            <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
-            <Text style={styles.buttonText}>Log out</Text>
-          </View>
-        </TouchableOpacity>
-
-        <View style={styles.bottomContainer}>
-          <TouchableOpacity onPress={handleTermsAndConditions}>
-            <Text style={styles.bottomText}>Terms & Conditions</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handlePrivacyPolicyPage}>
-            <Text style={styles.bottomText}>Privacy Policy</Text>
-          </TouchableOpacity>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleSupportPage}>
+        <View style={styles.buttonContent}>
+          <FeatherIcon name="book-open" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.buttonText}>About Snapster</Text>
         </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleRateApp}>
+        <View style={styles.buttonContent}>
+          <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.buttonText}>Rate this App</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
+        <View style={styles.buttonContent}>
+          <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.buttonText}>Follow us on Instagram</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleLogout}>
+        <View style={styles.buttonContent}>
+          <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
+          <Text style={styles.buttonText}>Log out</Text>
+        </View>
+      </TouchableOpacity>
+      </View>
+      <View style={styles.bottomContainer}>
+        <TouchableOpacity onPress={handleTermsAndConditions}>
+          <Text style={styles.bottomText}>Terms & Conditions</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handlePrivacyPolicyPage}>
+          <Text style={styles.bottomText}>Privacy Policy</Text>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -152,7 +143,6 @@ export default function SettingsPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   backButton: {
     position: 'absolute',
@@ -161,40 +151,22 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    fontSize: 42, // Increased font size
+    fontSize: 42,
     fontWeight: 'bold',
     color: '#2A4D69',
-    alignSelf: 'center',
     fontFamily: Fonts.Title,
-    textShadowColor: 'rgba(255, 255, 255, 0.75)', // White text shadow
+    textShadowColor: 'rgba(255, 255, 255, 0.75)',
     textShadowOffset: { width: -1, height: 1 },
     textShadowRadius: 10,
-    letterSpacing: 2, // Increased letter spacing
+    letterSpacing: 2,
   },
-  settingContainer: {
-    width: '100%',
-    marginVertical: 10,
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    borderWidth: 1,
-    borderColor: '#2A4D69',
-    borderRadius: 8,
-    backgroundColor: 'white',
-  },
-  settingText: {
-    fontSize: 18,
-    color: 'grey',
-    fontFamily: Fonts.Subtitle,
-  },
-  settingRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  accountHeaderText: {
-    fontSize: 18,
-    color: 'white',
-    fontFamily: Fonts.Subtitle,
+  topContainer: {
+    alignSelf: 'center',
+    backgroundColor: '#E2CAAE',
+    width: '40%',
+    padding: 2,
+    top: '15%',
+    position: 'absolute',
   },
   button: {
     width: '85%',
@@ -203,7 +175,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#2A4D69',
     borderRadius: 8,
-    backgroundColor: '#2A4D69', // Assuming you have a color defined for this in the Colors constant
+    backgroundColor: '#2A4D69',
     alignSelf: 'center',
   },
   buttonText: {
@@ -211,18 +183,27 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: Fonts.Button,
   },
+  buttonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  accountHeaderText: {
+    fontSize: 18,
+    color: 'white',
+    fontFamily: Fonts.Subtitle,
+  },
   bottomContainer: {
     position: 'absolute',
     bottom: '5%',
-    alignSelf: 'center', // Center the container horizontally
+    alignSelf: 'center',
     padding: 2,
     backgroundColor: '#E2CAAE',
-    width: '40%',       // Set the width to 40% of the screen width
+    width: '40%',
     justifyContent: 'center',
     alignItems: 'center',
   },
   bottomText: {
-    color: 'white',
+    color: '#2A4D69',
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 2,
@@ -230,26 +211,21 @@ const styles = StyleSheet.create({
     textDecorationStyle: 'dotted',
     fontFamily: Fonts.Footer,
   },
-  buttonContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   BG_lines: {
-    position: 'absolute', // Absolute position
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // Cover the entire screen
+    resizeMode: 'cover',
   },
-  topContainer: {
-    alignSelf: 'center', // Center the container horizontally
-    backgroundColor: '#E2CAAE',
-    width: '42%',       // Set the width to 40% of the screen width
+ContentContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 2,
-  },
+    marginTop: -30,
+    
+}
 });
