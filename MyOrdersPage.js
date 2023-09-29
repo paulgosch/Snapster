@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground,Image } from 'react-native';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
+const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function MyOrdersPage() {
   const { orders } = useSelector((state) => state.user); // Assuming 'orders' is an array of order objects in your Redux state
@@ -17,6 +18,7 @@ export default function MyOrdersPage() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color="white" />
@@ -95,6 +97,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 20,
     fontFamily: Fonts.BodyText,
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });
 

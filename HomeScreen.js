@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Animated, Easing, Image } from 'react-native';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Feather } from '@expo/vector-icons';
@@ -11,7 +11,8 @@ import { reference, storage } from './firebaseConfig';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { get, set, child, onValue } from 'firebase/database';
 const customFont = require('./assets/Neucha-Regular.otf');
-const backgroundImageSource = require('./assets/Background.jpg');
+const backgroundImageSource = require('./assets/FilmFrame.png');
+const cameraImageSource = require('./assets/Camera_.png');
 
 export default function HomeScreen({ route }) {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -244,10 +245,11 @@ export default function HomeScreen({ route }) {
     );
   }
   return (
+    <View style={styles.backgroundColorContainer}>
     <ImageBackground source={backgroundImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.headerTop}>
-          <Text style={styles.title}>Snapster</Text>
+        <Image source={cameraImageSource} style={styles.titleImage} />
           <Text style={styles.progressText}>3/27</Text>
           <TouchableOpacity style={styles.flashButton} onPress={toggleFlashMode}>
             <Feather
@@ -310,14 +312,16 @@ export default function HomeScreen({ route }) {
         )}
       </View>
     </ImageBackground>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    resizeMode: 'cover',
-    backgroundColor: 'rgba(255, 255, 255, 0.7)', // White transparent background
+    width: '100%',  // Ensure the width is set to 100%
+    height: '100%', // Ensure the height is set to 100%
+    resizeMode: 'cover', // This will ensure the image covers the entire view
   },
   container: {
     flex: 1, // Use flex 1 to occupy the entire screen
@@ -350,7 +354,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     position: 'absolute',
-    top: '10%', // Adjust the top position
     left: '47.5%', // Adjust the left position
   },
   button: {
@@ -373,13 +376,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   cameraContainer: {
-    flex: 0.85, // Adjust the flex to take more space for the camera
-    width: '100%',
+    flex: 0.73, // Adjust the flex to take more space for the camera
+    width: '99%',
     justifyContent: 'center', // Align the camera to the center of the container
-    bottom: 35,
+    bottom: 30,
   },
   cameraBorderRadius: {
-    borderRadius: 20, // Set the border radius for rounded corners
+    borderRadius: 8, // Set the border radius for rounded corners
     overflow: 'hidden', // Clip the camera view to fit within the rounded container
   },
   settingsButton: {
@@ -465,6 +468,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
     fontFamily: Fonts.Button,
+  },
+  backgroundColorContainer: {
+    flex: 1,
+    backgroundColor: '#2E2E2E',
+  },
+  titleImage: {
+    width: 65,  // You can adjust this as needed
+    height: 68, // You can adjust this as needed
+    resizeMode: 'contain', // This will ensure the image fits within the dimensions provided
   },
 
 });

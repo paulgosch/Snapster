@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView } from 'react-native'; // Import ScrollView
+import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, Image } from 'react-native'; // Import ScrollView
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Linking } from 'react-native';
 import { Pages, Colors, Fonts } from './constants';
+
+const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function SupportScreen() {
   const navigation = useNavigation(); // Use the useNavigation hook here
@@ -75,6 +77,7 @@ export default function SupportScreen() {
       style={styles.backgroundImage}
       resizeMode="cover"
     >
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <ScrollView style={styles.scrollContainer}>
         <View style={styles.container}>
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
@@ -215,5 +218,15 @@ const styles = StyleSheet.create({
   },
   additionalContainer: {
     marginBottom: 50
-  }
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
+  },
 });

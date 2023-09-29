@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View } from 'react-native';
+import { StyleSheet, TextInput, Text, TouchableOpacity, ImageBackground, KeyboardAvoidingView, View,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from './firebaseConfig';
@@ -34,13 +34,18 @@ export default function LoginPage() {
     navigation.navigate(Pages.ForgotPasswordPage);
   };
 
+  const BG_lines_upSource = require('./assets/BG_lines_up.png');
   const backgroundImageSource = require('./assets/Background.jpg');
+  const cameraImageSource = require('./assets/Camera_.png');
 
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+        <Image source={BG_lines_upSource} style={styles.BG_lines} />
+        <Image source={cameraImageSource} style={styles.CameraImageTop} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>Snapster</Text>
+        <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           placeholder="Username or Email"
@@ -51,6 +56,8 @@ export default function LoginPage() {
             payload: text,
           })}
         />
+        </View>
+        <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -59,6 +66,7 @@ export default function LoginPage() {
           value={password}
           onChangeText={setPassword}
         />
+        </View>
         <TouchableOpacity onPress={handleForgotPassword}>
           <Text style={styles.forgotPassword}>Forgot Password</Text>
         </TouchableOpacity>
@@ -69,6 +77,7 @@ export default function LoginPage() {
             </View>
           </View>
         ) : (
+      
           <TouchableOpacity style={styles.button} onPress={handleLogin}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
@@ -106,7 +115,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
   },
   button: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+   
     borderWidth: 1,
     borderColor: 'white',
     borderRadius: 8,
@@ -114,6 +123,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     alignSelf: 'center',
     width: '30%',
+    backgroundColor: '#E2CAAE', // Assuming you have a color defined for this in the Colors constant
   },
   buttonText: {
     color: 'white',
@@ -148,5 +158,26 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     marginBottom: 20,
     fontFamily: Fonts.Button,
+  },
+  BG_lines: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+  CameraImageTop: {
+    position: 'absolute',
+    width: 125,
+    height: '45%',
+    resizeMode: 'contain',
+    alignSelf: 'center',
+  },
+  inputContainer: {
+    backgroundColor: '#E2CAAE', // Assuming you have a color defined for this in the Colors constant
+    padding: 0,
   },
 });

@@ -8,6 +8,7 @@ import { Pages, Colors, Fonts } from './constants';
 const backgroundImageSource = require('./assets/Background.jpg');
 const BundleImage = require('./assets/Rolls.png');
 const blurryImagePlaceholder = require('./assets/CardPaymentMasterCard.jpg'); // replace with your blurry image
+const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function MyPicturesPage() {
   const { userBundle } = useSelector((state) => state.user);
@@ -24,6 +25,7 @@ export default function MyPicturesPage() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color="white" />
@@ -113,5 +115,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     resizeMode: 'contain',
     marginBottom: 10, // Space between the image and the "Buy More" text
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
   },
 });

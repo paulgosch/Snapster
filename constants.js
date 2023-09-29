@@ -23,9 +23,9 @@ export const Pages = {
 };
 
 export const Colors = {
-  PrimaryColor: 'white',
-  SecondaryColor: 'grey',
-  TertiaryColor: 'grey',
+  PrimaryColor: '#2A4D69',
+  SecondaryColor: '#2A4D69',
+  TertiaryColor: '#2A4D69',
   Background: '#CED4DA',
   ErrorColor: 'red',
 };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Linking, Alert,Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -88,18 +88,29 @@ export default function SettingsPage() {
     Linking.openURL(instagramURL).catch(err => console.error("Couldn't load Instagram page", err));
   };
 
+  const BG_linesSource = require('./assets/BG_lines.png');
+
   return (
     <ImageBackground source={backgroundImageSource} style={styles.container}>
+      <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleBack}>
           <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
         </TouchableOpacity>
+        <View style={styles.topContainer}>
         <Text style={styles.title}>Settings</Text>
-
+        </View>
         <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
           <View style={styles.buttonContent}>
             <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
             <Text style={styles.accountHeaderText}>My Account</Text>
+          </View>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={handleSupportPage}>
+          <View style={styles.buttonContent}>
+            <FeatherIcon name="book-open" size={24} color="white" style={{ marginRight: 10 }} />
+            <Text style={styles.buttonText}>About Snapster </Text>
           </View>
         </TouchableOpacity>
 
@@ -117,14 +128,12 @@ export default function SettingsPage() {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.accountContainer} onPress={handleLogout}>
+        <TouchableOpacity style={styles.button} onPress={handleLogout}>
           <View style={styles.buttonContent}>
             <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
             <Text style={styles.buttonText}>Log out</Text>
           </View>
         </TouchableOpacity>
-
-
 
         <View style={styles.bottomContainer}>
           <TouchableOpacity onPress={handleTermsAndConditions}>
@@ -133,10 +142,6 @@ export default function SettingsPage() {
 
           <TouchableOpacity onPress={handlePrivacyPolicyPage}>
             <Text style={styles.bottomText}>Privacy Policy</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={handleSupportPage}>
-            <Text style={styles.bottomText}>Q&A + Support</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -147,7 +152,6 @@ export default function SettingsPage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     justifyContent: 'center',
   },
   backButton: {
@@ -157,12 +161,15 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    fontSize: 28,
+    fontSize: 42, // Increased font size
     fontWeight: 'bold',
-    marginBottom: 20,
-    color: 'white',
+    color: '#2A4D69',
     alignSelf: 'center',
     fontFamily: Fonts.Title,
+    textShadowColor: 'rgba(255, 255, 255, 0.75)', // White text shadow
+    textShadowOffset: { width: -1, height: 1 },
+    textShadowRadius: 10,
+    letterSpacing: 2, // Increased letter spacing
   },
   settingContainer: {
     width: '100%',
@@ -170,7 +177,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#2A4D69',
     borderRadius: 8,
     backgroundColor: 'white',
   },
@@ -184,30 +191,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  accountContainer: {
-    width: '50%',
-    marginVertical: 10,
-    padding: 5,
-    borderWidth: 1,
-    borderColor: 'white',
-    borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   accountHeaderText: {
     fontSize: 18,
     color: 'white',
     fontFamily: Fonts.Subtitle,
   },
   button: {
-    width: '100%',
-    marginVertical: 10,
+    width: '85%',
+    marginVertical: 5,
     padding: 5,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: '#2A4D69',
     borderRadius: 8,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#2A4D69', // Assuming you have a color defined for this in the Colors constant
+    alignSelf: 'center',
   },
   buttonText: {
     fontSize: 18,
@@ -216,15 +213,16 @@ const styles = StyleSheet.create({
   },
   bottomContainer: {
     position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
+    bottom: '5%',
+    alignSelf: 'center', // Center the container horizontally
+    padding: 2,
+    backgroundColor: '#E2CAAE',
+    width: '40%',       // Set the width to 40% of the screen width
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 20,
   },
   bottomText: {
-    color: Colors.PrimaryColor,
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     marginVertical: 2,
@@ -235,5 +233,23 @@ const styles = StyleSheet.create({
   buttonContent: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
+  },
+  topContainer: {
+    alignSelf: 'center', // Center the container horizontally
+    backgroundColor: '#E2CAAE',
+    width: '42%',       // Set the width to 40% of the screen width
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
   },
 });
