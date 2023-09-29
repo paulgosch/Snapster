@@ -6,7 +6,9 @@ import { useNavigation } from '@react-navigation/native';
 import { Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-const userIconPlaceholder = require('./assets/user-icon-image-placeholder.jpg');
+const userIconPlaceholder = require('./assets/user-icon-image-placeholder.png');
+const BG_linesSource = require('./assets/BG_lines.png');
+
 
 export default function ProfilePage() {
   const { userName, email, fullName, address, userBundle } = useSelector((state) => state.user);
@@ -94,6 +96,7 @@ export default function ProfilePage() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
+       <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
         <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
           <Icon name="arrow-left" size={24} color="white" />
@@ -105,7 +108,9 @@ export default function ProfilePage() {
           <Image source={userIconPlaceholder} style={styles.profileImage} />
         </View>
         <View style={styles.accountContainer}>
-          <Text style={styles.accountHeaderText}>My Account</Text>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>My Account</Text>
+          </View>
           <View style={styles.accountDetails}>
             <View style={styles.accountRow}>
               <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
@@ -163,7 +168,7 @@ export default function ProfilePage() {
         </View>
 
         <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
-          <Text style={styles.changeText}>Delete Account</Text>
+          <Text style={styles.deleteAccountText}>Delete Account</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}>
@@ -203,18 +208,19 @@ const styles = StyleSheet.create({
     width: 125,
     height: 125,
     borderRadius: 75,
+    backgroundColor: 'white',
   },
   detailsContainer: {
     marginBottom: 20,
   },
   label: {
     fontSize: 16,
-    color: 'grey',
+    color: '#707070',
     marginBottom: 4,
   },
   value: {
     fontSize: 18,
-    color: 'grey',
+    color: '#707070',
     marginBottom: 16,
   },
   accountContainer: {
@@ -231,7 +237,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Subtitle,
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#2A4D69',
     marginBottom: 10,
   },
   accountDetails: {
@@ -247,14 +253,14 @@ const styles = StyleSheet.create({
   accountText: {
 
     fontSize: 16,
-    color: 'black',
+    color: '#2A4D69',
     fontFamily: Fonts.BodyText,
     width: "75%",
     alignSelf: "left",
     alignItems: "left"
   },
   accountTextGrey: {
-    color: 'grey',
+    color: '#707070',
     fontFamily: Fonts.BodyText,
     alignItems: "left",
     alignSelf: "left",
@@ -269,18 +275,18 @@ const styles = StyleSheet.create({
     textAlign: 'left',
   },
   changeText: {
-    color: '#FF9817',
+    color: '#DAA05D',
     fontFamily: Fonts.BodyText,
 
   },
   invisibleText: {
-    color: '#FF9817',
+    color: '#2A4D69',
     opacity: "0",
     fontFamily: Fonts.BodyText,
 
   },
   button: {
-    backgroundColor: '#FF9817',
+    backgroundColor: '#2A4D69',
     padding: 12,
     borderRadius: 4,
     alignItems: 'center',
@@ -303,15 +309,15 @@ const styles = StyleSheet.create({
     paddingBottom: 10, // Add bottom padding
   },
   deleteAccountText: {
-    color: '#FF9817', // Use the same orange color as the "Change" text
     fontSize: 16, // Set a font size for the text
     fontFamily: Fonts.Button,
+    color: '#2A4D69',
   },
   centeredText: {
     textAlign: 'center',
     fontSize: 14, // Adjust the font size to be slightly smaller
     fontWeight: 'bold',
-    color: 'black',
+    color: '#2A4D69',
     paddingTop: 10,
     fontFamily: Fonts.BodyText,
   },
@@ -319,18 +325,29 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
     borderWidth: 1,
-    borderColor: 'orange',
+    borderColor: '#2A4D69',
     borderRadius: 8,
     alignItems: 'center',
   },
   myPicturesText: {
-    color: 'orange',
+    color: '#2A4D69',
     fontSize: 14,
     fontFamily: Fonts.Button,
   },
   addAddressText: {
-    color: '#FF9817', // Use the same orange color as the "Change" text
+    color: '#2A4D69',
     fontSize: 16, // Set a font size for the text
     fontFamily: Fonts.BodyText,
   },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
+  },
+  
 });
