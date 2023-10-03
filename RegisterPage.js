@@ -111,13 +111,14 @@ export default function RegisterScreen() {
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
       <Image source={BG_linesSource} style={styles.BG_lines} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>Snapster</Text>
-        </View>
+        <View style={styles.whiteContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>Snapster</Text>
+          </View>
         <TextInput
           style={styles.input}
           placeholder="Full Name"
-          placeholderTextColor="white"
+          placeholderTextColor="#2A4D69"
           value={fullName}
           onChangeText={text => dispatch({
             type: 'SET_FULLNAME',
@@ -127,7 +128,7 @@ export default function RegisterScreen() {
         <TextInput
           style={styles.input}
           placeholder="Username"
-          placeholderTextColor="white"
+          placeholderTextColor="#2A4D69"
           value={userName}
           onChangeText={text => dispatch({
             type: 'SET_USERNAME',
@@ -137,7 +138,7 @@ export default function RegisterScreen() {
         <TextInput
           style={styles.input}
           placeholder="Email"
-          placeholderTextColor="white"
+          placeholderTextColor="#2A4D69"
           value={email}
           onChangeText={text => dispatch({
             type: 'SET_EMAIL',
@@ -148,7 +149,7 @@ export default function RegisterScreen() {
           <TextInput
             style={styles.passwordInput}
             placeholder="Password"
-            placeholderTextColor="white"
+            placeholderTextColor="#2A4D69"
             secureTextEntry={!passwordVisible}
             value={password}
             onChangeText={setPassword}
@@ -164,7 +165,7 @@ export default function RegisterScreen() {
           <TextInput
             style={styles.passwordInput}
             placeholder="Confirm Password"
-            placeholderTextColor="white"
+            placeholderTextColor="#2A4D69"
             secureTextEntry={!confirmPasswordVisible}
             value={confirmPassword}
             onChangeText={setconfirmPassword}
@@ -202,6 +203,7 @@ export default function RegisterScreen() {
             <Text style={styles.buttonText}>Sign-up</Text>
           </TouchableOpacity>
         )}
+    </View>
       </KeyboardAvoidingView>
     </ImageBackground>
   );
@@ -218,29 +220,38 @@ const styles = StyleSheet.create({
     marginTop: 20,
     justifyContent: 'center',
     padding: 20,
-    marginTop: 100,
+    marginTop: '50%',
+  },
+  whiteContainer: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   title: {
     fontFamily: Fonts.Title,
     fontSize: 40,
     fontWeight: 'bold',
-    color: Colors.PrimaryColor,
-    textAlign: 'center', // Center the title horizontally
-    marginTop: 60, // Adjust the marginTop value as needed
+    color: '#2A4D69', // Changed color to blue
+    textAlign: 'center',
   },
   titleContainer: {
     alignItems: 'center', // Center the title horizontally within the container
-    marginTop: 40, // Adjust the marginTop value to move only the title "Snapster"
+    marginBottom: 10,
+    
   },
   input: {
     height: 40,
-    borderColor: 'white',
+    borderColor: '#2A4D69',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
     paddingLeft: 10,
     color: Colors.PrimaryColor,
-    backgroundColor: '#E2CAAE',
     
   },
   button: {
@@ -271,19 +282,17 @@ const styles = StyleSheet.create({
   },
   agreeText: {
     fontSize: 14,
-    color: Colors.PrimaryColor,
+    color: '#2A4D69',
     marginLeft: 5, // Add some space between the checkbox and "Agree with"
     fontFamily: Fonts.BodyText,
-    backgroundColor: '#E2CAAE',
   },
   termsText: {
     fontSize: 14,
-    color: Colors.PrimaryColor,
+    color: '#2A4D69',
     textDecorationLine: 'underline',
     textDecorationStyle: 'dotted',
     marginLeft: 5, // Add some space between "Agree with" and "Terms and Conditions"
     fontFamily: Fonts.Button,
-    backgroundColor: '#E2CAAE',
   },
   checkbox: {
     marginRight: 5, // Add some space between "Terms and Conditions" and the checkbox
@@ -300,21 +309,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   loadingText: {
-    color: Colors.PrimaryColor,
+    color: '#2A4D69',
     fontSize: 18,
     fontWeight: 'bold',
     fontFamily: Fonts.Button,
-    backgroundColor: '#E2CAAE',
   },
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: 'white',
+    borderColor: '#2A4D69',
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
     paddingLeft: 10,
-    backgroundColor: '#E2CAAE',
   },
   passwordInput: {
     flex: 1,
@@ -323,6 +330,7 @@ const styles = StyleSheet.create({
   },
   eyeIconContainer: {
     padding: 10,
+    color: '#2A4D69',
    
   },
   BG_lines: {

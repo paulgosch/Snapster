@@ -11,8 +11,10 @@ import { reference, storage } from './firebaseConfig';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { get, set, child, onValue } from 'firebase/database';
 const customFont = require('./assets/Neucha-Regular.otf');
-const backgroundImageSource = require('./assets/FilmFrame.png');
+const ImageSource = require('./assets/FilmFrame.png');
 const cameraImageSource = require('./assets/Camera_.png');
+const backgroundImageSource = require('./assets/Background.jpg');
+const BG_lines_upSource = require('./assets/BG_lines.png');
 
 export default function HomeScreen({ route }) {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -116,7 +118,7 @@ export default function HomeScreen({ route }) {
   };
 
   const takePicture = async () => {
-    animateButtonOpacity(0.5, "Uploading");
+    animateButtonOpacity(0.5, "Uploading...");
     if (isTimerEnabled) {
       startTimer();
     } else {
@@ -246,7 +248,9 @@ export default function HomeScreen({ route }) {
   }
   return (
     <View style={styles.backgroundColorContainer}>
-    <ImageBackground source={backgroundImageSource} style={styles.background}>
+    <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
+    <Image source={BG_lines_upSource} style={styles.BG_lines} />
+    <ImageBackground source={ImageSource} style={styles.background}>
       <View style={styles.container}>
         <View style={styles.headerTop}>
         <Image source={cameraImageSource} style={styles.titleImage} />
@@ -255,14 +259,14 @@ export default function HomeScreen({ route }) {
             <Feather
               name={flashMode === Camera.Constants.FlashMode.off ? 'zap-off' : 'zap'}
               size={24}
-              color="white"
+              color="#2A4D69"
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.cameraSwitchButton} onPress={toggleCameraType}>
-            <Feather name="rotate-cw" size={24} color="white" />
+            <Feather name="rotate-cw" size={24} color="#2A4D69" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.timerButton} onPress={toggleTimer}>
-            <Feather name="clock" size={24} color={isTimerEnabled ? 'green' : 'white'} />
+            <Feather name="clock" size={24} color={isTimerEnabled ? 'green' : '#2A4D69'} />
           </TouchableOpacity>
         </View>
         <GestureDetector gesture={doubleTap}>
@@ -288,10 +292,10 @@ export default function HomeScreen({ route }) {
         </GestureDetector>
         <View style={styles.headerBottom}>
           <TouchableOpacity style={styles.settingsButton} onPress={() => navigation.navigate(Pages.SettingsPage)}>
-            <Feather name="settings" size={24} color="white" />
+            <Feather name="settings" size={24} color="#2A4D69" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.storeButton} onPress={() => navigation.navigate(Pages.StorePage)}>
-            <Feather name="shopping-cart" size={24} color="white" />
+            <Feather name="shopping-cart" size={24} color="#2A4D69" />
           </TouchableOpacity>
         </View>
         {isTimerActive ? (
@@ -311,6 +315,7 @@ export default function HomeScreen({ route }) {
           </Animated.View>
         )}
       </View>
+      </ImageBackground>
     </ImageBackground>
     </View>
   );
@@ -345,14 +350,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Title,
   },
   progressText: {
     fontFamily: Fonts.BodyText,
     fontSize: 24,
     fontWeight: 'bold',
-    color: 'white',
+    color: '#2A4D69',
     position: 'absolute',
     left: '47.5%', // Adjust the left position
   },
@@ -361,7 +366,7 @@ const styles = StyleSheet.create({
     bottom: '11%', // Move the button 10% higher up from the bottom
     backgroundColor: 'rgba(255, 255, 255, 0.1)', // White transparent background
     borderWidth: 1,
-    borderColor: 'white', // Change the button border color to white
+    borderColor: '#2A4D69', // Change the button border color to white
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 20,
@@ -369,7 +374,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 18,
     fontFamily: Fonts.Button,
-    color: 'white', // Set the button text color to white
+    color: '#2A4D69', // Set the button text color to white
   },
   camera: {
     flex: 1,
@@ -478,6 +483,19 @@ const styles = StyleSheet.create({
     height: 68, // You can adjust this as needed
     resizeMode: 'contain', // This will ensure the image fits within the dimensions provided
   },
-
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+  },
+  BG_lines: {
+    position: 'absolute', // Absolute position
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover', // Cover the entire screen
+  },
 });
 

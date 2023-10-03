@@ -39,44 +39,50 @@ export default function WelcomePage() {
     // Code to navigate to the register page
     navigation.navigate(Pages.RegisterPage);
   };
-
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
       <View style={styles.container}>
-        <View style={styles.upperHalf}>
-          <Text style={styles.title}>Snapster</Text>
-        </View>
+        <Text style={styles.title}>Snapster</Text>
         <Image source={cameraImageSource} style={styles.titleImage} />
-        <View style={styles.inputContainer}>
-        <Text style={styles.middle}>Ready to bring your digital photos</Text>
-        <Text style={styles.middle}>to life?</Text>
+        <View style={styles.whiteShadowContainer}>
+          <View style={styles.divider} />
+          <Text style={styles.middle}>Ready to bring your digital photos</Text>
+          <Text style={styles.middle}>to life?</Text>
+          <View style={styles.divider} />
         </View>
-        <View style={styles.lowerHalf}>
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleRegisterPress}>
-              <Text style={styles.buttonText}>Register</Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
+            <Text style={styles.buttonText}>Login</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleRegisterPress}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
   );
 }
 
-
 const styles = StyleSheet.create({
   middle: {
     fontFamily: Fonts.BodyText,
     fontSize: 25,
     fontWeight: 'bold',
-    color: 'white',
-    Top: 100,
+    color: '#2A4D69',  // Changed color to blue
     padding: 2,
     alignSelf: "center",
+  },
+  whiteShadowContainer: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    marginBottom: 20,  // Added some space below the container
   },
   title: {
     fontFamily: Fonts.Title,
@@ -87,6 +93,7 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     width: '100%',
+    alignSelf: 'center',
   },
   container: {
     flex: 1,
@@ -123,6 +130,11 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 8,
     paddingHorizontal: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 
   buttonText: {
@@ -132,10 +144,17 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.Button,
     textAlign: 'center',
   },
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',  // Distribute the space between items
+    alignItems: 'center',
+    paddingVertical: 50,  // Add some padding to top and bottom
+  },
   titleImage: {
     width: 150,  // You can adjust this as needed
     height: 150, // You can adjust this as needed
     resizeMode: 'contain', // This will ensure the image fits within the dimensions provided
+    marginTop: -50,  // Adjust this value to move the camera image up a bit
   },
   BG_lines: {
     position: 'absolute', // Absolute position
@@ -156,6 +175,12 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingLeft: 5,
     paddingRight: 5,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#E2CAAE',
+    marginVertical: 10,
+    alignSelf: 'stretch',
   },
 
 });
