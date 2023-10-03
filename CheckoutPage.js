@@ -109,7 +109,6 @@ const CheckoutPage = ({ route }) => {
     // Handle the PayPal checkout logic here
   };
 
-
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
@@ -123,6 +122,7 @@ const CheckoutPage = ({ route }) => {
               <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
                 <Icon name="arrow-left" size={24} color="white" />
               </TouchableOpacity>
+              
               <Text style={styles.title}>Checkout Page</Text>
               <View style={{ width: 24 }} />
             </View>
@@ -167,9 +167,11 @@ const CheckoutPage = ({ route }) => {
                 </View>
               )}
             </View>
-            <View style={styles.Paymentmethodcontainer}>
-            <Text style={styles.paymentmethod}>Payment Method</Text></View>
-            <View style={styles.container2}>
+            <View style={styles.Titlecontainer}>
+            <View style={styles.paymentContainer}>
+              <Text style={styles.paymentmethod}>Payment Method</Text>
+              <View style={styles.divider} />
+
               <Text style={styles.subtitle}>Email</Text>
               <TextInput
                 autoCapitalize="none"
@@ -197,19 +199,21 @@ const CheckoutPage = ({ route }) => {
               >
                 <Text style={styles.payButtonText}>Pay with Card</Text>
               </TouchableOpacity>
-            </View>
 
-            <Text style={styles.ortext}>Or</Text>
+             
 
-            <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
-              <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
-            </TouchableOpacity>
+              <Text style={styles.ortext}>Or check out with: </Text>
+
+              <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
+                <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+              </TouchableOpacity>
+              </View>
+          </View>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
     </ImageBackground>
   );
-
 }
 const styles = StyleSheet.create({
   container: {
@@ -223,16 +227,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     height: 50,
     padding: 10,
-    fontFamily: Fonts.BodyText,
-    marginBottom: 15, // Added margin for spacing
+    marginBottom: 15,
+    fontFamily: Fonts.Subtitle,
   },
   card: {
     backgroundColor: "#efefefef",
-    fontFamily: Fonts.BodyText,
   },
   cardContainer: {
     height: 50,
-
   },
   backgroundContainer: {
     flex: 1,
@@ -247,67 +249,64 @@ const styles = StyleSheet.create({
     height: 50,
   },
   ortext: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#2A4D69',
-    fontFamily: Fonts.Title,
     marginVertical: 10,
-    alignSelf: 'center', // This will center the button horizontally
-    backgroundColor: '#E2CAAE',
+    alignSelf: 'left',
+    fontFamily: Fonts.Subtitle,
+  
     padding: 2,
   },
   cardImageContainer: {
     alignItems: 'center',
   },
-  cardImage: {
-    width: 300, // Adjust the width as necessary
-    height: 190, // Adjust the height as necessary
-  },
   payButtonContainer: {
-    paddingVertical: 6,  // Adjusted padding for better shape
-    paddingHorizontal: 10, // Increased padding for better shape
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     borderColor: '#2A4D69',
     backgroundColor: '#2A4D69',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 10, // Added margin for spacing
+    marginTop: 10,
   },
   payButtonText: {
     color: 'white',
-    fontSize: 16,  // Slightly bigger font size
-    fontWeight: '500',  // Not too bold, not too light
-    letterSpacing: 0.5,  // Spacing between letters for better readability
+    fontSize: 16,
+    fontWeight: '500',
+    letterSpacing: 0.5,
+    fontFamily: Fonts.Subtitle,
   },
   subtitle: {
     fontSize: 16,
-   color: '#2A4D69',
-    fontFamily: Fonts.Title,
-    marginBottom: 5, // Added margin for spacing
+    color: '#2A4D69',
+    marginBottom: 5,
     left: 10,
-  },
-  container2: {
-    padding: 20, // Increased padding for better spacing
-    backgroundColor: 'white',
-    borderRadius: 8,
-    marginVertical: 10,
+    fontFamily: Fonts.Subtitle,
   },
   paymentmethod: {
     fontSize: 24,
     color: '#2A4D69',
-    fontFamily: Fonts.Title,
-    
-},
-Paymentmethodcontainer: {
-  color: '#2A4D69',
-  borderWidth: 1,
-  borderColor: '#2A4D69',
-  borderRadius: 10,
-  padding: 4,
-  backgroundColor: 'rgba(255, 255, 255, 0.5)', // White transparent background
-  alignItems: 'center',
-},
-
+    fontFamily: Fonts.Subtitle,
+  },
+  paymentContainer: {
+    backgroundColor: 'white',
+    borderRadius: 8,
+    padding: 20,
+    marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  divider: {
+    height: 1,
+    backgroundColor: '#E2CAAE',
+    marginVertical: 10,
+    alignSelf: 'stretch',
+  },
   bundle: {
     flexDirection: 'row',
     backgroundColor: '#fff',
@@ -328,52 +327,51 @@ Paymentmethodcontainer: {
     textAlign: 'left',
     marginBottom: 5,
     color: '#666',
-    fontFamily: Fonts.BodyText,
+    fontFamily: Fonts.Subtitle,
   },
   bundlePrice: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#2ecc71',
-    fontFamily: Fonts.BodyText,
     textAlign: 'right',
-
+    fontFamily: Fonts.Subtitle,
   },
   bundleImage: {
     width: 100,
     height: 100,
     resizeMode: 'contain',
     marginRight: 10,
-    flex: 1,  // Add this line
+    flex: 1,
   },
   textContainer: {
-    flex: 2,  // Add this line
-    paddingRight: 10,  // Add some padding to prevent text from touching the edge
+    flex: 2,
+    paddingRight: 10,
   },
   headerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',  // Add this line
+    justifyContent: 'space-between',
     marginBottom: 20,
   },
   backButton: {
-    marginRight: 10,  // To give some space between the back button and the title
+    marginRight: 10,
   },
   title: {
     fontSize: 24,
     color: '#2A4D69',
-    fontFamily: Fonts.Title,
     backgroundColor: '#E2CAAE',
     padding: 2,
+    fontFamily: Fonts.Subtitle,
   },
   BG_lines: {
-    position: 'absolute', // Absolute position
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // Cover the entire screen
+    resizeMode: 'cover',
   },
 });
 

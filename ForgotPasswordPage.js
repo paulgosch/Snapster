@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
 import { FIREBASE_AUTH } from './firebaseConfig'; // Adjust the path as necessary
 import { sendPasswordResetEmail } from 'firebase/auth'; // Import the function from the auth package
+import Icon from 'react-native-vector-icons/Feather'; // Corrected Icon import
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
@@ -28,32 +29,41 @@ export default function ForgotPasswordPage() {
   const backgroundImageSource = require('./assets/Background.jpg');
   const BG_linesSource = require('./assets/BG_lines.png');
 
+  const handleGoBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
       <Image source={BG_linesSource} style={styles.BG_lines} />
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <Text style={styles.title}>Forgot Password</Text>
-        <Text style={styles.description}>
-          Enter your email address, and we'll send you a password reset link.
-        </Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          placeholderTextColor={Colors.PrimaryColor}
-          value={email}
-          onChangeText={setEmail}
-        />
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <View style={styles.loadingContent}>
-              <Text style={styles.loadingText}>Sending...</Text>
+        <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+          <Icon name="arrow-left" size={24} color="white" />
+        </TouchableOpacity>
+        <View style={styles.whiteContainer}>
+          <Text style={styles.title}>Forgot Password</Text>
+          <Text style={styles.description}>
+            Enter your email address, and we'll send you a password reset link.
+          </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            placeholderTextColor={Colors.PrimaryColor}
+            value={email}
+            onChangeText={setEmail}
+          />
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <View style={styles.loadingContent}>
+                <Text style={styles.loadingText}>Sending...</Text>
+              </View>
             </View>
-          </View>
-        ) : (
-          <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
-            <Text style={styles.buttonText}>Reset Password</Text>
-          </TouchableOpacity>
-        )}
+          ) : (
+            <TouchableOpacity style={styles.button} onPress={handleResetPassword}>
+              <Text style={styles.buttonText}>Reset Password</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </KeyboardAvoidingView>
     </ImageBackground>
   );
@@ -92,6 +102,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: Colors.PrimaryColor,
     borderRadius: 8,
+    width: '100%',
   },
   button: {
     backgroundColor: Colors.SecondaryColor,
@@ -104,7 +115,7 @@ const styles = StyleSheet.create({
     width: '50%',
   },
   buttonText: {
-    color: Colors.PrimaryColor,
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -144,5 +155,25 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover', // Cover the entire screen
+  },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
+    padding: 10,
+  },
+
+  whiteContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });

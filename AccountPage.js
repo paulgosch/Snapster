@@ -101,90 +101,89 @@ export default function ProfilePage() {
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.background}>
-       <Image source={BG_linesSource} style={styles.BG_lines} />
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
-          <Icon name="arrow-left" size={24} color="white" />
-        </TouchableOpacity>
-        <View style={styles.header}>
-          <Text style={styles.title}>Profile</Text>
-        </View>
-        <View style={styles.profileImageContainer}>
-      <Image source={userIconPlaceholder} style={styles.profileImage} />
-      <TouchableOpacity style={styles.cameraIconContainer} onPress={handleProfilPicture}>
-        <Feather name="camera" size={24} color="#2A4D69" />
-      </TouchableOpacity>
-      </View>
-        <View style={styles.accountContainer}>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>My Account</Text>
-          </View>
-          <View style={styles.accountDetails}>
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{fullName}</Text>
-              <TouchableOpacity onPress={handleChangeFullName}>
-                <Text style={styles.changeText}>Change</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Password:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>********</Text>
-              <TouchableOpacity onPress={handleChangePassword}>
-                <Text style={styles.changeText}>Change</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
-              <Text style={styles.invisibleText}>Change</Text>
-
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
-              <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
-              <Text style={styles.invisibleText}>Change</Text>
-
-            </View>
-
-            <View style={styles.accountRow}>
-              <Text style={[styles.accountText, styles.accountLabel]}>My Adress:</Text>
-            </View>
-            <View style={styles.accountRow}>
-              <Text style={styles.accountTex}>{address}</Text>
-              <TouchableOpacity onPress={handleaddAdress}>
-                <Text style={styles.addAddressText}>add address</Text>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-        </View>
-
-        <View style={styles.accountContainer}>
-          <Text style={styles.accountHeaderText}>My Pictures</Text>
-          <View style={styles.accountDetails}>
-            <TouchableOpacity style={styles.myPictures} onPress={handleMyPicturesPage}>
-              <Text style={styles.myPicturesText}>My Snap-Bundles</Text>
+        <Image source={BG_linesSource} style={styles.BG_lines} />
+        <View style={styles.container}>
+            <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
+                <Icon name="arrow-left" size={24} color="white" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.myPictures} onPress={handleMyOrdersPage}>
-              <Text style={styles.myPicturesText}>My Orders</Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>Profile Page</Text>
+            </View>
+            <View style={styles.profileImageContainer}>
+                <Image source={userIconPlaceholder} style={styles.profileImage} />
+                <TouchableOpacity style={styles.cameraIconContainer} onPress={handleProfilPicture}>
+                    <Feather name="camera" size={24} color="#2A4D69" />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.accountContainer}>
+                <View style={styles.button}>
+                    <Text style={styles.buttonText}>Account Information</Text>
+                </View>
+                <View style={styles.accountDetails}>
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{fullName}</Text>
+                        <TouchableOpacity onPress={handleChangeFullName}>
+                            <Text style={styles.changeText}>Change</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>Password:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>********</Text>
+                        <TouchableOpacity onPress={handleChangePassword}>
+                            <Text style={styles.changeText}>Change</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
+                        <Text style={styles.invisibleText}>Change</Text>
+                    </View>
+
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
+                        <Text style={styles.invisibleText}>Change</Text>
+                    </View>
+
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>My Adress:</Text>
+                    </View>
+                    <View style={styles.accountRow}>
+                        <Text style={styles.accountTex}>{address}</Text>
+                        <TouchableOpacity onPress={handleaddAdress}>
+                            <Text style={styles.addAddressText}>add address</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                
+                <View style={styles.divider}></View> 
+                
+                <View style={styles.subButton}>
+                    <Text style={styles.subButtonText}>My Pictures</Text>
+                </View>
+                <View style={styles.accountDetails}>
+                <TouchableOpacity style={styles.subMyPictures} onPress={handleMyPicturesPage}>
+                        <Text style={styles.subMyPicturesText}>My Snap-Bundles</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.subMyPictures} onPress={handleMyOrdersPage}>
+                        <Text style={styles.subMyPicturesText}>My Orders</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
+                <Text style={styles.deleteAccountText}>Delete Account</Text>
             </TouchableOpacity>
-          </View>
+
+            <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Logout</Text>
+            </TouchableOpacity>
         </View>
-
-        <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
-          <Text style={styles.deleteAccountText}>Delete Account</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Logout</Text>
-        </TouchableOpacity>
-      </View>
     </ImageBackground>
-  );
+);
 }
 
 const styles = StyleSheet.create({
@@ -206,6 +205,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+    backgroundColor: '#E2CAAE'
   },
   profileImageContainer: {
     flexDirection: 'row', // Ensure items are on the same row
@@ -250,6 +250,11 @@ cameraIconContainer: {
     borderRadius: 8,
     backgroundColor: 'white',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   accountHeaderText: {
     fontFamily: Fonts.Subtitle,
@@ -293,7 +298,7 @@ cameraIconContainer: {
     textAlign: 'left',
   },
   changeText: {
-    color: '#DAA05D',
+    color: '#2A4D69',
     fontFamily: Fonts.BodyText,
 
   },
@@ -309,6 +314,7 @@ cameraIconContainer: {
     borderRadius: 4,
     alignItems: 'center',
     marginBottom: 10,
+    width: '100%',
   },
   buttonText: {
     color: '#fff',
@@ -367,5 +373,42 @@ cameraIconContainer: {
     height: '100%',
     resizeMode: 'cover', // Cover the entire screen
   },
+  divider: {
+    height: 1, // height of the divider
+    width: '90%', // width of the divider
+    backgroundColor: '#E2CAAE', // color of the divider
+    marginVertical: 20, // space above and below the divider
+    alignSelf: 'center' // center the divider horizontally
+  },
+  subButton: {
+    backgroundColor: 'rgba(42, 77, 105, 0.5)', 
+    padding: 10, // Reduced padding
+    borderRadius: 4,
+    alignItems: 'center',
+    marginBottom: 10,
+    width: '100%',
+},
+subButtonText: {
+    color: '#fff',
+    fontSize: 16, // Reduced font size
+    fontFamily: Fonts.Button,
+},
+subAccountDetails: {
+    width: '100%',
+    padding: 10, // Reduced padding
+},
+subMyPictures: {
+    marginBottom: 10, // Reduced margin
+    padding: 8, // Reduced padding
+    borderWidth: 0.5, // Reduced border width
+    borderColor: 'rgba(42, 77, 105, 0.5)',
+    borderRadius: 8,
+    alignItems: 'center',
+},
+subMyPicturesText: {
+    color: 'rgba(42, 77, 105, 0.5)',
+    fontSize: 16, // Reduced font size
+    fontFamily: Fonts.Button,
+},
   
 });
