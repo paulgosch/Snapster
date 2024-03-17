@@ -410,5 +410,4 @@ subMyPicturesText: {
     fontSize: 16, // Reduced font size
     fontFamily: Fonts.Button,
 },
-  
 });

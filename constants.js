@@ -26,7 +26,7 @@ export const Colors = {
   PrimaryColor: '#2A4D69',
   SecondaryColor: '#2A4D69',
   TertiaryColor: '#2A4D69',
-  Background: '#CED4DA',
+  Background: '#blue',
   ErrorColor: 'red',
 };
 

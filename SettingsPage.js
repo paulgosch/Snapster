@@ -24,7 +24,7 @@ export default function SettingsPage() {
     // Logic to load sound effects setting
   };
 
-  const handleBack = () => {
+  const handleGoBack = () => {
     navigation.goBack();
 };
 
@@ -90,7 +90,7 @@ export default function SettingsPage() {
   return (
     <ImageBackground source={backgroundImageSource} style={styles.container}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
-      <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+      <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
         <FeatherIcon name="arrow-left" size={24} color={Colors.PrimaryColor} />
       </TouchableOpacity>
       <View style={styles.topContainer}>
