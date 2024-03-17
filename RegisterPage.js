@@ -48,7 +48,7 @@ export default function RegisterScreen() {
   }, []);
 
   const handleRegister = async () => {
-    if (!fullName || !userName) {
+    if ( !userName) {
       // Show an alert if the name or username is missing
       Alert.alert('Name and Username are required fields');
       return;

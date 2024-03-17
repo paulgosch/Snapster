@@ -213,7 +213,6 @@ export default function HomeScreen({ route }) {
         console.error("Error loading user:", error);
       }
     }
-
     useEffect(() => {
       async function loadFont() {
         await Font.loadAsync({
