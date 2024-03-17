@@ -1,16 +1,41 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, ImageBackground, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import * as Font from 'expo-font';
 import { Pages, Colors, Fonts } from './constants';
 
 const backgroundImageSource = require('./assets/Background.jpg');
-const customFont = require('./assets/Neucha-Regular.otf');
 
 export default function FirstScreen({ navigation }) {
   const handleScreenPress = () => {
     navigation.navigate(Pages.WelcomePage);
   };
+
+  // Override default navigation options
+  React.useLayoutEffect(() => {
+    const disableBackButton = () => {
+      navigation.setOptions({
+        headerLeft: () => null, // Disable system-provided back button
+      });
+    };
+
+    const disableGesture = () => {
+      // Disable swipe gesture from the left edge on iOS
+      navigation.setOptions({
+        gestureEnabled: false,
+      });
+    };
+
+    disableBackButton();
+    disableGesture();
+
+    // Cleanup function to reset navigation options when component unmounts
+    return () => {
+      navigation.setOptions({
+        headerLeft: undefined, // Reset headerLeft
+        gestureEnabled: false, // Reset gestureEnabled
+      });
+    };
+  }, [navigation]);
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
@@ -44,10 +69,9 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   title: {
-    fontFamily: 'neucha-regular', // Apply the custom font
+    fontFamily: Fonts.Title,
     fontSize: 50,
     fontWeight: 'bold',
     color: Colors.PrimaryColor,
-    fontFamily: Fonts.Title,
   },
 });

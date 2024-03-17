@@ -20,6 +20,7 @@ import CreateNewPasswordPage from './CreateNewPasswordPage';
 import AccountPage from './AccountPage';
 import MyPicturesPage from './MyPicturesPage';
 import MyOrdersPage from './MyOrdersPage';
+import PaymentSuccessPage from './PaymentSuccessPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -200,6 +201,13 @@ function App() {
             <Stack.Screen
               name={Pages.MyOrdersPage}
               component={MyOrdersPage}
+              options={{
+                headerShown: false, // Hide the header for the new screen if needed
+              }}
+            />
+            <Stack.Screen
+              name={Pages.PaymentSuccessPage}
+              component={PaymentSuccessPage}
               options={{
                 headerShown: false, // Hide the header for the new screen if needed
               }}

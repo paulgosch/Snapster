@@ -117,16 +117,6 @@ export default function RegisterScreen() {
           </View>
         <TextInput
           style={styles.input}
-          placeholder="Full Name"
-          placeholderTextColor="#2A4D69"
-          value={fullName}
-          onChangeText={text => dispatch({
-            type: 'SET_FULLNAME',
-            payload: text,
-          })}
-        />
-        <TextInput
-          style={styles.input}
           placeholder="Username"
           placeholderTextColor="#2A4D69"
           value={userName}

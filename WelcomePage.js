@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'; // Import useState here
-import { View, Text, StyleSheet, TouchableOpacity, ImageBackground,Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
@@ -11,7 +11,8 @@ const customFont = require('./assets/Neucha-Regular.otf');
 const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function WelcomePage() {
-  // ... your existing code ...
+  const navigation = useNavigation();
+
   const [fontLoaded, setFontLoaded] = useState(false);
   useEffect(() => {
     async function loadFont() {
@@ -28,17 +29,14 @@ export default function WelcomePage() {
     return null;
   }
 
-  const navigation = useNavigation();
-
   const handleLoginPress = () => {
-    // Code to navigate to the login page
     navigation.navigate(Pages.LoginPage);
   };
 
   const handleRegisterPress = () => {
-    // Code to navigate to the register page
     navigation.navigate(Pages.RegisterPage);
   };
+
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.BodyText,
     fontSize: 25,
     fontWeight: 'bold',
-    color: '#2A4D69',  // Changed color to blue
+    color: '#2A4D69',
     padding: 2,
     alignSelf: "center",
   },
@@ -82,7 +80,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    marginBottom: 20,  // Added some space below the container
+    marginBottom: 20,
   },
   title: {
     fontFamily: Fonts.Title,
@@ -99,20 +97,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  upperHalf: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  lowerHalf: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  cameraIcon: {
-    marginBottom: 5,
-    color: 'white',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -136,38 +120,31 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
-
   buttonText: {
-    color: 'white', // Change text color to white
+    color: 'white',
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: Fonts.Button,
     textAlign: 'center',
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',  // Distribute the space between items
-    alignItems: 'center',
-    paddingVertical: 50,  // Add some padding to top and bottom
-  },
   titleImage: {
-    width: 150,  // You can adjust this as needed
-    height: 150, // You can adjust this as needed
-    resizeMode: 'contain', // This will ensure the image fits within the dimensions provided
-    marginTop: -50,  // Adjust this value to move the camera image up a bit
+    width: 150,
+    height: 150,
+    resizeMode: 'contain',
+    marginTop: -50,
   },
   BG_lines: {
-    position: 'absolute', // Absolute position
+    position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
     width: '100%',
     height: '100%',
-    resizeMode: 'cover', // Cover the entire screen
+    resizeMode: 'cover',
   },
   inputContainer: {
-    backgroundColor: '#E2CAAE', // Assuming you have a color defined for this in the Colors constant
+    backgroundColor: '#E2CAAE',
     padding: 0,
     borderWidth: 1,
     borderColor: 'white',
@@ -182,5 +159,4 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignSelf: 'stretch',
   },
-
 });

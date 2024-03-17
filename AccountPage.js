@@ -172,15 +172,11 @@ export default function ProfilePage() {
                         <Text style={styles.subMyPicturesText}>My Orders</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
-
-            <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
+                <View style={styles.divider}></View> 
+                <TouchableOpacity onPress={handleDeleteAccount} style={styles.deleteAccountButton}>
                 <Text style={styles.deleteAccountText}>Delete Account</Text>
             </TouchableOpacity>
-
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Logout</Text>
-            </TouchableOpacity>
+            </View>
         </View>
     </ImageBackground>
 );
@@ -329,7 +325,7 @@ cameraIconContainer: {
     padding: 10,
   },
   deleteAccountButton: {
-    alignSelf: 'center', // Center the button horizontally
+    alignSelf: 'left', // Center the button horizontally
     paddingBottom: 10, // Add bottom padding
   },
   deleteAccountText: {
@@ -381,7 +377,7 @@ cameraIconContainer: {
     alignSelf: 'center' // center the divider horizontally
   },
   subButton: {
-    backgroundColor: 'rgba(42, 77, 105, 0.5)', 
+    backgroundColor: 'rgba(42, 77, 105, 0.7)', 
     padding: 10, // Reduced padding
     borderRadius: 4,
     alignItems: 'center',
