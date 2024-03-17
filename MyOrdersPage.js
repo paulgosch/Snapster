@@ -1,17 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground,Image } from 'react-native';
-import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from './constants';
+import { reference, storage } from './firebaseConfig';
+import { useDispatch, useSelector } from 'react-redux';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const BG_linesSource = require('./assets/BG_lines.png');
 
 export default function MyOrdersPage() {
-  const { orders } = useSelector((state) => state.user); // Assuming 'orders' is an array of order objects in your Redux state
-  const navigation = useNavigation();
+  const [data, setData] = useState([]);
+  const { purchaseHistory, userName } = useSelector((state) => state.user);
 
+  const navigation = useNavigation();
+  useEffect(() => {
+  //   setTimeout(() => {
+  //   database.ref('purchaseHistory/').on('value', function (snapshot) {
+  //     setData(snapshot.val());
+  //     console.log("HERE")
+  //     console.log(snapshot.val())
+  //   });
+  // }, 1000);
+  console.log(userName)
+  });
+  
+ 
   const handleGoBack = () => {
     navigation.goBack();
   };
@@ -27,18 +41,16 @@ export default function MyOrdersPage() {
           <Text style={styles.title}>My Orders</Text>
         </View>
         <ScrollView style={styles.ordersContainer}>
-          {orders ? orders.map((order, index) => (
+          {purchaseHistory ? purchaseHistory.map((order, index) => (
             <View key={index} style={styles.orderCard}>
               <Text style={styles.orderTitle}>{order.title}</Text>
-              <Text style={styles.orderDetail}>Order Number: {order.orderNumber}</Text>
               <Text style={styles.orderDetail}>Bundle Type: {order.bundleType}</Text>
-              <Text style={styles.orderDetail}>Date: {order.date}</Text>
-              <Text style={styles.orderDetail}>Status: {order.status}</Text>
-              <Text style={styles.orderDetail}>Subtotal: ${order.subtotal}</Text>
+              <Text style={styles.orderDetail}>Date: {order.purchaseDate}</Text>
+              <Text style={styles.orderDetail}>Size: ${order.totalPictures}</Text>
             </View>
           )) : <Text style={styles.noOrdersText}>No orders found</Text>}
         </ScrollView>
-      </View>
+      </View> 
     </ImageBackground>
   );
 }

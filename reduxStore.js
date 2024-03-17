@@ -5,6 +5,7 @@ const initialState = {
     userName: '',
     email: '',
     address: '',
+    purchaseHistory: 'purch',
 };
 
 // Reducer
@@ -30,6 +31,11 @@ function userReducer(state = initialState, action) {
                 ...state,
                 address: action.payload,
             };
+        case 'SET_PURCHASE_HISTORY':
+            return {
+                ...state,
+                purchaseHistory:  action.payload,
+            }
         default:
             return state;
     }

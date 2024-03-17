@@ -27,7 +27,7 @@ export default function HomeScreen({ route }) {
   const [hasPermission, setHasPermission] = React.useState(null);
   const [cameraRef, setCameraRef] = React.useState(null);
   const navigation = useNavigation();
-  const { userName } = useSelector((state) => state.user);
+  const { userName, purchaseHistory } = useSelector((state) => state.user);
 
   const doubleTap = Gesture.Tap({
     numberOfTaps: 2,
@@ -166,10 +166,15 @@ export default function HomeScreen({ route }) {
     });
   }
   const loadUser = async () => {
-    onValue(reference, (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-      Object.entries(data).forEach(([key, value]) => {
+    try {
+      console.log("loaduser here")
+      console.log(reference);
+
+      const snapshot = await get((reference));
+      console.log("loaduser2 here")
+
+      const userData = snapshot.val();
+      Object.entries(userData).forEach(([key, value]) => {
         switch (key) {
           case "username":
             dispatch({
@@ -195,38 +200,35 @@ export default function HomeScreen({ route }) {
               payload: Object.values(value).join(' ')
             })
             break;
-          case "username":
+
+          case 'bundles':
             dispatch({
-              type: 'SET_USERNAME',
-              payload: value
+              type: 'SET_PURCHASE_HISTORY',
+              payload: value.purchaseHistory
             })
             break;
-        }
-      })
-    })
-    /*     get(child(reference)).then((snapshot) => {
-          if(snapshot.exists()) {
-            console.log(snapshot.val());
-          }else{
-            console.log("No data available")
           }
-        }).catch((error) => {
-          console.log(error);
-        }) */
-  }
-
-  React.useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync({
-        'neucha-regular': customFont,
-      });
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-      setFontLoaded(true);
+        });
+      } catch (error) {
+        console.error("Error loading user:", error);
+      }
     }
-    loadFont();
-    loadUser();
-  }, []);
+
+    useEffect(() => {
+      async function loadFont() {
+        await Font.loadAsync({
+          'neucha-regular': customFont,
+        });
+        const { status } = await Camera.requestCameraPermissionsAsync();
+        setHasPermission(status === 'granted');
+        setFontLoaded(true);
+      }
+      loadFont();
+      loadUser();
+      console.log(purchaseHistory)
+      console.log(purchaseHistory)
+
+    }, []);
 
   if (!fontLoaded) {
     return null;
