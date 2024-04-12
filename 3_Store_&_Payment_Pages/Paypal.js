@@ -3,7 +3,6 @@ import { View, ActivityIndicator } from 'react-native';
 import axios from 'axios';
 import { WebView } from 'react-native-webview';
 import queryString from 'query-string';
-import { useNavigation } from '@react-navigation/native';
 
 export default class Paypal extends Component {
     state = {

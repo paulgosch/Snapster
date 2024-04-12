@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Alert, TouchableOpacity, ImageBackground, TextInput, Image, Platform, KeyboardAvoidingView, ScrollView } from 'react-native';
-import axios from 'axios';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
 import { Pages, Colors, Fonts } from '../constants';
 import { useStripe, CardField, useConfirmPayment } from '@stripe/stripe-react-native';
-import Constants from "expo-constants";
-
 
 const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj'; // this is our real Client ID from paypal
 
@@ -19,7 +16,6 @@ const cardImage = require('.././assets/CardPaymentMasterCard.png');
 const CheckoutPage = ({ route }) => {
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
-  const [clientSecret, setClientSecret] = useState('');
   const [email, setEmail] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
   const navigation = useNavigation(); // Use the useNavigation hook here

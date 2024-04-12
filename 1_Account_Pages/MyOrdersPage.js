@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ImageBackground,Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Pages, Colors, Fonts } from '../constants';
-import { reference, storage } from '../firebaseConfig';
-import { useDispatch, useSelector } from 'react-redux';
+import { Fonts } from '../constants';
+import { useSelector } from 'react-redux';
 
 const backgroundImageSource = require('.././assets/Background.jpg');
 const BG_linesSource = require('.././assets/BG_lines.png');
@@ -15,13 +14,6 @@ export default function MyOrdersPage() {
 
   const navigation = useNavigation();
   useEffect(() => {
-  //   setTimeout(() => {
-  //   database.ref('purchaseHistory/').on('value', function (snapshot) {
-  //     setData(snapshot.val());
-  //     console.log("HERE")
-  //     console.log(snapshot.val())
-  //   });
-  // }, 1000);
   console.log(userName)
   });
   

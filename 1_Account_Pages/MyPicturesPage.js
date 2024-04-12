@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Dimensions, 
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Pages, Colors, Fonts } from '../constants';
+import { Fonts } from '../constants';
 
 const backgroundImageSource = require('.././assets/Background.jpg');
 const BundleImage = require('.././assets/Rolls.png');

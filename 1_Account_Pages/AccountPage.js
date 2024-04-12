@@ -4,7 +4,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
-import { Colors, Fonts } from '../constants';
+import {Fonts } from '../constants';
 
 const backgroundImageSource = require('.././assets/Background.jpg');
 const userIconPlaceholder = require('.././assets/user-icon-image-placeholder.png');

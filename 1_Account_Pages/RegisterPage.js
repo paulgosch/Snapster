@@ -3,7 +3,6 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity, Alert, ImageBackgr
 import * as Font from 'expo-font';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
-import AppPresentationScreen from '../2_App_Pages/AppPresentationScreen'; // Import the new screen component
 
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { FIREBASE_AUTH } from '../firebaseConfig';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from '../constants';

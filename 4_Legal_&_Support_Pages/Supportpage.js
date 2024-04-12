@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ImageBackground, TouchableOpacity, ScrollView, 
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 import { Linking } from 'react-native';
-import { Pages, Colors, Fonts } from '../constants';
+import { Colors, Fonts } from '../constants';
 
 const BG_linesSource = require('.././assets/BG_lines.png');
 
