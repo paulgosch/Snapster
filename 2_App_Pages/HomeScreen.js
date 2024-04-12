@@ -251,7 +251,7 @@ export default function HomeScreen({ route }) {
     <View style={styles.backgroundColorContainer}>
     <ImageBackground source={backgroundImageSource} style={styles.backgroundImage} resizeMode="cover">
     <Image source={BG_lines_upSource} style={styles.BG_lines} />
-    <ImageBackground source={ImageSource} style={styles.background}>
+    
       <View style={styles.container}>
         <View style={styles.headerTop}>
         <Image source={cameraImageSource} style={styles.titleImage} />
@@ -317,7 +317,7 @@ export default function HomeScreen({ route }) {
         )}
       </View>
       </ImageBackground>
-    </ImageBackground>
+    
     </View>
   );
 }
@@ -325,22 +325,20 @@ export default function HomeScreen({ route }) {
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    width: '100%',  // Ensure the width is set to 100%
-    height: '100%', // Ensure the height is set to 100%
     resizeMode: 'cover', // This will ensure the image covers the entire view
   },
   container: {
     flex: 1, // Use flex 1 to occupy the entire screen
     justifyContent: 'space-between', // Align elements vertically with space between them
     alignItems: 'center', // Center elements horizontally in the row
-    padding: 20,
+    
   },
   headerTop: {
     flexDirection: 'row', // Align elements horizontally in a row
     alignItems: 'center', // Center elements vertically in the row
     justifyContent: 'space-between', // Distribute space evenly between elements
     width: '100%', // Occupy the full width
-    marginTop: '10%', // Move the header 15% towards the bottom
+    marginTop: '15%', // Move the header 15% towards the bottom
   },
   headerBottom: {
     flexDirection: 'row', // Align elements horizontally
@@ -383,9 +381,9 @@ const styles = StyleSheet.create({
   },
   cameraContainer: {
     flex: 0.73, // Adjust the flex to take more space for the camera
-    width: '99%',
+    width: '90%',
     justifyContent: 'center', // Align the camera to the center of the container
-    bottom: 30,
+    bottom: '5%',
   },
   cameraBorderRadius: {
     borderRadius: 8, // Set the border radius for rounded corners
