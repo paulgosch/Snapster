@@ -1,0 +1,38 @@
+def safeExtGet(prop, fallback = null) {
+    if (rootProject.ext.has(prop)) {
+        return rootProject.ext[prop]
+    }
+    if (project.properties[prop]) {
+        return project.properties[prop]
+    }
+    return fallback
+}
+
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion safeExtGet('compileSdkVersion')
+    buildToolsVersion safeExtGet('buildToolsVersion')
+
+    defaultConfig {
+        minSdkVersion safeExtGet('minSdkVersion')
+        targetSdkVersion safeExtGet('targetSdkVersion')
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    def pdfViewerVersion = safeExtGet('pdfViewerVersion', '2.8.2')
+    def pdfViewerRepo = safeExtGet('pdfViewerRepo', 'com.github.barteksc')
+
+    //noinspection GradleDynamicVersion
+    implementation "com.facebook.react:react-native:+"
+    implementation "$pdfViewerRepo:android-pdf-viewer:$pdfViewerVersion"
+}

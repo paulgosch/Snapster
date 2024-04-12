@@ -4,23 +4,23 @@ import Icon from 'react-native-vector-icons/Feather';
 import * as Font from 'expo-font';
 import { NavigationContainer, useNavigation, useRoute } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import WelcomePage from './WelcomePage';
-import LoginPage from './LoginPage';
-import RegisterPage from './RegisterPage';
-import FirstScreen from './FirstScreen';
-import AppPresentationScreen from './AppPresentationScreen';
-import HomeScreen from './HomeScreen'; // Import the new screen component
-import SettingsPage from './SettingsPage';
-import SupportPage from './Supportpage';
-import PrivacyPolicyPage from './PrivacyPolicyPage';
-import StorePage from './StorePage';
-import CheckoutPage from './CheckoutPage';
-import ForgotPasswordPage from './ForgotPasswordPage';
-import CreateNewPasswordPage from './CreateNewPasswordPage';
-import AccountPage from './AccountPage';
-import MyPicturesPage from './MyPicturesPage';
-import MyOrdersPage from './MyOrdersPage';
-import PaymentSuccessPage from './PaymentSuccessPage';
+import WelcomePage from './2_App_Pages/WelcomePage';
+import LoginPage from './1_Account_Pages/LoginPage';
+import RegisterPage from './1_Account_Pages/RegisterPage';
+import FirstScreen from './2_App_Pages/FirstScreen';
+import AppPresentationScreen from './2_App_Pages/AppPresentationScreen';
+import HomeScreen from './2_App_Pages/HomeScreen'; // Import the new screen component
+import SettingsPage from './2_App_Pages/SettingsPage';
+import SupportPage from './4_Legal_&_Support_Pages/Supportpage';
+import PrivacyPolicyPage from './4_Legal_&_Support_Pages/PrivacyPolicyPage';
+import StorePage from './3_Store_&_Payment_Pages/StorePage';
+import CheckoutPage from './3_Store_&_Payment_Pages/CheckoutPage';
+import ForgotPasswordPage from './1_Account_Pages/ForgotPasswordPage';
+import CreateNewPasswordPage from './1_Account_Pages/CreateNewPasswordPage';
+import AccountPage from './1_Account_Pages/AccountPage';
+import MyPicturesPage from './1_Account_Pages/MyPicturesPage';
+import MyOrdersPage from './1_Account_Pages/MyOrdersPage';
+import PaymentSuccessPage from './3_Store_&_Payment_Pages/PaymentSuccessPage';
 import { Provider } from 'react-redux';
 import { store } from './reduxStore';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -28,8 +28,8 @@ import { StripeProvider } from '@stripe/stripe-react-native'
 import { Pages, Colors, Fonts } from './constants';
 
 
-import TermsAndConditionsScreen from './TermsAndConditions';
-import Paypal from './Paypal';
+import TermsAndConditionsScreen from './4_Legal_&_Support_Pages/TermsAndConditions';
+import Paypal from './3_Store_&_Payment_Pages/Paypal';
 
 const backgroundImageSource = require('./assets/Background.jpg');
 const customFont = require('./assets/Neucha-Regular.otf');
@@ -85,6 +85,7 @@ function App() {
               name={Pages.WelcomePage}
               component={WelcomePage}
               options={{
+                gestureEnabled: false,
                 headerShown: false, // Hide the header for Welcome
               }}
             />
