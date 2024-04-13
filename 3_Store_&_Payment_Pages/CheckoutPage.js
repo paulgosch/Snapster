@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook from React Navigation
 import { Pages, Colors, Fonts } from '../constants';
 import { useStripe, CardField, useConfirmPayment } from '@stripe/stripe-react-native';
+import { Feather } from '@expo/vector-icons';
 
 const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj'; // this is our real Client ID from paypal
 
@@ -14,6 +15,9 @@ const API_URL = "http://172.16.62.62:3000";
 const cardImage = require('.././assets/CardPaymentMasterCard.png');
 
 const CheckoutPage = ({ route }) => {
+  const [useSameAddress, setUseSameAddress] = useState(true); // Set the initial state to true
+  const [deliveryAddress, setDeliveryAddress] = useState(''); // State for delivery address
+  const [useCreditCard, setCreditCard] = useState (true);
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
   const [email, setEmail] = useState();
@@ -50,6 +54,7 @@ const CheckoutPage = ({ route }) => {
     }
     const billingDetails = {
       email: email,
+      address: useSameAddress ? deliveryAddress : null, 
     };
     //2.Fetch the intent client secret from the backend
     try {
@@ -73,36 +78,13 @@ const CheckoutPage = ({ route }) => {
       console.log("HERE")
       console.log(e);
     }
-    //3.Confirm the payment with the card details
+
   };
 
-  /*  try {
-     const { paymentIntent, error } = await stripe.confirmPayment(clientSecret, {
-       paymentMethod: {
-         card: cardDetails,
-         type: "card", 
-       },
-     });
-
-     if (error) {
-       console.log('Payment error:', error);
-       Alert.alert('Payment Failed', error.message);
-     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-       console.log('Payment succeeded:', paymentIntent);
-       Alert.alert('Payment Successful');
-     } else {
-       console.log('Unexpected payment result:', paymentIntent);
-       Alert.alert('Unexpected Payment Result');
-     }
-   } catch (error) {
-     console.log('An error occurred:', error);
-     Alert.alert('An error occurred');
-   } */
   const handleGoBack = () => {
-    navigation.goBack(); // Navigate back to the previous screen
+    navigation.goBack(); 
   };
   const handlePaypalCheckout = () => {
-    // Handle the PayPal checkout logic here
   };
 
   return (
@@ -118,13 +100,18 @@ const CheckoutPage = ({ route }) => {
               <TouchableOpacity style={styles.backButton} onPress={handleGoBack}>
                 <Icon name="arrow-left" size={24} color="white" />
               </TouchableOpacity>
-              
               <Text style={styles.title}>Checkout Page</Text>
               <View style={{ width: 24 }} />
             </View>
             <View style={styles.cardImageContainer}>
-              {selectedBundle === 'basic' && (
+              <View style={styles.headerContainer2}>
+                <Text style={styles.paymentmethod}>Shopping Cart</Text>
+                <Feather name="shopping-cart" size={24} color="#2A4D69" />
+                </View>
+                <View style={styles.divider} />
+                 {selectedBundle === 'basic' && (
                 <View style={styles.bundle}>
+                  <Text style={styles.bundleTitle}>1x </Text>
                   <Image source={basicBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>
                     <Text style={styles.bundleTitle}>Basic Bundle</Text>
@@ -138,6 +125,7 @@ const CheckoutPage = ({ route }) => {
               )}
               {selectedBundle === 'standard' && (
                 <View style={styles.bundle}>
+                  <Text style={styles.bundleTitle}>1x </Text>
                   <Image source={standardBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>
                     <Text style={styles.bundleTitle}>Standard Bundle</Text>
@@ -151,6 +139,7 @@ const CheckoutPage = ({ route }) => {
               )}
               {selectedBundle === 'premium' && (
                 <View style={styles.bundle}>
+                  <Text style={styles.bundleTitle}>1x </Text>
                   <Image source={premiumBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>
                     <Text style={styles.bundleTitle}>Premium Bundle</Text>
@@ -163,20 +152,96 @@ const CheckoutPage = ({ route }) => {
                 </View>
               )}
             </View>
-            <View style={styles.Titlecontainer}>
-            <View style={styles.paymentContainer}>
+            <View>
+              <View style={styles.paymentContainer}>
+                <View style = {styles.headerContainer2}> 
+                <Text style={styles.paymentmethod}>Delivery & Billing Address</Text>
+                <Feather name="map-pin" size={24} color="#2A4D69" />
+                </View>
+                <View style={styles.divider} />
+                <View style={styles.deliveryAddressContainer}>
+                    <Text style={styles.subtitle}>Delivery Address</Text>
+                    <TextInput
+                      autoCapitalize="words"
+                      placeholder="Full Name"
+                      style={styles.input}
+                    />
+                    <TextInput
+                      autoCapitalize="words"
+                      placeholder="Street Address"
+                      style={styles.input}
+                    />
+                    <TextInput
+                      autoCapitalize="words"
+                      placeholder="City"
+                      style={styles.input}
+                    />
+                    <TextInput
+                      keyboardType="numeric"
+                      placeholder="Postal Code"
+                      style={styles.input}
+                    />
+                    <TextInput
+                      editable={false} 
+                      autoCapitalize="words"
+                      defaultValue="Germany" 
+                      style={styles.input}
+                    />
+                  </View>
+                  <View style={styles.addressContainer}>
+                  <TouchableOpacity onPress={() => setUseSameAddress(!useSameAddress)} style={styles.checkbox}>
+                    {useSameAddress ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
+                  </TouchableOpacity>
+                  <Text style={styles.ortext}>Use same address for delivery and billing?</Text>
+                </View>
+                {!useSameAddress && (
+                  <View>
+                    <Text style={styles.BillingAdressTitle}>Billing Address</Text>
+                    <TextInput
+                     autoCapitalize="words"
+                     placeholder="Full Name"
+                     style={styles.input}
+                   />
+                   <TextInput
+                     autoCapitalize="words"
+                     placeholder="Street Address"
+                     style={styles.input}
+                   />
+                   <TextInput
+                     autoCapitalize="words"
+                     placeholder="City"
+                     style={styles.input}
+                   />
+                   <TextInput
+                     keyboardType="numeric"
+                     placeholder="Postal Code"
+                     style={styles.input}
+                   />
+                   <TextInput
+                     autoCapitalize="words"
+                     placeholder="Country" 
+                     style={styles.input}
+                   />
+                  </View>
+                )}
+                
+              </View>
+              <View style = {styles.paymentContainer}>
+              <View style = {styles.headerContainer2}>
               <Text style={styles.paymentmethod}>Payment Method</Text>
+                <Feather name="credit-card" size={24} color="#2A4D69" />
+                </View>
               <View style={styles.divider} />
 
-              <Text style={styles.subtitle}>Email</Text>
-              <TextInput
-                autoCapitalize="none"
-                placeholder="E-mail"
-                keyboardType="email-address"
-                onChange={value => setEmail(value.nativeEvent.text)}
-                style={styles.input}
-              />
-              <Text style={styles.subtitle}>Card Information</Text>
+              <View style={styles.addressContainer}>
+              <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
+                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
+                  </TouchableOpacity>
+                  <Text style={styles.ortext}>Credit Card</Text>
+                </View>
+                
+                <View>
+              <Text style={styles.BillingAdressTitle}>Card Information</Text>
               <CardField
                 postalCodeEnabled={false}
                 placeholder={{
@@ -195,13 +260,15 @@ const CheckoutPage = ({ route }) => {
               >
                 <Text style={styles.payButtonText}>Pay with Card</Text>
               </TouchableOpacity>
-
-             
-
-              <Text style={styles.ortext}>Or check out with: </Text>
-
+              </View>
+              <View style={styles.addressContainer}>
+              <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
+                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
+                  </TouchableOpacity>
+                  <Text style={styles.ortext}>PayPal</Text>
+              </View>
               <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
-                <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+              <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
               </TouchableOpacity>
               </View>
           </View>
@@ -225,6 +292,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     fontFamily: Fonts.Subtitle,
+    color: '#2A4D69',
   },
   card: {
     backgroundColor: "#efefefef",
@@ -247,14 +315,17 @@ const styles = StyleSheet.create({
   ortext: {
     fontSize: 16,
     color: '#2A4D69',
-    marginVertical: 10,
-    alignSelf: 'left',
     fontFamily: Fonts.Subtitle,
-  
-    padding: 2,
   },
   cardImageContainer: {
-    alignItems: 'center',
+      backgroundColor: 'white',
+      borderRadius: 8,
+      padding: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
   },
   payButtonContainer: {
     paddingVertical: 6,
@@ -306,10 +377,9 @@ const styles = StyleSheet.create({
   bundle: {
     flexDirection: 'row',
     backgroundColor: '#fff',
-    padding: 20,
+    padding: 10,
     borderRadius: 8,
     alignItems: 'center',
-    marginBottom: 20,
     elevation: 4,
     width: '100%',
   },
@@ -344,10 +414,16 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
   headerContainer: {
+    paddingTop: '10%',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: 20,
+  },
+  headerContainer2:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   backButton: {
     marginRight: 10,
@@ -356,7 +432,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     color: '#2A4D69',
     backgroundColor: '#E2CAAE',
-    padding: 2,
     fontFamily: Fonts.Subtitle,
   },
   BG_lines: {
@@ -369,6 +444,22 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  addressContainer: {
+    flexDirection: 'row', // Align items in a row
+    alignItems: 'center', // Center items vertically
+  },
+  checkbox: {
+    paddingRight: 5,
+  },
+ BillingAdressTitle: {
+ paddingTop: 10,
+ fontSize: 16,
+ color: '#2A4D69',
+ marginBottom: 5,
+ left: 10,
+ fontFamily: Fonts.Subtitle,
+ },
+  
 });
 
 export default CheckoutPage;
