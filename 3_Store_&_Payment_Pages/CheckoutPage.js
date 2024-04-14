@@ -134,7 +134,7 @@ const CheckoutPage = ({ route }) => {
                     <Text style={styles.bundleDescription}>+ with 27 Pictures </Text>
                     <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
                     <Text style={styles.bundleDescription}>+ free Delivery</Text>
-                    <Text style={styles.bundlePrice}>€5.99</Text>
+                    <Text style={styles.bundlePrice}>€8.99</Text>
                   </View>
                 </View>
               )}
@@ -148,7 +148,7 @@ const CheckoutPage = ({ route }) => {
                     <Text style={styles.bundleDescription}>+ with 47 Pictures </Text>
                     <Text style={styles.bundleDescription}>+ sustainable packaging </Text>
                     <Text style={styles.bundleDescription}>+ free Delivery</Text>
-                    <Text style={styles.bundlePrice}>€6.99</Text>
+                    <Text style={styles.bundlePrice}>€12.99</Text>
                   </View>
                 </View>
               )}
