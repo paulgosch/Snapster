@@ -6,31 +6,34 @@ import { Pages, Colors, Fonts } from '../constants';
 import { useStripe, CardField, useConfirmPayment } from '@stripe/stripe-react-native';
 import { Feather } from '@expo/vector-icons';
 
-const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj'; // this is our real Client ID from paypal
-
-// Import the backgroundImageSource from StorePage
+const YOUR_CLIENT_ID = 'AZC-5Z6zhxR338bOISEchhRL13JfwG-JCGCmgsJPBpZzntabmjEsd9Ki-xlWK9YziV6CyfLW4-PTtgQj';
 const backgroundImageSource = require('.././assets/Background.jpg');
-const paypalimage = require('.././assets/paypalimage.png'); // Import the PayPal image
+const paypalimage = require('.././assets/paypalimage.png');
 const API_URL = "http://172.16.62.62:3000";
 const cardImage = require('.././assets/CardPaymentMasterCard.png');
+const basicBundleImage = require('.././assets/Roll_basic.png');
+const standardBundleImage = require('.././assets/Roll_standard.png');
+const premiumBundleImage = require('.././assets/Roll_premium.png');
+const BG_linesSource = require('.././assets/BG_lines.png');
 
 const CheckoutPage = ({ route }) => {
-  const [useSameAddress, setUseSameAddress] = useState(true); // Set the initial state to true
-  const [deliveryAddress, setDeliveryAddress] = useState(''); // State for delivery address
-  const [useCreditCard, setCreditCard] = useState (true);
+  const [useSameAddress, setUseSameAddress] = useState(true);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [useCreditCard, setCreditCard] = useState(false);
+  const [showCreditCard, setShowCreditCard] = useState(true);
+  const [usePayPal, setPaypal] = useState(false);
+  const [showPaypal, setShowPaypal] = useState(true);
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
   const [email, setEmail] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
-  const navigation = useNavigation(); // Use the useNavigation hook here
+  const navigation = useNavigation();
+
+  const selectedBundle = route.params?.bundle;
+
   const createOrder = () => {
     navigation.navigate(Pages.Paypal);
   };
-
-  const basicBundleImage = require('.././assets/Roll_basic.png');
-  const standardBundleImage = require('.././assets/Roll_standard.png');
-  const premiumBundleImage = require('.././assets/Roll_premium.png');
-  const BG_linesSource = require('.././assets/BG_lines.png');
 
   const fetchPaymentIntentClientSecret = async () => {
     const response = await fetch(`${API_URL}/create-payment-intent/24pack`, {
@@ -43,23 +46,18 @@ const CheckoutPage = ({ route }) => {
     return { clientSecret, error };
   };
 
-
-  const selectedBundle = route.params?.bundle;
-
   const capturePayment = async () => {
-    //1.Gather the customer's billing information (e.g., email)
     if (!cardDetails?.complete || !email) {
-      Alert.alert("Please enter Complete card details and Email");
+      Alert.alert("Please enter complete card details and email.");
       return;
     }
     const billingDetails = {
       email: email,
       address: useSameAddress ? deliveryAddress : null, 
     };
-    //2.Fetch the intent client secret from the backend
+
     try {
       const { clientSecret, error } = await fetchPaymentIntentClientSecret();
-      //2. confirm the payment
       if (error) {
         console.log("Unable to process payment");
       } else {
@@ -78,22 +76,24 @@ const CheckoutPage = ({ route }) => {
       console.log("HERE")
       console.log(e);
     }
-
   };
 
   const handleGoBack = () => {
     navigation.goBack(); 
   };
+
+  const handleCreditCardCheckout = () => {
+    setShowCreditCard(!showCreditCard);
+  };
+
   const handlePaypalCheckout = () => {
+    setShowPaypal(!showPaypal);
   };
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
       <Image source={BG_linesSource} style={styles.BG_lines} />
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-      >
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }} style={{ flex: 1 }}>
           <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -103,13 +103,15 @@ const CheckoutPage = ({ route }) => {
               <Text style={styles.title}>Checkout Page</Text>
               <View style={{ width: 24 }} />
             </View>
+
             <View style={styles.cardImageContainer}>
               <View style={styles.headerContainer2}>
                 <Text style={styles.paymentmethod}>Shopping Cart</Text>
                 <Feather name="shopping-cart" size={24} color="#2A4D69" />
-                </View>
-                <View style={styles.divider} />
-                 {selectedBundle === 'basic' && (
+              </View>
+              <View style={styles.divider} />
+
+              {selectedBundle === 'basic' && (
                 <View style={styles.bundle}>
                   <Text style={styles.bundleTitle}>1x </Text>
                   <Image source={basicBundleImage} style={styles.bundleImage} />
@@ -190,7 +192,7 @@ const CheckoutPage = ({ route }) => {
                   </View>
                   <View style={styles.addressContainer}>
                   <TouchableOpacity onPress={() => setUseSameAddress(!useSameAddress)} style={styles.checkbox}>
-                    {useSameAddress ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
+                    {useSameAddress ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="#2A4D69" />}
                   </TouchableOpacity>
                   <Text style={styles.ortext}>Use same address for delivery and billing?</Text>
                 </View>
@@ -227,49 +229,55 @@ const CheckoutPage = ({ route }) => {
                 
               </View>
               <View style = {styles.paymentContainer}>
-              <View style = {styles.headerContainer2}>
-              <Text style={styles.paymentmethod}>Payment Method</Text>
-                <Feather name="credit-card" size={24} color="#2A4D69" />
-                </View>
-              <View style={styles.divider} />
+                <View style = {styles.headerContainer2}>
+                  <Text style={styles.paymentmethod}>Payment Method</Text>
+                  <Feather name="credit-card" size={24} color="#2A4D69" />
+                    </View>
+                    <View style={styles.divider} />
 
-              <View style={styles.addressContainer}>
-              <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
-                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
-                  </TouchableOpacity>
-                  <Text style={styles.ortext}>Credit Card</Text>
+                    <View style={styles.addressContainer}>
+                    <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
+                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="#2A4D69"/>}
+                    </TouchableOpacity>
+                    <Text style={styles.ortext}>Credit Card</Text>
+                      </View>
+                    {useCreditCard && showCreditCard && (
+                    <View>
+                    <Text style={styles.BillingAdressTitle}>Card Information</Text>
+                    <View>
+                    <CardField
+                    postalCodeEnabled={false}
+                    placeholder={{
+                      number: "4242 4242 4242 4242",
+                    }}
+                    cardStyle={styles.card}
+                    style={styles.cardContainer}
+                    onCardChange={cardDetails => {
+                      setCardDetails(cardDetails);
+                    }}
+                    />
+                    <TouchableOpacity
+                      onPress={capturePayment}
+                      style={styles.payButtonContainer}
+                      disabled={loading}
+                    >
+                      <Text style={styles.payButtonText}>Buy Now</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                
-                <View>
-              <Text style={styles.BillingAdressTitle}>Card Information</Text>
-              <CardField
-                postalCodeEnabled={false}
-                placeholder={{
-                  number: "4242 4242 4242 4242",
-                }}
-                cardStyle={styles.card}
-                style={styles.cardContainer}
-                onCardChange={cardDetails => {
-                  setCardDetails(cardDetails);
-                }}
-              />
-              <TouchableOpacity
-                onPress={capturePayment}
-                style={styles.payButtonContainer}
-                disabled={loading}
-              >
-                <Text style={styles.payButtonText}>Pay with Card</Text>
-              </TouchableOpacity>
-              </View>
+              )}
               <View style={styles.addressContainer}>
-              <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
-                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="black" />}
+              <TouchableOpacity onPress={() => setPaypal(!usePayPal)} style={styles.checkbox}>
+                    {usePayPal ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="#2A4D69" />}
                   </TouchableOpacity>
                   <Text style={styles.ortext}>PayPal</Text>
-              </View>
-              <TouchableOpacity onPress={createOrder} style={styles.paypalImageContainer}>
-              <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
-              </TouchableOpacity>
+                </View>
+               {usePayPal && showPaypal && (
+                <TouchableOpacity onPress={handlePaypalCheckout} style={styles.paypalImageContainer}>
+                <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+                <Text style={styles.subtitle}>Click here to continue with PayPal</Text>
+                </TouchableOpacity>
+                )}
               </View>
           </View>
           </View>
@@ -331,7 +339,7 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 10,
     borderColor: '#2A4D69',
-    backgroundColor: '#2A4D69',
+    backgroundColor: 'green',
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
