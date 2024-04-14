@@ -21,7 +21,7 @@ const CheckoutPage = ({ route }) => {
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [useCreditCard, setCreditCard] = useState(false);
   const [showCreditCard, setShowCreditCard] = useState(true);
-  const [usePayPal, setPaypal] = useState(false);
+  const [usePayPal, setPaypal] = useState(true);
   const [showPaypal, setShowPaypal] = useState(true);
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
@@ -87,7 +87,6 @@ const CheckoutPage = ({ route }) => {
   };
 
   const handlePaypalCheckout = () => {
-    setShowPaypal(!showPaypal);
   };
 
   return (
