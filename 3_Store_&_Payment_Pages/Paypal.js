@@ -4,6 +4,9 @@ import axios from 'axios';
 import { WebView } from 'react-native-webview';
 import queryString from 'query-string';
 import { useNavigation } from '@react-navigation/native';
+import { get, update, child, onValue } from 'firebase/database';
+import { reference, storage } from '../firebaseConfig';
+import { serverTimestamp } from 'firebase/database';
 
 export default class Paypal extends Component {
     state = {
@@ -12,12 +15,27 @@ export default class Paypal extends Component {
         paymentId: null,
         webViewVisible: true,
     };
+    
 
     closeWebView = () => {
         this.setState({ webViewVisible: false });
     };
 
+    loadData = async () => {
+        try {
+            const snapshot = await get((reference));
+            if (snapshot.exists()) {
+                console.log(snapshot.val()["bundles"]);
+            } else {
+                console.log('No data available');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     componentDidMount() {
+        this.loadData();
         let currency = '1 EUR';
         currency.replace(' EUR', '');
 
@@ -97,17 +115,18 @@ export default class Paypal extends Component {
             });
     }
 
-    _onNavigationStateChange = (webViewState) => {
+    _onNavigationStateChange = async (webViewState) => {
         if (webViewState.url.includes('https://example.com/')) {
             this.setState({
                 approvalUrl: null,
             });
-
+    
             const parsedUrl = queryString.parseUrl(webViewState.url);
             const { PayerID, paymentId } = parsedUrl.query;
-
-            axios
-                .post(
+    
+            try {
+                // Execute the payment
+                const execResponse = await axios.post(
                     `https://api.sandbox.paypal.com/v1/payments/payment/${paymentId}/execute`,
                     { payer_id: PayerID },
                     {
@@ -116,15 +135,33 @@ export default class Paypal extends Component {
                             Authorization: `Bearer ${this.state.accessToken}`,
                         },
                     }
-                )
-                .then((response) => {
-                    console.log(response);
-                    // Navigate to PaymentSuccessPage
-                    this.props.navigation.navigate('PaymentSuccessPage');
-                })
-                .catch((err) => {
-                    console.log({ ...err });
-                });
+                );
+    
+                console.log('Payment execution response:', execResponse.data);
+    
+                // Fetch existing bundles from Firebase
+                const snapshot = await get(reference);  // Make sure to use the correct Firebase reference
+                let bundles = snapshot.exists() && Array.isArray(snapshot.val()["bundles"]) ? snapshot.val()["bundles"] : [];
+                const pack = this.props.route.params.pack;
+                console.log(pack)
+                // Add new bundle
+                const newBundle = {
+                    bundleType: pack,
+                    purchaseDate: new Date().toISOString().slice(0, 10),  // YYYY-MM-DD
+                    timestamp: serverTimestamp(),  // Firebase server timestamp
+                };
+                bundles.push(newBundle);
+    
+                // Update Firebase with new bundles
+                await update(reference, {bundles: bundles});  // Updating as an object field if reference points to the parent object
+                console.log('Database updated successfully!');
+    
+                // Navigate to success page
+                this.props.navigation.navigate('PaymentSuccessPage');
+            } catch (error) {
+                console.error('Error during payment execution or database update:', error);
+                // Consider navigation to an error page or showing an error message
+            }
         }
     };
 

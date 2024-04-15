@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ref, uploadBytesResumable } from 'firebase/storage';
 import { reference, storage } from '../firebaseConfig';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { get, set, child, onValue } from 'firebase/database';
+import { get, set, update, child, onValue } from 'firebase/database';
 const customFont = require('.././assets/Neucha-Regular.otf');
 const ImageSource = require('.././assets/FilmFrame.png');
 const cameraImageSource = require('.././assets/Camera_.png');

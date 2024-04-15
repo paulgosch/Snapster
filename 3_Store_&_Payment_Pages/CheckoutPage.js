@@ -23,8 +23,9 @@ const CheckoutPage = ({ route }) => {
   const [email, setEmail] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
   const navigation = useNavigation(); // Use the useNavigation hook here
+  const { pack } = route.params;
   const createOrder = () => {
-    navigation.navigate(Pages.Paypal);
+    navigation.navigate(Pages.Paypal, {pack: pack});
   };
 
   const basicBundleImage = require('.././assets/Roll_basic.png');
@@ -43,8 +44,6 @@ const CheckoutPage = ({ route }) => {
     return { clientSecret, error };
   };
 
-
-  const selectedBundle = route.params?.bundle;
 
   const capturePayment = async () => {
     //1.Gather the customer's billing information (e.g., email)
@@ -127,7 +126,7 @@ const CheckoutPage = ({ route }) => {
               <View style={{ width: 24 }} />
             </View>
             <View style={styles.cardImageContainer}>
-              {selectedBundle === 'basic' && (
+              {pack === 'basic' && (
                 <View style={styles.bundle}>
                   <Image source={basicBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>
@@ -140,7 +139,7 @@ const CheckoutPage = ({ route }) => {
                   </View>
                 </View>
               )}
-              {selectedBundle === 'standard' && (
+              {pack === 'standard' && (
                 <View style={styles.bundle}>
                   <Image source={standardBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>
@@ -153,7 +152,7 @@ const CheckoutPage = ({ route }) => {
                   </View>
                 </View>
               )}
-              {selectedBundle === 'premium' && (
+              {pack === 'premium' && (
                 <View style={styles.bundle}>
                   <Image source={premiumBundleImage} style={styles.bundleImage} />
                   <View style={styles.textContainer}>

@@ -14,7 +14,8 @@ const StorePage = () => {
   const navigation = useNavigation();
 
   const handleBundleOrder = (selectedBundle) => {
-    navigation.navigate(Pages.CheckoutPage, { bundle: selectedBundle });
+    console.log(selectedBundle)
+    navigation.navigate(Pages.CheckoutPage, { pack: selectedBundle });
   };
 
   const handleGoBack = () => {
