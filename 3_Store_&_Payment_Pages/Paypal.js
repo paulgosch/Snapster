@@ -8,6 +8,7 @@ import { get, update, child, onValue } from 'firebase/database';
 import { reference, storage } from '../firebaseConfig';
 import { serverTimestamp } from 'firebase/database';
 
+
 export default class Paypal extends Component {
     state = {
         accessToken: null,

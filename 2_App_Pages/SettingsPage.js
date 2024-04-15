@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Switch, StyleSheet, ImageBackground, Link
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from '../constants';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 
 const backgroundImageSource = require('.././assets/Background.jpg');

@@ -4,9 +4,9 @@ import * as Font from 'expo-font';
 import { useNavigation } from '@react-navigation/native';
 import { Pages, Colors, Fonts } from '../constants';
 
-const backgroundImageSource = require('.././assets/Background.jpg');
-const customFont = require('.././assets/Neucha-Regular.otf');
-const PeopleTakingPics = require('.././assets/PeopleTakingPics.jpg');
+const backgroundImageSource = require('../assets/Background.jpg');
+const customFont = require('../assets/Neucha-Regular.otf');
+const PeopleTakingPics = require('../assets/PeopleTakingPics.jpg');
 const FactoryWorkers = require('../assets/FactoryWorkers.jpg');
 const Delivery = require('../assets/Delivery.jpg');
 const BG_linesSource = require('../assets/BG_lines.png');
@@ -70,7 +70,7 @@ export default function AppPresentationScreen() {
 
         <Text style={styles.title}>{steps[currentStep].title}</Text>
         <View style={styles.imageContainer}>
-          <Image source={steps[currentStep].image} style={styles.image} resizeMode="contain" />
+          <Image source={steps[currentStep].image} style={getStepImageStyle(currentStep)} resizeMode="contain" />
         </View>
         <View style={styles.textContainer}>
           <Text style={styles.text}>{steps[currentStep].text}</Text>
@@ -175,6 +175,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderRadius: 8,
   },
+  image2: {
+    width: 300,
+    height: 150,
+    marginBottom: 15,
+    borderRadius: 8,
+  },
+  image3: {
+    width: 300,
+    height: 200,
+    marginBottom: 15,
+    borderRadius: 8, // Adjust border radius as needed
+  },
   BG_lines: {
     position: 'absolute',
     top: 0,
@@ -185,4 +197,16 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
-});
+}); 
+
+// Function to get the style based on current step
+const getStepImageStyle = (step) => {
+  switch (step) {
+    case 1:
+      return styles.image2;
+    case 2:
+      return styles.image3;
+    default:
+      return styles.image;
+  }
+};

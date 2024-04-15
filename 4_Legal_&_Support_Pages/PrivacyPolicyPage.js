@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; // Import the useNavigation hook
 import Icon from 'react-native-vector-icons/Feather';
-import { Pages, Colors, Fonts } from '../constants';
+import { Fonts } from '../constants';
 
 export default function PrivacyPolicyPage() {
   const navigation = useNavigation(); // Use the useNavigation hook here
