@@ -144,11 +144,14 @@ export default class Paypal extends Component {
                 const snapshot = await get(reference);  // Make sure to use the correct Firebase reference
                 let bundles = snapshot.exists() && Array.isArray(snapshot.val()["bundles"]) ? snapshot.val()["bundles"] : [];
                 const pack = this.props.route.params.pack;
+                const deliveryAddress = this.props.route.params.deliveryAddress;
+                const billingAddress = this.props.route.params.billingAddress;
                 console.log(pack)
                 // Add new bundle
                 const newBundle = {
                     bundleType: pack,
-                    purchaseDate: new Date().toISOString().slice(0, 10),  // YYYY-MM-DD
+                    deliveryAddress: deliveryAddress,  
+                    billingAddress:billingAddress,
                     timestamp: serverTimestamp(),  // Firebase server timestamp
                 };
                 bundles.push(newBundle);

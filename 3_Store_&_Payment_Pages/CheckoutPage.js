@@ -18,7 +18,6 @@ const BG_linesSource = require('.././assets/BG_lines.png');
 
 const CheckoutPage = ({ route }) => {
   const [useSameAddress, setUseSameAddress] = useState(true);
-  const [deliveryAddress, setDeliveryAddress] = useState('');
   const [useCreditCard, setCreditCard] = useState(false);
   const [showCreditCard, setShowCreditCard] = useState(true);
   const [usePayPal, setPaypal] = useState(true);
@@ -27,11 +26,39 @@ const CheckoutPage = ({ route }) => {
   const [cardDetails, setCardDetails] = useState();
   const [email, setEmail] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
-  const navigation = useNavigation(); // Use the useNavigation hook here
-  const { pack } = route.params;
-  const createOrder = () => {
-    navigation.navigate(Pages.Paypal, {pack: pack});
+  const [deliveryAddress, setDeliveryAddress] = useState({
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: 'Germany' // Defaulting to Germany, not editable as per your setup
+  });
+
+  const [billingAddress, setBillingAddress] = useState({
+    fullName: '',
+    streetAddress: '',
+    city: '',
+    postalCode: '',
+    country: ''
+  });
+
+  const navigation = useNavigation();
+
+  // Handle address input changes
+  const handleAddressChange = (name, value, isBilling = false) => {
+    if (isBilling) {
+      setBillingAddress(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    } else {
+      setDeliveryAddress(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
+  const { pack } = route.params;
 
   const fetchPaymentIntentClientSecret = async () => {
     const response = await fetch(`${API_URL}/create-payment-intent/24pack`, {
@@ -85,7 +112,9 @@ const CheckoutPage = ({ route }) => {
   };
 
   const handlePaypalCheckout = () => {
-    navigation.navigate(Pages.Paypal, {pack: pack});
+    useSameAddress ?
+     navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:deliveryAddress}) : 
+     navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:billingAddress});
   };
 
   return (
@@ -163,31 +192,34 @@ const CheckoutPage = ({ route }) => {
                 <View style={styles.deliveryAddressContainer}>
                     <Text style={styles.subtitle}>Delivery Address</Text>
                     <TextInput
-                      autoCapitalize="words"
-                      placeholder="Full Name"
-                      style={styles.input}
-                    />
-                    <TextInput
-                      autoCapitalize="words"
-                      placeholder="Street Address"
-                      style={styles.input}
-                    />
-                    <TextInput
-                      autoCapitalize="words"
-                      placeholder="City"
-                      style={styles.input}
-                    />
-                    <TextInput
-                      keyboardType="numeric"
-                      placeholder="Postal Code"
-                      style={styles.input}
-                    />
-                    <TextInput
-                      editable={false} 
-                      autoCapitalize="words"
-                      defaultValue="Germany" 
-                      style={styles.input}
-                    />
+          placeholder="Full Name"
+          value={deliveryAddress.fullName}
+          onChangeText={text => handleAddressChange('fullName', text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="Street Address"
+          value={deliveryAddress.streetAddress}
+          onChangeText={text => handleAddressChange('streetAddress', text)}
+          style={styles.input}
+        />
+        <TextInput
+          placeholder="City"
+          value={deliveryAddress.city}
+          onChangeText={text => handleAddressChange('city', text)}
+          style={styles.input}
+        />
+        <TextInput
+          keyboardType="numeric"
+          placeholder="Postal Code"
+          value={deliveryAddress.postalCode}
+          onChangeText={text => handleAddressChange('postalCode', text)}
+          style={styles.input}
+        />
+        <TextInput
+          editable={false}
+          value={deliveryAddress.country}
+        />
                   </View>
                   <View style={styles.addressContainer}>
                   <TouchableOpacity onPress={() => setUseSameAddress(!useSameAddress)} style={styles.checkbox}>
@@ -199,30 +231,36 @@ const CheckoutPage = ({ route }) => {
                   <View>
                     <Text style={styles.BillingAdressTitle}>Billing Address</Text>
                     <TextInput
-                     autoCapitalize="words"
-                     placeholder="Full Name"
-                     style={styles.input}
-                   />
-                   <TextInput
-                     autoCapitalize="words"
-                     placeholder="Street Address"
-                     style={styles.input}
-                   />
-                   <TextInput
-                     autoCapitalize="words"
-                     placeholder="City"
-                     style={styles.input}
-                   />
-                   <TextInput
-                     keyboardType="numeric"
-                     placeholder="Postal Code"
-                     style={styles.input}
-                   />
-                   <TextInput
-                     autoCapitalize="words"
-                     placeholder="Country" 
-                     style={styles.input}
-                   />
+            placeholder="Full Name"
+            value={billingAddress.fullName}
+            onChangeText={text => handleAddressChange('fullName', text, true)}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Street Address"
+            value={billingAddress.streetAddress}
+            onChangeText={text => handleAddressChange('streetAddress', text, true)}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="City"
+            value={billingAddress.city}
+            onChangeText={text => handleAddressChange('city', text, true)}
+            style={styles.input}
+          />
+          <TextInput
+            keyboardType="numeric"
+            placeholder="Postal Code"
+            value={billingAddress.postalCode}
+            onChangeText={text => handleAddressChange('postalCode', text, true)}
+            style={styles.input}
+          />
+          <TextInput
+            placeholder="Country"
+            value={billingAddress.country}
+            onChangeText={text => handleAddressChange('country', text, true)}
+            style={styles.input}
+          />
                   </View>
                 )}
                 
