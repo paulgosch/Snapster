@@ -19,8 +19,8 @@ const BG_linesSource = require('.././assets/BG_lines.png');
 const CheckoutPage = ({ route }) => {
   const [useSameAddress, setUseSameAddress] = useState(true);
   const [useCreditCard, setCreditCard] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState('paypal'); // Updated state for payment method
   const [showCreditCard, setShowCreditCard] = useState(true);
-  const [usePayPal, setPaypal] = useState(true);
   const [showPaypal, setShowPaypal] = useState(true);
   const stripe = useStripe();
   const [cardDetails, setCardDetails] = useState();
@@ -107,15 +107,27 @@ const CheckoutPage = ({ route }) => {
     navigation.goBack(); 
   };
 
+  const handlePaymentMethodChange = (method) => {
+    setPaymentMethod(method);
+    // If changing payment method, make sure to reset other payment methods
+    if (method === 'creditCard') {
+      setShowCreditCard(true);
+      setShowPaypal(false);
+    } else {
+      setShowCreditCard(false);
+      setShowPaypal(true);
+    }
+  };
+
   const handleCreditCardCheckout = () => {
-    setShowCreditCard(!showCreditCard);
+    handlePaymentMethodChange('creditCard');
   };
 
   const handlePaypalCheckout = () => {
     useSameAddress ?
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:deliveryAddress}) : 
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:billingAddress});
-  };
+
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
@@ -273,12 +285,12 @@ const CheckoutPage = ({ route }) => {
                     <View style={styles.divider} />
 
                     <View style={styles.addressContainer}>
-                    <TouchableOpacity onPress={() => setCreditCard(!useCreditCard)} style={styles.checkbox}>
-                    {useCreditCard ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="#2A4D69"/>}
+                    <TouchableOpacity onPress={() => handlePaymentMethodChange('creditCard')} style={styles.checkbox2}>
+                    {paymentMethod === 'creditCard' ? <Icon name="check-circle" size={24} color="#2A4D69"/> : <Icon name="circle" size={24} color="#2A4D69"/>}
                     </TouchableOpacity>
                     <Text style={styles.ortext}>Credit Card</Text>
                       </View>
-                    {useCreditCard && showCreditCard && (
+                    {paymentMethod === 'creditCard' && showCreditCard && (
                     <View>
                     <Text style={styles.BillingAdressTitle}>Card Information</Text>
                     <View>
@@ -304,12 +316,12 @@ const CheckoutPage = ({ route }) => {
                 </View>
               )}
               <View style={styles.addressContainer}>
-              <TouchableOpacity onPress={() => setPaypal(!usePayPal)} style={styles.checkbox}>
-                    {usePayPal ? <Icon name="check-square" size={24} color="#2A4D69"/> : <Icon name="square" size={24} color="#2A4D69" />}
+              <TouchableOpacity onPress={() => handlePaymentMethodChange('paypal')} style={styles.checkbox}>
+                    {paymentMethod === 'paypal' ? <Icon name="check-circle" size={24} color="#2A4D69"/> : <Icon name="circle" size={24} color="#2A4D69" />}
                   </TouchableOpacity>
                   <Text style={styles.ortext}>PayPal</Text>
                 </View>
-               {usePayPal && showPaypal && (
+               {paymentMethod === 'paypal' && showPaypal && (
                 <TouchableOpacity onPress={handlePaypalCheckout} style={styles.paypalImageContainer}>
                 <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
                 <Text style={styles.subtitle}>Click here to continue with PayPal</Text>
@@ -322,6 +334,7 @@ const CheckoutPage = ({ route }) => {
       </KeyboardAvoidingView>
     </ImageBackground>
   );
+}
 }
 const styles = StyleSheet.create({
   container: {
@@ -495,6 +508,10 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     paddingRight: 5,
+  },
+  checkbox2: {
+    paddingRight: 5,
+    paddingBottom: 5,
   },
  BillingAdressTitle: {
  paddingTop: 10,
