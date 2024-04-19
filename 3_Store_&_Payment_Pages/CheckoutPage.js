@@ -127,7 +127,7 @@ const CheckoutPage = ({ route }) => {
     useSameAddress ?
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:deliveryAddress}) : 
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:billingAddress});
-
+  }
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
@@ -334,7 +334,6 @@ const CheckoutPage = ({ route }) => {
       </KeyboardAvoidingView>
     </ImageBackground>
   );
-}
 }
 const styles = StyleSheet.create({
   container: {
