@@ -99,35 +99,36 @@ export default function SettingsPage() {
       <View style={styles.ContentContainer}>
       <TouchableOpacity style={styles.button} onPress={handleAccountPage}>
         <View style={styles.buttonContent}>
-          <FeatherIcon name="user" size={24} color="white" style={{ marginRight: 10 }} />
+          <FeatherIcon name="user" size={24} color="#2A4D69" style={{ marginRight: 10 }} />
           <Text style={styles.accountHeaderText}>My Account</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleSupportPage}>
         <View style={styles.buttonContent}>
-          <FeatherIcon name="book-open" size={24} color="white" style={{ marginRight: 10 }} />
+          <FeatherIcon name="book-open" size={24} color="#2A4D69" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>About Snapster</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleRateApp}>
         <View style={styles.buttonContent}>
-          <FeatherIcon name="star" size={24} color="white" style={{ marginRight: 10 }} />
+          <FeatherIcon name="star" size={24} color="#2A4D69" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>Rate this App</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleInstagramRedirect}>
         <View style={styles.buttonContent}>
-          <AntDesignIcon name="instagram" size={24} color="white" style={{ marginRight: 10 }} />
+          <AntDesignIcon name="instagram" size={24} color="#2A4D69" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>Follow us on Instagram</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleLogout}>
         <View style={styles.buttonContent}>
-          <FeatherIcon name="log-out" size={24} color="white" style={{ marginRight: 10 }} />
+          <FeatherIcon name="log-out" size={24} color="#2A4D69" style={{ marginRight: 10 }} />
           <Text style={styles.buttonText}>Log out</Text>
         </View>
       </TouchableOpacity>
       </View>
+      
       <View style={styles.bottomContainer}>
         <TouchableOpacity onPress={handleTermsAndConditions}>
           <Text style={styles.bottomText}>Terms & Conditions</Text>
@@ -171,16 +172,15 @@ const styles = StyleSheet.create({
   button: {
     width: '85%',
     marginVertical: 5,
-    padding: 5,
-    borderWidth: 1,
-    borderColor: '#2A4D69',
+    padding: 10,
+    borderColor: 'white',
     borderRadius: 8,
-    backgroundColor: '#2A4D69',
-    alignSelf: 'center',
+    backgroundColor: 'white',
+
   },
   buttonText: {
     fontSize: 18,
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Button,
   },
   buttonContent: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   },
   accountHeaderText: {
     fontSize: 18,
-    color: 'white',
+    color: '#2A4D69',
     fontFamily: Fonts.Subtitle,
   },
   bottomContainer: {
@@ -225,7 +225,5 @@ ContentContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -30,
-    
 }
 });
