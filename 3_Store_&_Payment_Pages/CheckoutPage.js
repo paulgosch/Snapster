@@ -131,11 +131,33 @@ const CheckoutPage = ({ route }) => {
     handlePaymentMethodChange('creditCard');
   };
 
+  const getMissingField = () => {
+    const requiredFields = ['firstName', 'lastName', 'streetAddress', 'city', 'postalCode'];
+    const addressToCheck = useSameAddress ? deliveryAddress : billingAddress;
+  
+    for (const field of requiredFields) {
+      if (!addressToCheck[field]) {
+        return field;
+      }
+    }
+    return null;
+  };
+
   const handlePaypalCheckout = () => {
     useSameAddress ?
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:deliveryAddress}) : 
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:billingAddress});
-  }
+  };
+  
+  const isBuyNowEnabled = () => {
+    const deliveryAddressValues = Object.values(deliveryAddress);
+    const billingAddressValues = Object.values(billingAddress);
+  
+    const allFieldsFilled = deliveryAddressValues.every(val => val !== '') &&
+      (!useSameAddress || billingAddressValues.every(val => val !== ''));
+  
+    return allFieldsFilled;
+  };
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
@@ -359,20 +381,25 @@ const CheckoutPage = ({ route }) => {
                 )}
               </View>
               <TouchableOpacity
-              onPress={() => {
-                if (paymentMethod === 'paypal') {
-                    handlePaypalCheckout();
-                  } else if (paymentMethod === 'creditCard') {
-                    capturePayment();
-                  } else {
-                    // Handle case where no payment method is selected
-                    console.log("Please select a payment method");
-                  }
-                }}
-                  style={styles.paymentContainer2}
-                >
-                  <Text style={styles.payButtonText}>Buy Now</Text>
-                </TouchableOpacity>
+  onPress={() => {
+    const missingField = getMissingField();
+    if (missingField) {
+      Alert.alert("Error", `Please fill in the "${missingField}" field.`);
+    } else {
+      if (paymentMethod === 'paypal') {
+        handlePaypalCheckout();
+      } else if (paymentMethod === 'creditCard') {
+        capturePayment();
+      } else {
+        console.log("Please select a payment method");
+      }
+    }
+  }}
+  style={[styles.paymentContainer2]}
+>
+  <Text style={styles.payButtonText}>Buy Now</Text>
+</TouchableOpacity>
+
            </View>
           </View>
           <View style={styles.footerContainer}>
