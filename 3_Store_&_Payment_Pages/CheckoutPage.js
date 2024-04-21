@@ -273,6 +273,13 @@ const CheckoutPage = ({ route }) => {
                   style={styles.input}
                   value={deliveryAddress.country}
                 />
+                <TextInput
+                  keyboardType="numeric"
+                  placeholder="Phone Number (optional)"
+                  value={deliveryAddress.phoneNumber}
+                  onChangeText={text => handleAddressChange('phoneNumber', text)}
+                  style={styles.input}
+                />
                   </View>
                   <View style={styles.addressContainer}>
                   <TouchableOpacity onPress={() => setUseSameAddress(!useSameAddress)} style={styles.checkbox}>
@@ -318,6 +325,13 @@ const CheckoutPage = ({ route }) => {
                   placeholder="Country"
                   value={billingAddress.country}
                   onChangeText={text => handleAddressChange('country', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  keyboardType="numeric"
+                  placeholder="Phone Number (optional)"
+                  value={deliveryAddress.phoneNumber}
+                  onChangeText={text => handleAddressChange('phoneNumber', text)}
                   style={styles.input}
                 />
                         </View>
