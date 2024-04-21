@@ -27,7 +27,8 @@ const CheckoutPage = ({ route }) => {
   const [email, setEmail] = useState();
   const { confirmPayment, loading } = useConfirmPayment();
   const [deliveryAddress, setDeliveryAddress] = useState({
-    fullName: '',
+    firstName: '',
+    lastName:'',
     streetAddress: '',
     city: '',
     postalCode: '',
@@ -35,7 +36,8 @@ const CheckoutPage = ({ route }) => {
   });
 
   const [billingAddress, setBillingAddress] = useState({
-    fullName: '',
+    firstName: '',
+    lastName:'',
     streetAddress: '',
     city: '',
     postalCode: '',
@@ -73,7 +75,7 @@ const CheckoutPage = ({ route }) => {
 
   const capturePayment = async () => {
     if (!cardDetails?.complete || !email) {
-      Alert.alert("Please enter complete card details and email.");
+      Alert.alert("Please enter complete adress and card details.");
       return;
     }
     const billingDetails = {
@@ -112,11 +114,17 @@ const CheckoutPage = ({ route }) => {
     // If changing payment method, make sure to reset other payment methods
     if (method === 'creditCard') {
       setShowCreditCard(true);
-      setShowPaypal(false);
     } else {
       setShowCreditCard(false);
-      setShowPaypal(true);
     }
+  };
+
+  const handlePrivacyPolicyPage = () => {
+    navigation.navigate(Pages.PrivacyPolicyPage);
+  };
+
+  const handleTermsAndConditions = () => {
+    navigation.navigate(Pages.TermsAndConditions);
   };
 
   const handleCreditCardCheckout = () => {
@@ -194,44 +202,65 @@ const CheckoutPage = ({ route }) => {
                 </View>
               )}
             </View>
+            <View style={styles.paymentContainer}>
+            <View style = {styles.headerContainer2}> 
+                        <Text style={styles.paymentmethod}>Login</Text>
+                        <Feather name="user" size={24} color="#2A4D69" />
+                        </View>
+                        <View style={styles.divider} />
+                        <View style={styles.headerContainer2}>
+                        <Text style={styles.subtitle}>User: </Text>
+                        <Text style={styles.changeText}>Change</Text>
+                        </View>
+                        <View style={styles.headerContainer2}>
+                        <Text style={styles.subtitle}>Email: </Text>
+                        </View>
+            </View>
             <View>
-              <View style={styles.paymentContainer}>
-                <View style = {styles.headerContainer2}> 
-                <Text style={styles.paymentmethod}>Delivery & Billing Address</Text>
-                <Feather name="map-pin" size={24} color="#2A4D69" />
-                </View>
-                <View style={styles.divider} />
-                <View style={styles.deliveryAddressContainer}>
-                    <Text style={styles.subtitle}>Delivery Address</Text>
-                    <TextInput
-          placeholder="Full Name"
-          value={deliveryAddress.fullName}
-          onChangeText={text => handleAddressChange('fullName', text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="Street Address"
-          value={deliveryAddress.streetAddress}
-          onChangeText={text => handleAddressChange('streetAddress', text)}
-          style={styles.input}
-        />
-        <TextInput
-          placeholder="City"
-          value={deliveryAddress.city}
-          onChangeText={text => handleAddressChange('city', text)}
-          style={styles.input}
-        />
-        <TextInput
-          keyboardType="numeric"
-          placeholder="Postal Code"
-          value={deliveryAddress.postalCode}
-          onChangeText={text => handleAddressChange('postalCode', text)}
-          style={styles.input}
-        />
-        <TextInput
-          editable={false}
-          value={deliveryAddress.country}
-        />
+                <View style={styles.paymentContainer}>
+                        <View style = {styles.headerContainer2}> 
+                        <Text style={styles.paymentmethod}>Delivery Address</Text>
+                        <Feather name="map-pin" size={24} color="#2A4D69" />
+                        </View>
+                        <View style={styles.divider} />
+                        <View style={styles.deliveryAddressContainer}>
+                            
+                        <TextInput
+                    placeholder="First Name"
+                    value={billingAddress.firstName}
+                    onChangeText={text => handleAddressChange('firstName', text, true)}
+                    style={styles.input}
+                  />
+                  <TextInput
+                    placeholder="Last Name"
+                    value={billingAddress.lastName}
+                    onChangeText={text => handleAddressChange('lastName', text, true)}
+                    style={styles.input}
+                  />
+                <TextInput
+                  placeholder="Street & Nr."
+                  value={deliveryAddress.streetAddress}
+                  onChangeText={text => handleAddressChange('streetAddress', text)}
+                  style={styles.input}
+                />
+                <TextInput
+                  placeholder="City"
+                  value={deliveryAddress.city}
+                  onChangeText={text => handleAddressChange('city', text)}
+                  style={styles.input}
+                />
+                <TextInput
+                  keyboardType="numeric"
+                  placeholder="Postal Code"
+                  value={deliveryAddress.postalCode}
+                  onChangeText={text => handleAddressChange('postalCode', text)}
+                  style={styles.input}
+                />
+                <TextInput
+                  editable={false}
+                  style={styles.input}
+                  value={deliveryAddress.country}
+                />
                   </View>
                   <View style={styles.addressContainer}>
                   <TouchableOpacity onPress={() => setUseSameAddress(!useSameAddress)} style={styles.checkbox}>
@@ -242,39 +271,45 @@ const CheckoutPage = ({ route }) => {
                 {!useSameAddress && (
                   <View>
                     <Text style={styles.BillingAdressTitle}>Billing Address</Text>
-                    <TextInput
-            placeholder="Full Name"
-            value={billingAddress.fullName}
-            onChangeText={text => handleAddressChange('fullName', text, true)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Street Address"
-            value={billingAddress.streetAddress}
-            onChangeText={text => handleAddressChange('streetAddress', text, true)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="City"
-            value={billingAddress.city}
-            onChangeText={text => handleAddressChange('city', text, true)}
-            style={styles.input}
-          />
-          <TextInput
-            keyboardType="numeric"
-            placeholder="Postal Code"
-            value={billingAddress.postalCode}
-            onChangeText={text => handleAddressChange('postalCode', text, true)}
-            style={styles.input}
-          />
-          <TextInput
-            placeholder="Country"
-            value={billingAddress.country}
-            onChangeText={text => handleAddressChange('country', text, true)}
-            style={styles.input}
-          />
-                  </View>
-                )}
+                  <TextInput
+                  placeholder="First Name"
+                  value={billingAddress.firstName}
+                  onChangeText={text => handleAddressChange('firstName', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  placeholder="Last Name"
+                  value={billingAddress.lastName}
+                  onChangeText={text => handleAddressChange('lastName', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  placeholder="Street Address"
+                  value={billingAddress.streetAddress}
+                  onChangeText={text => handleAddressChange('streetAddress', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  placeholder="City"
+                  value={billingAddress.city}
+                  onChangeText={text => handleAddressChange('city', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  keyboardType="numeric"
+                  placeholder="Postal Code"
+                  value={billingAddress.postalCode}
+                  onChangeText={text => handleAddressChange('postalCode', text, true)}
+                  style={styles.input}
+                />
+                <TextInput
+                  placeholder="Country"
+                  value={billingAddress.country}
+                  onChangeText={text => handleAddressChange('country', text, true)}
+                  style={styles.input}
+                />
+                        </View>
+                      )}
                 
               </View>
               <View style = {styles.paymentContainer}>
@@ -283,8 +318,15 @@ const CheckoutPage = ({ route }) => {
                   <Feather name="credit-card" size={24} color="#2A4D69" />
                     </View>
                     <View style={styles.divider} />
-
-                    <View style={styles.addressContainer}>
+                <View style={styles.addressContainer}>
+                <TouchableOpacity onPress={() => handlePaymentMethodChange('paypal')}>
+                    {paymentMethod === 'paypal' ? <Icon name="check-circle" size={24} color="#2A4D69"/> : <Icon name="circle" size={24} color="#2A4D69" />}
+                  </TouchableOpacity>
+                <TouchableOpacity onPress={handlePaypalCheckout} >
+                <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
+                </TouchableOpacity>
+                </View>
+                <View style={styles.addressContainer}>
                     <TouchableOpacity onPress={() => handlePaymentMethodChange('creditCard')} style={styles.checkbox2}>
                     {paymentMethod === 'creditCard' ? <Icon name="check-circle" size={24} color="#2A4D69"/> : <Icon name="circle" size={24} color="#2A4D69"/>}
                     </TouchableOpacity>
@@ -310,25 +352,40 @@ const CheckoutPage = ({ route }) => {
                       style={styles.payButtonContainer}
                       disabled={loading}
                     >
-                      <Text style={styles.payButtonText}>Buy Now</Text>
+
                     </TouchableOpacity>
                   </View>
                 </View>
-              )}
-              <View style={styles.addressContainer}>
-              <TouchableOpacity onPress={() => handlePaymentMethodChange('paypal')} style={styles.checkbox}>
-                    {paymentMethod === 'paypal' ? <Icon name="check-circle" size={24} color="#2A4D69"/> : <Icon name="circle" size={24} color="#2A4D69" />}
-                  </TouchableOpacity>
-                  <Text style={styles.ortext}>PayPal</Text>
-                </View>
-               {paymentMethod === 'paypal' && showPaypal && (
-                <TouchableOpacity onPress={handlePaypalCheckout} style={styles.paypalImageContainer}>
-                <Image source={paypalimage} style={styles.paypalImage} resizeMode="contain" />
-                <Text style={styles.subtitle}>Click here to continue with PayPal</Text>
-                </TouchableOpacity>
                 )}
               </View>
+              <TouchableOpacity
+              onPress={() => {
+                if (paymentMethod === 'paypal') {
+                    handlePaypalCheckout();
+                  } else if (paymentMethod === 'creditCard') {
+                    capturePayment();
+                  } else {
+                    // Handle case where no payment method is selected
+                    console.log("Please select a payment method");
+                  }
+                }}
+                  style={styles.paymentContainer2}
+                >
+                  <Text style={styles.payButtonText}>Buy Now</Text>
+                </TouchableOpacity>
+           </View>
           </View>
+          <View style={styles.footerContainer}>
+            <Text style={styles.footnote}>
+              By placing an order, you agree to Snapster's {' '}
+              <TouchableOpacity onPress={handleTermsAndConditions}>
+                <Text style={styles.FootnoteTouchable}>Terms & Conditions</Text>
+              </TouchableOpacity>{' '}
+              and{' '}
+              <TouchableOpacity onPress={handlePrivacyPolicyPage}>
+                <Text style={styles.FootnoteTouchable}>Privacy Policy</Text>
+              </TouchableOpacity>.
+            </Text>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -339,7 +396,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    margin: 20,
+    marginHorizontal: 20,
+    marginVertical: 7.5,
   },
   input: {
     backgroundColor: "#efefefef",
@@ -360,13 +418,8 @@ const styles = StyleSheet.create({
   backgroundContainer: {
     flex: 1,
   },
-  paypalImageContainer: {
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 10,
-  },
   paypalImage: {
-    width: 150,
+    width: 100,
     height: 50,
   },
   ortext: {
@@ -376,6 +429,7 @@ const styles = StyleSheet.create({
   },
   cardImageContainer: {
       backgroundColor: 'white',
+      marginVertical: 10,
       borderRadius: 8,
       padding: 20,
       shadowColor: '#000',
@@ -384,21 +438,11 @@ const styles = StyleSheet.create({
       shadowRadius: 3.84,
       elevation: 5,
   },
-  payButtonContainer: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderColor: '#2A4D69',
-    backgroundColor: 'green',
-    borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginTop: 10,
-  },
   payButtonText: {
     color: 'white',
     fontSize: 16,
     fontWeight: '500',
+    padding: 20,
     letterSpacing: 0.5,
     fontFamily: Fonts.Subtitle,
   },
@@ -409,8 +453,21 @@ const styles = StyleSheet.create({
     left: 10,
     fontFamily: Fonts.Subtitle,
   },
+  footnote: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#2A4D69',
+    fontFamily: Fonts.Subtitle,
+  },
+  FootnoteTouchable: {
+    textAlign: 'center',
+    fontSize: 14,
+    color: '#2A4D69',
+    fontFamily: Fonts.Subtitle,
+    textDecorationLine: 'underline',
+  },
   paymentmethod: {
-    fontSize: 24,
+    fontSize: 22,
     color: '#2A4D69',
     fontFamily: Fonts.Subtitle,
   },
@@ -419,6 +476,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 20,
     marginVertical: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  paymentContainer2: {
+    backgroundColor: '#2A4D69',
+    alignSelf: 'center',
+    alignItems: 'center',
+    width: '100%',
+    borderRadius: 8,
+    marginTop: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
@@ -520,6 +590,16 @@ const styles = StyleSheet.create({
  left: 10,
  fontFamily: Fonts.Subtitle,
  },
+ changeText: {
+  color: '#2A4D69',
+  fontFamily: Fonts.BodyText,
+},
+footerContainer: {
+flexDirection: 'row',
+flex: 1,
+justifyContent: 'center',
+marginBottom: 30,
+},
   
 });
 

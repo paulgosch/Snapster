@@ -12,9 +12,12 @@ const BG_linesSource = require('.././assets/BG_lines.png');
 
 
 export default function ProfilePage() {
-  const { userName, email, fullName, address, userBundle } = useSelector((state) => state.user);
+  const { userName, email, firstName,lastName, address, userBundle } = useSelector((state) => state.user);
 
-  const handleChangeFullName = () => {
+  const handleChangeFirstName = () => {
+    // Implement logic to navigate to the screen where the user can change their full name
+  };
+  const handleChangeLastName = () => {
     // Implement logic to navigate to the screen where the user can change their full name
   };
 
@@ -120,9 +123,16 @@ export default function ProfilePage() {
                 </View>
                 <View style={styles.accountDetails}>
                     <View style={styles.accountRow}>
-                        <Text style={[styles.accountText, styles.accountLabel]}>Name:</Text>
-                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{fullName}</Text>
-                        <TouchableOpacity onPress={handleChangeFullName}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>First Name:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{firstName}</Text>
+                        <TouchableOpacity onPress={handleChangeFirstName}>
+                            <Text style={styles.changeText}>Change</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.accountRow}>
+                        <Text style={[styles.accountText, styles.accountLabel]}>Last Name:</Text>
+                        <Text style={[styles.accountTextGrey, styles.accountValue]}>{lastName}</Text>
+                        <TouchableOpacity onPress={handleChangeLastName}>
                             <Text style={styles.changeText}>Change</Text>
                         </TouchableOpacity>
                     </View>
