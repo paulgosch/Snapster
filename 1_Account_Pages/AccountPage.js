@@ -148,22 +148,23 @@ export default function ProfilePage() {
                     <View style={styles.accountRow}>
                         <Text style={[styles.accountText, styles.accountLabel]}>Username:</Text>
                         <Text style={[styles.accountTextGrey, styles.accountValue]}>{userName}</Text>
-                        <Text style={styles.invisibleText}>Change</Text>
+                        <Text style={styles.changeText}>Change</Text>
                     </View>
 
                     <View style={styles.accountRow}>
                         <Text style={[styles.accountText, styles.accountLabel]}>Email:</Text>
                         <Text style={[styles.accountTextGrey, styles.accountValue]}>{email}</Text>
-                        <Text style={styles.invisibleText}>Change</Text>
+                        <Text style={styles.changeText}>Change</Text>
                     </View>
 
                     <View style={styles.accountRow}>
                         <Text style={[styles.accountText, styles.accountLabel]}>My Adress:</Text>
+                        <Text style={styles.changeText}>Change</Text>
                     </View>
                     <View style={styles.accountRow}>
-                        <Text style={styles.accountTex}>{address}</Text>
+                        <Text style={styles.accountTextGrey}>{address}</Text>
                         <TouchableOpacity onPress={handleaddAdress}>
-                            <Text style={styles.addAddressText}>add address</Text>
+                            <Text style={styles.addAddressText}>add Address</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -279,7 +280,6 @@ cameraIconContainer: {
     marginBottom: 5,
   },
   accountText: {
-
     fontSize: 16,
     color: '#2A4D69',
     fontFamily: Fonts.BodyText,
@@ -289,6 +289,7 @@ cameraIconContainer: {
   },
   accountTextGrey: {
     color: '#707070',
+    width: "75%",
     fontFamily: Fonts.BodyText,
     alignItems: "left",
     alignSelf: "left",
@@ -365,7 +366,7 @@ cameraIconContainer: {
   },
   addAddressText: {
     color: '#2A4D69',
-    fontSize: 16, // Set a font size for the text
+    fontSize: 14, // Set a font size for the text
     fontFamily: Fonts.BodyText,
   },
   BG_lines: {
