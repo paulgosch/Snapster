@@ -148,16 +148,6 @@ const CheckoutPage = ({ route }) => {
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:deliveryAddress}) : 
      navigation.navigate(Pages.Paypal, {pack: pack, deliveryAddress:deliveryAddress, billingAddress:billingAddress});
   };
-  
-  const isBuyNowEnabled = () => {
-    const deliveryAddressValues = Object.values(deliveryAddress);
-    const billingAddressValues = Object.values(billingAddress);
-  
-    const allFieldsFilled = deliveryAddressValues.every(val => val !== '') &&
-      (!useSameAddress || billingAddressValues.every(val => val !== ''));
-  
-    return allFieldsFilled;
-  };
 
   return (
     <ImageBackground source={backgroundImageSource} style={styles.backgroundContainer}>
